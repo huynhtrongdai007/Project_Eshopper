@@ -1,4 +1,6 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -9,6 +11,8 @@
     <link href="{{ asset('public/frontend/css/prettyPhoto.css') }} " rel="stylesheet">
     <link href="{{ asset('public/frontend/css/price-range.css') }} " rel="stylesheet">
     <link href="{{ asset('public/frontend/css/animate.css') }} " rel="stylesheet">
+
+
     <link href="{{ asset('public/frontend/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('public/frontend/css/responsive.css')}}" rel="stylesheet">
     <!--[if lt IE 9]>
@@ -20,7 +24,9 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('public/frontend/images/ico/apple-touch-icon-114-precomposed.png') }}">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('public/frontend/images/ico/apple-touch-icon-72-precomposed.png') }}">
     <link rel="apple-touch-icon-precomposed" href="{{ asset('public/frontend/images/ico/apple-touch-icon-57-precomposed.png') }}">
+</head><!--/head-->
 
+<body>
     <header id="header"><!--header-->
         <div class="header_top"><!--header_top-->
             <div class="container">
@@ -682,3 +688,5 @@
     <script src="{{ asset('public/frontend/js/price-range.js') }}"></script>
     <script src="{{ asset('public/frontend/js/jquery.prettyPhoto.js') }}"></script>
     <script src="{{ asset('public/frontend/js/main.js') }}"></script>
+</body>
+</html>
