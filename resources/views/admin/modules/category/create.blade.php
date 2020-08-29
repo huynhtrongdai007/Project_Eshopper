@@ -18,6 +18,9 @@
             <div class="form-group">
                     <label for="exampleInputEmail1">Category Name</label>
                     <input type="text" id="category_name" name="category_name" class="form-control" id="exampleInputEmail1" placeholder="Enter Category Name">
+                    @foreach($errors->all() as $e)
+                    <span class="text-danger">{{$e}}</span>
+                    @endforeach
             </div>
             <div class="form-group">
               <select class="form-control" id="category_status" name="category_status">

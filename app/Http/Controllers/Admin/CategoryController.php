@@ -44,6 +44,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate(['category_name'=>'unique:tbl_category']);
         $data = $request->except('_token');
         $data['created_at'] = new DateTime();
         $this->instant->insertData($data);
