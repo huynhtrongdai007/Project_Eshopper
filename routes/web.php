@@ -33,4 +33,20 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 
 		Route::get('destroy/{id}','CategoryController@destroy')->name('destroy');
 	});
+
+	Route::prefix('slider')->name('slider.')->group(function(){
+		Route::get('index','SliderController@index')->name('index');
+		Route::get('create','SliderController@create')->name('create');
+		Route::post('store','SliderController@store')->name('store');
+
+		Route::get('edit/{id}','SliderController@edit')->name('edit');
+		Route::post('update/{id}','SliderController@update')->name('update');
+
+		Route::post('update_status_untive','SliderController@updateUntive')->name('update_status_untive');
+
+		Route::post('update_status_active','SliderController@updateActive')->name('update_status_active');
+
+
+		Route::get('destroy/{id}','SliderController@destroy')->name('destroy');
+	});
 });

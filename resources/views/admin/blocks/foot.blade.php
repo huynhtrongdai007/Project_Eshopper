@@ -1,6 +1,7 @@
 
 <!-- jQuery -->
 <script src="{{asset('public/backend/plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{ asset('public/backend/js/jquery.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('public/backend/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
@@ -14,9 +15,12 @@
 <script src="{{ asset('public/backend/dist/js/adminlte.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
 <!-- AdminLTE for demo purposes -->
+
 <script src="{{asset('public/backend/dist/js/demo.js')}}"></script>
+
 <script src="{{ asset('public/backend/js/script.js') }}"></script>
 <!-- page script -->
+<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -31,6 +35,41 @@
       "info": true,
       "autoWidth": false,
       "responsive": true,
+    });
+  });
+</script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(document).on('change', '.status_off', function(event) {
+      event.preventDefault();
+      var id = $(this).attr("id");
+      var token = $("meta[name='csrf-token']").attr("content");
+      $.ajax({
+        url:"{{ route('admin.slider.update_status_untive') }}",
+        type:"POST",
+        data:{id:id,_token:token},
+
+        success:function() {
+            alert("Ok");
+        }
+      });
+    });
+
+
+
+     $(document).on('change', '.status_on', function(event) {
+      event.preventDefault();
+      var id = $(this).attr("id");
+      var token = $("meta[name='csrf-token']").attr("content");
+      $.ajax({
+        url:"{{ route('admin.slider.update_status_active') }}",
+        type:"POST",
+        data:{id:id,_token:token},
+
+        success:function() {
+            alert("Ok");
+        }
+      });
     });
   });
 </script>
