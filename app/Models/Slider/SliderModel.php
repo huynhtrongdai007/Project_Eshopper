@@ -7,11 +7,12 @@ use DB;
 class SliderModel extends Model
 {
 
-	public function getAllData()
-	{
-		$result = DB::table('tbl_slider')->orderby('id','DESC')->get();
-		return $result;
-	}
+   	public function getAllData()
+   	{
+   		$result = DB::table('tbl_slider')->orderby('id','DESC')->get();
+   		return $result;
+   	}
+
 
    	public function insertData($data)
    	{
@@ -39,4 +40,12 @@ class SliderModel extends Model
    	public function updateStatusUnctive($id) {
    		DB::table('tbl_slider')->where('id',$id)->update(['status'=>0]);
    	}
+
+
+      //lấy slider ra ngoai trang chu
+      public function getDataIndex() {
+         $result = DB::table('tbl_slider')->where('status',1)->orderby('id','DESC')->get();
+         return $result;
+      }
+
 }

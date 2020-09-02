@@ -1,7 +1,7 @@
  @extends('admin.master')
  @section('title','Thêm Slider')
  @section('content')
-   <form id="form-category" action="{{ route('admin.slider.store') }}" method="POST" enctype="multipart/form-data">
+   <form id="form-slider" action="{{ route('admin.slider.store') }}" method="POST" enctype="multipart/form-data">
       @csrf
  <div class="card">
         <div class="card-header">
@@ -17,14 +17,14 @@
 
             <div class="form-group">
                     <label for="exampleInputEmail1">Slider Name</label>
-                    <input type="text" id="category_name" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter Slider Name">
+                    <input type="text" id="slider_name" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter Slider Name">
                     @foreach($errors->all() as $e)
                     <span class="text-danger">{{$e}}</span>
                     @endforeach
             </div>
             <div class="form-group">
               <label for="">Description</label>
-              <input type="text" id="description" name="description" class="form-control" id="exampleInputEmail1" placeholder="Enter Description">
+              <textarea id="description" name="description" class="form-control" id="exampleInputEmail1" placeholder="Enter Description"></textarea> 
             </div>
              <div class="form-group">
              <label>Image</label>

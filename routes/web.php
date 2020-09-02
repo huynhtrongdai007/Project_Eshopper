@@ -13,15 +13,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.master');
-});
+// Route::get('/', function () {
+//     return view('pages.master');
+// });
 
+// //home
 
+Route::get('/','HomeController@index')->name('home');
 
+// login
 // admin
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
+
+    Route::get('/','LoginController@index')->name('login');
+    Route::post('progressLogin','LoginController@progressLogin')->name('progressLogin');
+    Route::get('register','RegisterController@index')->name('register');
+    Route::post('store','RegisterController@register')->name('store');
+  
 	Route::prefix('category')->name('category.')->group(function(){
 		Route::get('index','CategoryController@index')->name('index');
 
@@ -42,11 +51,12 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 		Route::get('edit/{id}','SliderController@edit')->name('edit');
 		Route::post('update/{id}','SliderController@update')->name('update');
 
+		Route::get('destroy/{id}','SliderController@destroy')->name('destroy');
+
 		Route::post('update_status_untive','SliderController@updateUntive')->name('update_status_untive');
 
 		Route::post('update_status_active','SliderController@updateActive')->name('update_status_active');
-
-
-		Route::get('destroy/{id}','SliderController@destroy')->name('destroy');
 	});
+
+	 
 });
