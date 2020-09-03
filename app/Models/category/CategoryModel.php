@@ -8,7 +8,7 @@ class CategoryModel extends Model
 {
    
    public function getAllData() {
-   	 $result = DB::table('tbl_category')->orderby('id','DESC')->get();
+   	 $result = DB::table('tbl_category')->orderby('parent','DESC')->get();
    	 return $result;
    }
 
@@ -32,6 +32,17 @@ class CategoryModel extends Model
 		DB::table('tbl_category')->where('id',$id)->delete();
 	}
 
+	public function updateStatusActive($id) {
+   		DB::table('tbl_category')->where('id',$id)->update(['category_status'=>1]);
+   	}
 
+   	public function updateStatusUnctive($id) {
+   		DB::table('tbl_category')->where('id',$id)->update(['category_status'=>0]);
+   	}
+
+public function getAllDataIndex() {
+   	 $result = DB::table('tbl_category')->where('category_status',1)->orderby('id','DESC')->get();
+   	 return $result;
+   }
 
 }

@@ -19,6 +19,19 @@
             <label>Category Name</label>
             <input type="text" id="category_name" name="category_name" class="form-control" value="{{$data_cat->category_name}}">
           </div>
+           <div class="form-group">
+                <select class="form-control" id="parent" name="parent">
+                <option value="0">danh muc cha</option>
+                @foreach ($cat_parent as $items)
+                 @if($items->parent == $data_cat->id)
+                 <option selected value="{{$items->id}}">--{{$items->category_name}}</option>
+                 @else
+                 
+                  <option value="{{$items->id}}">{{$items->category_name}}</option>
+                 @endif
+                @endforeach
+              </select>
+            </div>
           <div class="form-group">
            <select id="category_status" name="category_status" class="form-control">
              <option value="">Chọn trạng thái</option>

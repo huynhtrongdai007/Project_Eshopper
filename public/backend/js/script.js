@@ -4,13 +4,13 @@ $(document).ready(function(){
 		rules:{
 			    category_name:{
 				required:true
-	
-			
 			},
 			category_status:{
 				required:true
+			},
+			parent:{
+				required:true
 			}
-		
 		},
 		messages:{
 			category_name:{
@@ -19,7 +19,9 @@ $(document).ready(function(){
 			},
 			category_status:{
 				required:'xin vui lòng nhập chọn trạng thái'
-			
+			},
+			parent:{
+				required:'xin vui lòng chọn danh mục con'
 			}
 		}
 	});

@@ -25,8 +25,7 @@
    <thead>
       <tr>
          <th>#</th>
-         <th>Name Category</th>
-         <th>parent</th>
+         <th>Name Brand</th>
          <th>Status</th>
          <th>Created at</th>
          <th>Updated at</th>
@@ -34,35 +33,22 @@
       </tr>
    </thead>
    <tbody>
-     @foreach ($data_cat as $items)
+     @foreach ($data_brand as $items)
         <tr>
          <td>{{$items->id}}</td>
            <td>
-              {{$items->category_name}}
+              {{$items->brand_name}}
           </td>
-           
          <td>
-          @if($items->parent==0)
-           0
-           @else 
-           @foreach ($data_cat as $items2)
-             @if($items2->id==$items->parent)
-                {{$items2->category_name}}
-             @endif
-           @endforeach
-          @endif
-         </td>
-       
-         <td>
-           @if($items->category_status==1)
-          <input type="checkbox" class="category_status_off" id="{{$items->id}}" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
+           @if($items->status==1)
+          <input type="checkbox" class="brand_status_off" id="{{$items->id}}" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
           @else
-           <input type="checkbox" class="category_status_on" id="{{$items->id}}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
+           <input type="checkbox" class="brand_status_on" id="{{$items->id}}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
           @endif
           </td>
          <td>{{$items->created_at}}</td>
          <td>{{$items->updated_at}}</td>
-         <td><a href="{{ route('admin.category.edit',['id'=>$items->id]) }}">Edit</a> | <a href="{{ route('admin.category.destroy',['id'=>$items->id]) }}">Delete</a></td>
+         <td><a href="{{ route('admin.brand.edit',['id'=>$items->id]) }}">Edit</a> | <a href="{{ route('admin.brand.destroy',['id'=>$items->id]) }}">Delete</a></td>
       </tr>
      @endforeach
      

@@ -41,6 +41,26 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 		Route::post('update/{id}','CategoryController@update')->name('update');
 
 		Route::get('destroy/{id}','CategoryController@destroy')->name('destroy');
+
+		Route::post('update_status_untive','CategoryController@updateUntive')->name('update_status_untive');
+
+		Route::post('update_status_active','CategoryController@updateActive')->name('update_status_active');
+	});
+
+	Route::prefix('brand')->name('brand.')->group(function(){
+		Route::get('index','BrandController@index')->name('index');
+
+		Route::get('create','BrandController@create')->name('create');
+		Route::post('store','BrandController@store')->name('store');
+
+		Route::get('edit/{id}','BrandController@edit')->name('edit');
+		Route::post('update/{id}','BrandController@update')->name('update');
+
+		Route::get('destroy/{id}','BrandController@destroy')->name('destroy');
+
+		Route::post('update_status_untive','BrandController@updateUntive')->name('update_status_untive');
+
+		Route::post('update_status_active','BrandController@updateActive')->name('update_status_active');
 	});
 
 	Route::prefix('slider')->name('slider.')->group(function(){

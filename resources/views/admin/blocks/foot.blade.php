@@ -38,6 +38,8 @@
     });
   });
 </script>
+
+{{-- edit status slider --}}
 <script type="text/javascript">
   $(document).ready(function(){
     $(document).on('change', '.status_off', function(event) {
@@ -63,6 +65,85 @@
       var token = $("meta[name='csrf-token']").attr("content");
       $.ajax({
         url:"{{ route('admin.slider.update_status_active') }}",
+        type:"POST",
+        data:{id:id,_token:token},
+
+        success:function() {
+            alert("Ok");
+        }
+      });
+    });
+  });
+  {{-- end edit status --}}
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(document).on('change', '.brand_status_off', function(event) {
+      event.preventDefault();
+      var id = $(this).attr('id');
+       var token = $("meta[name='csrf-token']").attr("content");
+
+       $.ajax({
+          url:"{{ route('admin.brand.update_status_untive') }}",
+          type:"POST",
+          data:{id:id,_token:token},
+          success:function() {
+            alert("Ok");
+          }
+       });
+    });
+
+ $(document).on('change', '.brand_status_on', function(event) {
+      event.preventDefault();
+      var id = $(this).attr('id');
+       var token = $("meta[name='csrf-token']").attr("content");
+
+       $.ajax({
+          url:"{{ route('admin.brand.update_status_active') }}",
+          type:"POST",
+          data:{id:id,_token:token},
+          success:function() {
+            alert("Ok");
+          }
+       });
+    });
+
+  });
+</script>
+
+
+
+
+
+
+{{-- edit status slider --}}
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    $(document).on('change', '.category_status_off', function(event) {
+      event.preventDefault();
+      var id = $(this).attr("id");
+      var token = $("meta[name='csrf-token']").attr("content");
+      $.ajax({
+        url:"{{ route('admin.category.update_status_untive') }}",
+        type:"POST",
+        data:{id:id,_token:token},
+
+        success:function() {
+            alert("Ok");
+        }
+      });
+    });
+
+
+
+     $(document).on('change', '.category_status_on', function(event) {
+      event.preventDefault();
+      var id = $(this).attr("id");
+      var token = $("meta[name='csrf-token']").attr("content");
+      $.ajax({
+        url:"{{ route('admin.category.update_status_active') }}",
         type:"POST",
         data:{id:id,_token:token},
 

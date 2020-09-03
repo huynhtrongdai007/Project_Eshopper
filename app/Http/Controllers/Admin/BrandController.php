@@ -4,14 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Brand\BrandModel as MainModel;
 use DateTime;
-use App\Models\category\CategoryModel as MainModel;
-class CategoryController extends Controller
+class BrandController extends Controller
 {
+    
     private $instant;
 
     public function __construct() {
-        $this->instant = new MainModel;
+        $this->instants = new MainModel;
     }
 
 
@@ -22,8 +23,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data = $this->instant->getAllData();
-        return view('admin.modules.category.index',['data_cat'=>$data]);
+    	$data = $this->instants->getAllData();
+    	return view('admin.modules.brand.index',['data_brand'=>$data]);
     }
 
     /**
@@ -33,8 +34,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-         $data = $this->instant->getAllData();
-        return view('admin.modules.category.create',['cat_parent'=>$data]);
+         return view('admin.modules.brand.create');
     }
 
     /**
@@ -45,12 +45,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['category_name'=>'unique:tbl_category']);
-        $data = $request->except('_token');
-        $data['created_at'] = new DateTime();
-        $this->instant->insertData($data);
-        return redirect()->route('admin.category.index')->with('message','Inserted SuccessFully');
 
+    	$request->validate([
+    		'category_brand'=>'unique:tbl_category',
+    		'status' =>'required'
+    	]);
+    	$data = $request->except('_token');
+    	$data['created_at'] = new DateTime();
+    	$this->instants->insertData($data);
+    	return redirect()->route('admin.brand.index');
     }
 
     /**
@@ -72,9 +75,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $data = $this->instant->getByid($id); 
-        $cat_parent = $this->instant->getAllData();
-        return view('admin.modules.category.edit',['data_cat'=>$data,'cat_parent'=>$cat_parent]);
+    	$data = $this->instants->getById($id);
+    	$data_status = $this->instants->getAllData();
+        return view('admin.modules.brand.edit',['data_brand'=>$data,'data_status'=>$data_status]);
     }
 
     /**
@@ -86,10 +89,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->except('_token');
-        $data['updated_at'] = new DateTime();
-        $this->instant->updateData($data,$id);
-        return redirect()->route('admin.category.index')->with('message','Updated Category SuccessFully');
+    	$data = $request->except('_token');
+    	$data['updated_at'] = new DateTime();
+        $this->instants->updateData($id,$data);
+        return redirect()->route('admin.brand.index')->with('message','Updated Brand SuccessFully');
+
     }
 
     /**
@@ -100,19 +104,19 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-         $this->instant->deleteData($id);
-         return redirect()->route('admin.category.index')->with('message','Deleted SuccessFully');
+         $this->instants->deleteData($id);
+         return redirect()->route('admin.brand.index')->with('message','Delete Brand SuccessFully');
     }
 
     public function updateUntive(Request $request)
     {
         $id = $request->id;
-        $this->instant->updateStatusUnctive($id);
+        $this->instants->updateStatusUntive($id);
     }
 
     public function updateActive(Request $request)
     {
         $id = $request->id;
-        $this->instant->updateStatusActive($id);
+        $this->instants->updateStatusActive($id);
     }
 }
