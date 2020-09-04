@@ -44,7 +44,7 @@ class SliderController extends Controller
     public function store(Request $request)
     {
         $data = $request->except('_token');
-        $get_image = $request->file('image');
+        $get_image = $request->image;
         $new_image = $get_image->getClientOriginalName();
         $get_image->move('./public/uploads/sliders',$get_image->getClientOriginalName());
         $data['image'] = $new_image;

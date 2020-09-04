@@ -30,9 +30,26 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::post('progressLogin','LoginController@progressLogin')->name('progressLogin');
     Route::get('register','RegisterController@index')->name('register');
     Route::post('store','RegisterController@register')->name('store');
-  
+
+    Route::get('logout','LoginController@logout')->name('logout');
+
+  Route::middleware('check_login')->group(function() {
+   //---------------- Admin contron-----------------------------------
+
+  	Route::prefix('user')->name('user.')->group(function() {
+  		Route::get('index','UserController@index')->name('index');
+  		Route::get('create','UserController@create')->name('create');
+		Route::post('store','UserController@store')->name('store');
+
+		Route::get('edit/{id}','UserController@edit')->name('edit');
+		Route::post('update/{id}','UserController@update')->name('update');
+
+		Route::get('destroy/{id}','UserController@destroy')->name('destroy');
+  	});
+
 	Route::prefix('category')->name('category.')->group(function(){
 		Route::get('index','CategoryController@index')->name('index');
+
 
 		Route::get('create','CategoryController@create')->name('create');
 		Route::post('store','CategoryController@store')->name('store');
@@ -46,6 +63,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 
 		Route::post('update_status_active','CategoryController@updateActive')->name('update_status_active');
 	});
+
 
 	Route::prefix('brand')->name('brand.')->group(function(){
 		Route::get('index','BrandController@index')->name('index');
@@ -63,6 +81,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 		Route::post('update_status_active','BrandController@updateActive')->name('update_status_active');
 	});
 
+
 	Route::prefix('slider')->name('slider.')->group(function(){
 		Route::get('index','SliderController@index')->name('index');
 		Route::get('create','SliderController@create')->name('create');
@@ -77,6 +96,13 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 
 		Route::post('update_status_active','SliderController@updateActive')->name('update_status_active');
 	});
+
+
+
+  });
+	
+
+	
 
 	 
 });

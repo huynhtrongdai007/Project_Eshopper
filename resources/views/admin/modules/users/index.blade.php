@@ -1,17 +1,18 @@
  @extends('admin.master')
-   @section('title','Danh Sách Thể Loại')
+   @section('title','Danh Sách Users')
  @section('content')
- <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">Danh Sách Thể Loại</h3>
-         <?php
+  <?php
           $message = Session::get('message');
             if($message)
              {
-               echo"<div class='alert alert-success'>'$message'</div>";
+               echo"<div class='alert alert-success' role='alert'>'$message'</div>";
                Session::put('message',null);
              }
           ?>
+ <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Danh Sách Users</h3>
+        
           
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -21,37 +22,39 @@
           </div>
         </div>
 <div class="card-body">
-<table id="example1"  class="table table-bordered table-hover">
+<table id="example1" class="table table-bordered table-hover">
    <thead>
       <tr>
          <th>#</th>
-         <th>image</th>
          <th>Name</th>
-         <th>Status</th>
+         <th>Email</th>
+         <th>image</th>
          <th>Created at</th>
          <th>Updated at</th>
          <th>Actions</th>
       </tr>
    </thead>
    <tbody>
-    @foreach ($data_slider as $items)   
+     @foreach ($data_users as $items)
         <tr>
          <td>{{$items->id}}</td>
-         <td> <img width="80" src="{{ asset("./public/uploads/sliders/{$items->image}")}}" alt=""></td>
-         <td>{{$items->name}}</td>
+           <td>
+              {{$items->username}}
+          </td>
+           
          <td>
-          @if($items->status==1)
-          <input type="checkbox" class="status_off" id="{{$items->id}}" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
-          @else
-           <input type="checkbox" class="status_on" id="{{$items->id}}" data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
-          @endif
+            {{$items->email}}
+         </td>
+      
+         <td>
+           <img width="80" src="{{ asset("./public/uploads/users/{$items->image}")}}" alt="">
          </td>
          <td>{{$items->created_at}}</td>
          <td>{{$items->updated_at}}</td>
-         <td><a href="{{ route('admin.slider.edit',['id'=>$items->id]) }}">Edit</a> | <a href="{{ route('admin.slider.destroy',['id'=>$items->id]) }}">Delete</a></td>
+         <td><a href="{{ route('admin.user.edit',['id'=>$items->id]) }}">Edit</a> | <a href="{{ route('admin.user.destroy',['id'=>$items->id]) }}">Delete</a></td>
       </tr>
-  
      @endforeach
+     
 
 </table>
 
@@ -62,5 +65,4 @@
         </div>
         <!-- /.card-footer-->
  </div>
-
  @endsection
