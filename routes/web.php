@@ -98,6 +98,22 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 	});
 
 
+	Route::prefix('product')->name('product.')->group(function(){
+		Route::get('index','ProductController@index')->name('index');
+		Route::get('create','ProductController@create')->name('create');
+		Route::post('store','ProductController@store')->name('store');
+
+		Route::get('edit/{id}','ProductController@edit')->name('edit');
+		Route::post('update/{id}','ProductController@update')->name('update');
+
+		Route::get('destroy/{id}','ProductController@destroy')->name('destroy');
+
+		Route::post('update_status_untive','ProductController@updateUntive')->name('update_status_untive');
+
+		Route::post('update_status_active','ProductController@updateActive')->name('update_status_active');
+	});
+
+
 
   });
 	

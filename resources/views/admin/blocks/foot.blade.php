@@ -154,3 +154,40 @@
     });
   });
 </script>
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    $(document).on('change', '.product_status_off', function(event) {
+      event.preventDefault();
+      var id = $(this).attr("id");
+      var token = $("meta[name='csrf-token']").attr("content");
+      $.ajax({
+        url:"{{ route('admin.product.update_status_untive') }}",
+        type:"POST",
+        data:{id:id,_token:token},
+
+        success:function() {
+            alert("Ok");
+        }
+      });
+    });
+
+
+
+     $(document).on('change', '.product_status_on', function(event) {
+      event.preventDefault();
+      var id = $(this).attr("id");
+      var token = $("meta[name='csrf-token']").attr("content");
+      $.ajax({
+        url:"{{ route('admin.product.update_status_active') }}",
+        type:"POST",
+        data:{id:id,_token:token},
+
+        success:function() {
+            alert("Ok");
+        }
+      });
+    });
+  });
+</script>

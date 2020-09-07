@@ -108,6 +108,7 @@ class BrandController extends Controller
          return redirect()->route('admin.brand.index')->with('message','Delete Brand SuccessFully');
     }
 
+
     public function updateUntive(Request $request)
     {
         $id = $request->id;
@@ -119,4 +120,5 @@ class BrandController extends Controller
         $id = $request->id;
         $this->instants->updateStatusActive($id);
     }
+
 }

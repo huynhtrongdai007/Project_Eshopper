@@ -37,4 +37,9 @@ class BrandModel extends Model
     	DB::table('tbl_brand')->where('id',$id)->update(['status'=> 0]);
     }
 
+    public function getAllDataIndex() {
+        $result = DB::table('tbl_brand')->where('status',1)->orderby('id','DESC')->get();
+        return $result;
+    }
+
 }
