@@ -13,19 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('pages.master');
+//  Route::get('/', function () {
+//      return view('pages.master');
 // });
 
-// //home
+//home
 
-Route::get('/','HomeController@index')->name('home');
-
-// login
-// admin
-
+Route::get('/','HomeController@index');
+Route::get('/home','HomeController@index')->name('home');
+Route::get('product_details/{id}','HomeController@productDetails')->name('product_details');
+Route::get('cart','HomeController@viewCart')->name('cart');
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
-
     Route::get('/','LoginController@index')->name('login');
     Route::post('progressLogin','LoginController@progressLogin')->name('progressLogin');
     Route::get('register','RegisterController@index')->name('register');

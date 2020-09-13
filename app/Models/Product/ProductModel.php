@@ -39,5 +39,17 @@ class ProductModel extends Model
    	public function updateStatusUnctive($id) {
    		DB::table('tbl_products')->where('id',$id)->update(['status'=>0]);
    	}
+   	// phương thức lấy dữ liệu ra trang chủ
+   	public function getDataIndex() {
+   		$result = DB::table('tbl_products')->where('status',1)->orderby('id','DESC')->limit(6)->get();
+   		return $result;
+   	}
 
+    public function getProductDetails($id) {
+      $result = DB::table('tbl_products')
+      ->join('tbl_brand','tbl_brand.id','=','tbl_products.brand_id')
+      ->select('tbl_products.*','tbl_brand.brand_name')
+      ->where('tbl_products.id',$id)->first();
+      return $result;
+    }
 }

@@ -1,6 +1,14 @@
  @extends('admin.master')
  @section('title','Thêm Sản Phẩm')
  @section('content')
+ <?php
+          $message = Session::get('message');
+            if($message)
+             {
+               echo"<div class='alert alert-success'>'$message'</div>";
+               Session::put('message',null);
+             }
+          ?>
    <form id="form-category" action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
       @csrf
  <div class="card">
@@ -16,9 +24,12 @@
         <div class="card-body">
             <div class="form-group">
               <label for="exampleInputEmail1">Product Name</label>
-              <input type="text" value="{{old('name')}}" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter Product Name">
-             
+              <input type="text" value="{{old('name')}}" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter Product Name"> 
             </div>
+            @error('name')
+             <span class="text-danger">{{$message}}</span> 
+            @enderror
+
             <div class="form-group">
                 <label for="exampleInputEmail1">Category</label>
                 <select class="form-control" name="category_id">
@@ -29,6 +40,9 @@
                   
                 </select>
             </div>
+             @error('category_id')
+             <span class="text-danger">{{$message}}</span> 
+            @enderror
              <div class="form-group">
               <label for="exampleInputEmail1">Brand</label>
               <select name="brand_id" class="form-control">
@@ -38,27 +52,44 @@
                 @endforeach
               </select>
             </div>
+             @error('brand_id')
+             <span class="text-danger">{{$message}}</span> 
+            @enderror
             <div class="form-group">
              <label for="">Description</label>
              <textarea style="height: 200px;" class="form-control" name="description">{{old('description')}}</textarea>
             </div>
+             @error('description')
+             <span class="text-danger">{{$message}}</span> 
+            @enderror
             <div class="form-group">
               <label>Content</label>
               <textarea style="height: 200px;"  class="form-control" name="content">{{old('content')}}</textarea>
             </div>
+             @error('content')
+             <span class="text-danger">{{$message}}</span> 
+            @enderror
             <div class="form-group">
               <label>Price</label>
               <input type="number" min="1" value="{{old('price')}}" name="price" class="form-control">
             </div>
+            @error('price')
+             <span class="text-danger">{{$message}}</span> 
+            @enderror
             <div class="form-group">
               <label>Quantity</label>
               <input type="number" min="1" value="{{old('quantity')}}" name="quantity" class="form-control">
             </div>
+            @error('quantity')
+             <span class="text-danger">{{$message}}</span> 
+            @enderror
             <div class="form-group">
               <label>Image</label><br/>
               <input type="file" value="{{old('quantity')}}" name="image">
             </div>
-
+             @error('image')
+             <span class="text-danger">{{$message}}</span> 
+            @enderror
             <div class="form-group">
               <label>Status</label>
               <select class="form-control" name="status">
@@ -67,7 +98,9 @@
                 <option value="0">Off</option>
               </select>
             </div>
-            
+             @error('status')
+             <span class="text-danger">{{$message}}</span> 
+            @enderror
           
         </div>
         <!-- /.card-body -->

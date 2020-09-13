@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                            <a href="index.html"><img src="{{ asset('public/frontend/images/home/logo.png') }}" alt="" /></a>
+                            <a href="{{ route('home') }}"><img src="{{ asset('public/frontend/images/home/logo.png') }}" alt="" /></a>
                         </div>
                         <div class="btn-group pull-right">
                             <div class="btn-group">
@@ -91,7 +91,7 @@
                                         <li><a href="shop.html">Products</a></li>
                                         <li><a href="product-details.html">Product Details</a></li> 
                                         <li><a href="checkout.html">Checkout</a></li> 
-                                        <li><a href="cart.html">Cart</a></li> 
+                                        <li><a href="{{ route('cart') }}">Cart</a></li> 
                                         <li><a href="login.html">Login</a></li> 
                                     </ul>
                                 </li> 

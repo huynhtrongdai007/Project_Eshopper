@@ -56,14 +56,8 @@ $('#form-slider').validate({
 			status:{
 				required:'xin vui lòng chọn status'
 			}
-
-
 		}
 });
 
-var password = $("#password").val();
-var cfpass = $("#cfpassword").val();
-
-console.log(password);
 
 });

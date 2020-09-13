@@ -36,13 +36,32 @@ class CategoryModel extends Model
    		DB::table('tbl_category')->where('id',$id)->update(['category_status'=>1]);
    	}
 
-   	public function updateStatusUnctive($id) {
-   		DB::table('tbl_category')->where('id',$id)->update(['category_status'=>0]);
-   	}
+	public function updateStatusUnctive($id) {
+		DB::table('tbl_category')->where('id',$id)->update(['category_status'=>0]);
+	}
+      // phuong thuc lay du lieu ra trang chu voi dieu kien status = 1
 
-public function getAllDataIndex() {
+   public function getAllDataIndex() {
    	 $result = DB::table('tbl_category')->where('category_status',1)->orderby('id','DESC')->get();
    	 return $result;
+   }
+
+   // phuong thuc lay du lieu ra tab category voi dieu kien parent = 0
+   public function getDataTabCategory() {
+       $result = DB::table('tbl_category')
+       ->where('parent',0)
+       ->get();
+       return $result;
+   }
+
+
+ public function getDataTabProduct() {
+       $result = DB::table('tbl_category')
+       ->join('tbl_products','tbl_category.id','=','tbl_products.category_id')
+       ->where('tbl_products.status',1)
+       ->limit(4)
+       ->get();
+       return $result;
    }
 
 }

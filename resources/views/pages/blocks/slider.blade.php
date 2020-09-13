@@ -8,7 +8,7 @@
                             <li data-target="#slider-carousel" data-slide-to="1"></li>
                             <li data-target="#slider-carousel" data-slide-to="2"></li>
                         </ol>
-                         @php
+                            @php
                                  $i=0;
                              @endphp
                         <div class="carousel-inner">

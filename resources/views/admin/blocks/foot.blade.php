@@ -18,9 +18,10 @@
 
 <script src="{{asset('public/backend/dist/js/demo.js')}}"></script>
 
-<script src="{{ asset('public/backend/js/script.js') }}"></script>
 <!-- page script -->
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
+<script src="{{ asset('public/backend/js/script.js') }}"></script>
 <script>
   $(function () {
     $("#example1").DataTable({

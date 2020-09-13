@@ -41,6 +41,7 @@ class ProductController extends CategoryController
      */
     public function create()
     {
+
         $data_cat = $this->intants_catgory->getAllData(); 
         $data_br = $this->intants_brand->getAllData();
         return view('admin.modules.product.create',['data_cat'=>$data_cat,'data_br'=>$data_br]);
@@ -54,6 +55,18 @@ class ProductController extends CategoryController
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name'=>'required',
+            'category_id'=>'required',
+            'brand_id'=>'required',
+            'description'=>'required',
+            'content'=>'required',
+            'price'=>'required',
+            'quantity'=>'required',
+            'image'=>'required',
+            'status'=>'required'
+        ]);
+
         $data = $request->except('_token');
         $get_image = $request->file('image');
         $data['created_at'] = new DateTime;
@@ -64,11 +77,11 @@ class ProductController extends CategoryController
             $data['image'] = $new_image;
             $data['created_at'] = new DateTime;
             $this->intants_product->insertData($data);
-            return redirect()->route('admin.product.index')->with('message','Insertd Product SuccessFully');
+            return redirect()->route('admin.product.create')->with('message','Insertd Product SuccessFully');
         }
 
         $this->intants_product->insertData($data);
-        return redirect()->route('admin.product.index')->with('message','Insertd Product SuccessFully');
+        return redirect()->route('admin.product.create')->with('message','Insertd Product SuccessFully');
     }
 
     /**
@@ -148,4 +161,5 @@ class ProductController extends CategoryController
         $id = $request->id;
         $this->intants_product->updateStatusActive($id);
     }
+
 }

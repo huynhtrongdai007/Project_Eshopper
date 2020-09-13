@@ -1,6 +1,14 @@
  @extends('admin.master')
  @section('title','Thêm Thương Hiệu')
  @section('content')
+ <?php
+          $message = Session::get('message');
+            if($message)
+             {
+               echo"<div class='alert alert-success'>'$message'</div>";
+               Session::put('message',null);
+             }
+          ?>
    <form id="form-category" action="{{ route('admin.brand.store') }}" method="POST">
       @csrf
  <div class="card">
@@ -18,21 +26,23 @@
             <div class="form-group">
               <label for="exampleInputEmail1">Brand Name</label>
               <input type="text" id="brand_name" name="brand_name" class="form-control" id="exampleInputEmail1" placeholder="Enter Brand Name">
-              @foreach($errors->all() as $e)
-              <span class="text-danger">{{$e}}</span>
-              @endforeach
+              
             </div>
-            <div class="form-group">
+            @error('brand_name')
+              <span class="text-danger">{{$message}}</span>
+            @enderror
+            <div class="form-group">  
               <label>Status</label>
               <select class="form-control" id="brand_status" name="status">
                 <option value="">Chọn trạng thái</option>
                 <option value="1">On</option>
                 <option value="0">Off</option>
               </select>
-              @foreach($errors->all() as $e)
-              <span class="text-danger">{{$e}}</span>
-              @endforeach
+           
             </div>
+               @error('status')
+              <span class="text-danger">{{$message}}</span>
+            @enderror
 
           </div>
         <!-- /.card-body -->

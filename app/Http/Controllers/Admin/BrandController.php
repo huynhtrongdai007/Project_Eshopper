@@ -47,13 +47,13 @@ class BrandController extends Controller
     {
 
     	$request->validate([
-    		'category_brand'=>'unique:tbl_category',
+    		'brand_name'=>'required|unique:tbl_brand',
     		'status' =>'required'
     	]);
     	$data = $request->except('_token');
     	$data['created_at'] = new DateTime();
     	$this->instants->insertData($data);
-    	return redirect()->route('admin.brand.index');
+    	return redirect()->route('admin.brand.create')->with('message','inserted Brand SuccessFully');
     }
 
     /**
