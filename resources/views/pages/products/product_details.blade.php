@@ -32,7 +32,7 @@
 						</div><!--/price-range-->
 						
 						<div class="shipping text-center"><!--shipping-->
-							<img src="images/home/shipping.jpg" alt="" />
+							<img src="{{ asset('public/frontend/images/home/shipping.jpg') }}" alt="" />
 						</div><!--/shipping-->
 						
 					</div>
@@ -46,25 +46,19 @@
 								<h3>ZOOM</h3>
 							</div>
 							<div id="similar-product" class="carousel slide" data-ride="carousel">
-								
+									
 								  <!-- Wrapper for slides -->
 								    <div class="carousel-inner">
-										<div class="item active">
-										  <a href=""><img src="{{ asset('public/frontend/images/product-details/similar1.jpg') }}" alt=""></a>
-										  <a href=""><img src="{{ asset('public/frontend/images/product-details/similar1.jpg') }}" alt=""></a>
-										  <a href=""><img src="{{ asset('public/frontend/images/product-details/similar1.jpg') }}" alt=""></a>
+								    	  @php
+		                                  $i =1;
+		                                @endphp
+								    	@foreach ($getGallery as $key => $gallery)
+										@if ($i % 2 != 0)
+										<div class="item {{($key == 0) ? "active" : "" }}">
+										  <a  href=""><img width="100" src="{{ asset("public/uploads/products/{$gallery->image}") }}"></a> 
 										</div>
-										<div class="item">
-										  <a href=""><img src="{{ asset('public/frontend/images/product-details/similar1.jpg') }}" alt=""></a>
-										  <a href=""><img src="{{ asset('public/frontend/images/product-details/similar1.jpg') }}" alt=""></a>
-										  <a href=""><img src="{{ asset('public/frontend/images/product-details/similar1.jpg') }}" alt=""></a>
-										</div>
-										<div class="item">
-										  <a href=""><img src="{{ asset('public/frontend/images/product-details/similar1.jpg') }}" alt=""></a>
-										  <a href=""><img src="{{ asset('public/frontend/images/product-details/similar1.jpg') }}" alt=""></a>
-										  <a href=""><img src="{{ asset('public/frontend/images/product-details/similar1.jpg') }}" alt=""></a>
-										</div>
-										
+										@endif
+										@endforeach
 									</div>
 
 								  <!-- Controls -->
@@ -79,217 +73,42 @@
 						</div>
 						<div class="col-sm-7">
 							<div class="product-information"><!--/product-information-->
+
 								{{-- <img src="{{ asset("public/uploads/images/product-details/news.jpg") }}" class="newarrival" alt="" /> --}}
+								<form id="form-add-cart" method="POST" action="" enctype="mutipart/form-data">
+								@csrf	
+								
 								<h2>{{$product->name}}</h2>
-								<p>Web ID: 1089772</p>
-								<img src="images/product-details/rating.png" alt="" />
+								
+								<img name="image" src="{{ asset('public/frontend/images/product-details/rating.png') }}" alt="" />
 								<span>
 									<span>{{number_format($product->price)}}.Đ</span>
+									<div class="clearfix"></div>
 									<label>Quantity:</label>
-									<input type="text" min="1" value="1" />
-									<button  type="button" class="btn btn-fefault cart">
+
+									<div class="cart_quantity_button">
+										<a class="cart_quantity_up"   href=""> + </a>
+											<input name="qty"  class="cart_quantity_input" value="1" type="text"  size="2">
+										<a class="cart_quantity_down"  href=""> - </a>
+									</div>
+									<input type="hidden" name="id" id="id" value="{{$product->id}}">
+									<input type="hidden" name="name" id="name" value="{{$product->name}}">
+									<input type="hidden" name="price" id="price" value="{{$product->price}}">
+									<input type="hidden" name="image" id="image" value="{{$product->image}}">
+									<button  type="submit" class="btn btn-fefault cart add-to-cart">
 										<i class="fa fa-shopping-cart"></i>
 										Add to cart
 									</button>
 								</span>
-								<p><b>Availability:</b> In Stock</p>
-								<p><b>Condition:</b> New</p>
+								<p><b>Category:</b>{{$product->category_name}}</p>
+							{{-- 	<p><b>Condition:</b> New</p> --}}
 								<p><b>Brand:</b>{{$product->brand_name}}</p>
 								<a href=""><img src="{{ asset('public/frontend/images/product-details/share.png') }}" class="share img-responsive"  alt="" /></a>
+								</form>
 							</div><!--/product-information-->
 						</div>
 					</div><!--/product-details-->
-					
-					{{-- <div class="category-tab shop-details-tab"><!--category-tab-->
-						<div class="col-sm-12">
-							<ul class="nav nav-tabs">
-								<li><a href="#details" data-toggle="tab">Details</a></li>
-								<li><a href="#companyprofile" data-toggle="tab">Company Profile</a></li>
-								<li><a href="#tag" data-toggle="tab">Tag</a></li>
-								<li class="active"><a href="#reviews" data-toggle="tab">Reviews (5)</a></li>
-							</ul>
-						</div>
-						<div class="tab-content">
-							<div class="tab-pane fade" id="details" >
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery1.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery2.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery3.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery4.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<div class="tab-pane fade" id="companyprofile" >
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery1.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery3.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery2.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery4.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<div class="tab-pane fade" id="tag" >
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery1.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery2.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery3.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="product-image-wrapper">
-										<div class="single-products">
-											<div class="productinfo text-center">
-												<img src="images/home/gallery4.jpg" alt="" />
-												<h2>$56</h2>
-												<p>Easy Polo Black Edition</p>
-												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							
-							<div class="tab-pane fade active in" id="reviews" >
-								<div class="col-sm-12">
-									<ul>
-										<li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
-										<li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
-										<li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
-									</ul>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-									<p><b>Write Your Review</b></p>
-									
-									<form action="#">
-										<span>
-											<input type="text" placeholder="Your Name"/>
-											<input type="email" placeholder="Email Address"/>
-										</span>
-										<textarea name="" ></textarea>
-										<b>Rating: </b> <img src="images/product-details/rating.png" alt="" />
-										<button type="button" class="btn btn-default pull-right">
-											Submit
-										</button>
-									</form>
-								</div>
-							</div>
-							
-						</div>
-					</div><!--/category-tab--> --}}
-					
+
 					<div class="recommended_items"><!--recommended_items-->
 					 <h2 class="title text-center">recommended items</h2>
                         
@@ -309,3 +128,30 @@
 @include('pages.blocks.foot')
 </body>
 </html>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#form-add-cart').on('click', '.add-to-cart', function(event) {
+			event.preventDefault();
+			var id  =  $('#id').val();
+			var qty =  $('.cart_quantity_input').val();
+			var name = $('#name').val();
+			var price = $('#price').val();
+			var image = $('#image').val();
+			var _token = $("meta[name='csrf-token']").attr("content");
+	
+			$.ajax({
+				url:"{{ route('add-to-cart') }}",
+				type:"POST",
+				data:{id:id,qty:qty,name:name,price:price,image:image,_token:_token},
+				success:function() {
+					swal( "Đã Thêm Vào Giỏ Hàng","", "success");
+				}
+			});
+		}); 
+	
+			
+			 
+		
+	});
+</script>

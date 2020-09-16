@@ -48,8 +48,32 @@ class ProductModel extends Model
     public function getProductDetails($id) {
       $result = DB::table('tbl_products')
       ->join('tbl_brand','tbl_brand.id','=','tbl_products.brand_id')
-      ->select('tbl_products.*','tbl_brand.brand_name')
+      ->join('tbl_category','tbl_category.id','=','tbl_products.category_id')
+      ->select('tbl_products.*','tbl_brand.brand_name','tbl_category.category_name')
       ->where('tbl_products.id',$id)->first();
+      return $result;
+    }
+
+    // phuong thuc de show gallery image theo chuyen muc
+    public function getGallery($id) {
+      $result = DB::table('tbl_products')
+      ->join('tbl_category','tbl_category.id','=','tbl_products.category_id')
+      ->where('tbl_category.id',$id)
+      ->limit(4)
+      ->orderby('tbl_products.id','DESC')
+      ->get();
+      return $result;
+    }
+
+     // phuong thuc de show gallery image theo chuyen muc
+    public function getRecommenProduct($category_id,$product_id) {
+      $result = DB::table('tbl_products')
+      ->join('tbl_category','tbl_category.id','=','tbl_products.category_id')
+      ->where('tbl_category.id',$category_id)
+      ->whereNotIn('tbl_products.id',[$product_id])
+      ->orderby('tbl_products.id','DESC')
+      ->limit(3)
+      ->get();
       return $result;
     }
 }

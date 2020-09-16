@@ -22,7 +22,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','HomeController@index');
 Route::get('/home','HomeController@index')->name('home');
 Route::get('product_details/{id}','HomeController@productDetails')->name('product_details');
-Route::get('cart','HomeController@viewCart')->name('cart');
+
+
+Route::get('cart','CartController@viewCart')->name('view_cart');
+Route::post('add-to-cart','CartController@addToCart')->name('add-to-cart');
+Route::post('destroy-cart','CartController@deleteItemCart')->name('destroy-cart');
+
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::get('/','LoginController@index')->name('login');
     Route::post('progressLogin','LoginController@progressLogin')->name('progressLogin');
@@ -30,6 +35,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::post('store','RegisterController@register')->name('store');
 
     Route::get('logout','LoginController@logout')->name('logout');
+
 
   Route::middleware('check_login')->group(function() {
    //---------------- Admin contron-----------------------------------

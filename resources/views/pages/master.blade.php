@@ -59,11 +59,11 @@
                        @include('pages.blocks.category_tab')
                     </div><!--/category-tab-->
                     
-                    <div class="recommended_items"><!--recommended_items-->
+      {{--               <div class="recommended_items"><!--recommended_items-->
                         <h2 class="title text-center">recommended items</h2>
                         
                       @include('pages.blocks.recommended_items')
-                    </div><!--/recommended_items-->
+                    </div><!--/recommended_items--> --}}
                     
                 </div>
             </div>
