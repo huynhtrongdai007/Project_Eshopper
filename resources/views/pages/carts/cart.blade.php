@@ -16,7 +16,8 @@
 				  <li class="active">Shopping Cart</li>
 				</ol>
 			</div>
-			
+				<form action="{{ route('update-cart') }}" method="POST">
+				@csrf
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">
 					<thead>
@@ -29,7 +30,7 @@
 							<td></td>
 						</tr>
 					</thead>
-				
+
 					<tbody>
 						@php
 						$total=0;
@@ -62,7 +63,7 @@
 							<td class="cart_quantity">
 								<div class="cart_quantity_button">
 									<a class="cart_quantity_up"   href=""> + </a>
-									<input class="cart_quantity_input" value="{{$items['qty']}}" type="text" name="quantity" autocomplete="off" size="2">
+									<input class="cart_quantity_input" id="{{$items['qty']}}"  value="{{$items['qty']}}" type="text" name="quantity[{{$items['id']}}]" autocomplete="off" size="2">
 									<a class="cart_quantity_down"  href=""> - </a>
 								</div>
 							</td>
@@ -70,19 +71,21 @@
 								<p class="cart_total_price">{{number_format($subtotal)}}</p>
 							</td>
 							<td class="cart_delete">
-								
-							
 									<a class="cart_quantity_delete" id="{{$items['id']}}" href=""><i class="fa fa-times"></i></a>
-								
-								
 							</td>
 						</tr>
-						
+							
 					@endforeach
+ 						<tr>
+							<td><input class="btn btn-default btn-sm update" value="Update" type="submit"></td>
+					  </tr>
 						@endif
+						  
 					</tbody>
+				 
 				</table>
 			</div>
+		</form>
 		</div>
 	</section> <!--/#cart_items-->
 
@@ -98,8 +101,10 @@
 							<li>Shipping Cost <span>Free</span></li>
 							<li>Total <span>$61</span></li>
 						</ul>
-							<a class="btn btn-default update" href="">Update</a>
-							<a class="btn btn-default check_out" href="">Check Out</a>
+						
+						    <a class="btn btn-default delete"  href="">Delete All Cart</a> 
+							
+							<a class="btn btn-default check_out" href="{{ route('view-checkout') }}">Check Out</a> 
 					</div>
 				</div>
 			</div>
@@ -112,6 +117,26 @@
     @include('pages.blocks.foot')
 </body>
 </html>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.delete').click(function(event) {
+			event.preventDefault();
+			$.ajax({
+				url:"{{ route('destroy-all-cart') }}",
+				type:"GET",
+				success:function() {
+					setTimeout(function(){
+						location.reload();
+					});
+				}
+			});
+		});
+		
+
+	});
+</script>
+
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('.cart_quantity_delete').click(function(event) {
@@ -124,9 +149,11 @@
 				type:"POST",
 				data:{id:id,_token:_token},
 				success:function() {
-					
-					$(row).closest("tr").hide();
-					
+				  
+					// $(row).closest("tr").hide();
+					setTimeout(function(){
+						location.reload();
+					});
 				}
 
 			});

@@ -40,15 +40,16 @@ $(document).ready(function(){
     //  $(".cart_quantity_input").change(function() {
     //     var sum = 0;
     //     var total = 0;
-    //     $('.price_jq').each(function () {
+    //     $('.price').each(function () {
     //         var price = $(this);
     //         var count = price.closest('tr').find('.cart_quantity_input');
+    //          console.log(price);
     //         sum = (price.html() * count.val());
     //         total = total + sum;
-    //         console.log(sum);
+           
     //         price.closest('tr').find('.cart_total_price').html(sum + "Đ"); //Also use html() instead of append()
     //     });
-    //     // $('#total').html("<span>" + total + "</span>"); 
+    //     $('#total').html(total); 
     //     //Also use html() instead of append()
 
     // }).change(); //trigger change event on page load 

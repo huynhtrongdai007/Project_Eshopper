@@ -17,16 +17,33 @@ use Illuminate\Support\Facades\Route;
 //      return view('pages.master');
 // });
 
-//home
-
+//----------------Home----------------------------------------------------------------------------
 Route::get('/','HomeController@index');
 Route::get('/home','HomeController@index')->name('home');
 Route::get('product_details/{id}','HomeController@productDetails')->name('product_details');
+//----------------Home----------------------------------------------------------------------------
 
+//----------------login----------------------------------------------------------------------------
+Route::get('login','ControllerLogin@index')->name('login');
+Route::post('create_account','ControllerLogin@store')->name('create_account');
+//----------------------------------------------------------------------------------------------
+
+//----------------Cart----------------------------------------------------------------------------
 
 Route::get('cart','CartController@viewCart')->name('view_cart');
 Route::post('add-to-cart','CartController@addToCart')->name('add-to-cart');
+Route::post('update-cart','CartController@updateCart')->name('update-cart');
 Route::post('destroy-cart','CartController@deleteItemCart')->name('destroy-cart');
+Route::get('destroy-all-cart','CartController@deleteAllCart')->name('destroy-all-cart');
+//----------------Cart----------------------------------------------------------------------------
+
+//----------------checkout----------------------------------------------------------------------------
+
+Route::get('checkout','ControllerCheckOut@index')->name('checkout');
+
+
+//----------------checkout----------------------------------------------------------------------------
+
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::get('/','LoginController@index')->name('login');

@@ -73,6 +73,23 @@ class CartController extends Controller
 
 	}
 
+
+	public function updateCart(Request $request) {
+		$data = $request->except('_token');
+		$cart = Session::get('cart');
+		if ($cart==true) {
+			foreach ($data['quantity'] as $key => $qty) {
+				foreach ($cart as $id => $val) {
+					if ($val['id']==$key) {
+						$cart[$id]['qty'] = $qty;
+					}
+				}
+			}
+			Session::put('cart',$cart);
+			return redirect()->back();
+		}
+	}
+
 	public function deleteItemCart(Request $request) {
 	
 		 $carts = Session::get('cart');
@@ -89,5 +106,13 @@ class CartController extends Controller
         }
         
 		
+	}
+
+
+	public function deleteAllCart() {
+		$cart = Session::get('cart');
+		if ($cart==true) {
+			Session::forget('cart');
+		}
 	}
 }

@@ -1772,7 +1772,7 @@ h2.title {
   margin-left: 40px;
 }
 
-.update, .check_out {
+.update, .check_out, .delete {
   background: #FE980F;
   border-radius: 0;
   color: #FFFFFF;
@@ -1788,6 +1788,9 @@ h2.title {
   margin-left: 20px
 }
 
+.delete {
+   margin-left: 40px;
+}
 
 
 /*************************

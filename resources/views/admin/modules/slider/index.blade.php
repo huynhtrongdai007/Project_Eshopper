@@ -36,6 +36,7 @@
    <tbody>
     @foreach ($data_slider as $items)   
         <tr>
+   
          <td>{{$items->id}}</td>
          <td> <img width="80" src="{{ asset("./public/uploads/sliders/{$items->image}")}}" alt=""></td>
          <td>{{$items->name}}</td>
