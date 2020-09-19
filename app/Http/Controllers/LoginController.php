@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DateTime;
+use Session;
+
 use App\Models\Customer\CustomerModel as MainModel;
-class ControllerLogin extends Controller
+session_start();
+class LoginController extends Controller
 {
 
     private $instants;
@@ -30,9 +33,24 @@ class ControllerLogin extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function login()
+    public function login(Request $request)
     {
-        
+       $email = $request->email;
+       $password = md5($request->password);
+       $result = $this->instants->loginCustomer($email,$password);
+     
+        if ($result) {
+            Session::put('customer_id',$result->id);
+            return redirect()->route('view-checkout');
+        } else {
+             return redirect()->back()->with('error_message','Login Not Success');
+        }
+
+    }
+
+    public function logout(Request $request) {
+        $request->session()->flush();
+         return redirect()->back();
     }
 
     /**
@@ -44,14 +62,13 @@ class ControllerLogin extends Controller
     public function store(Request $request)
     {
 
-
         $request->validate([
             
             'email'=>'required|unique:tbl_customers'
-            
         ]);
 
         $data = $request->except('_token');
+        $data['password'] = md5($request->password);
         $data['created_at'] = new DateTime; 
         $this->instants->createAcount($data);
         return redirect()->back()->with('message','Registered Success');

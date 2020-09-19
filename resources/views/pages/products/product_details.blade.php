@@ -75,8 +75,8 @@
 							<div class="product-information"><!--/product-information-->
 
 								{{-- <img src="{{ asset("public/uploads/images/product-details/news.jpg") }}" class="newarrival" alt="" /> --}}
-								<form id="form-add-cart" method="POST" action="" enctype="mutipart/form-data">
-								@csrf	
+								<form id="form-add-cart" method="" action="" enctype="mutipart/form-data">
+								
 								
 								<h2>{{$product->name}}</h2>
 								
@@ -122,7 +122,6 @@
 	
 	<footer id="footer"><!--Footer-->
 	   @include('pages.blocks.footer')
-		
 	</footer><!--/Footer-->
 	
 @include('pages.blocks.foot')
@@ -139,7 +138,7 @@
 			var price = $('#price').val();
 			var image = $('#image').val();
 			var _token = $("meta[name='csrf-token']").attr("content");
-	
+		
 			$.ajax({
 				url:"{{ route('add-to-cart') }}",
 				type:"POST",
@@ -148,10 +147,7 @@
 					swal( "Đã Thêm Vào Giỏ Hàng","", "success");
 				}
 			});
-		}); 
-	
-			
-			 
-		
+		}); 	
 	});
 </script>
+

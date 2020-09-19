@@ -111,89 +111,56 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/one.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
+						@php
+							$total=0;
+							$subtotal =0;
+						@endphp
+						@if (empty(Session::get('cart')))
+							<tr><td><h3>Cart Empty</h3></td></tr>
+						@else
+					
+						    
 
+
+						@foreach (Session::get('cart') as $items)
+						@php
+							$subtotal = $items['qty'] * $items['price'];
+							$total += $subtotal;
+						@endphp
 						<tr>
 							<td class="cart_product">
-								<a href=""><img src="images/cart/two.png" alt=""></a>
+								<a href=""><img width="80" src="{{ asset("public/uploads/products/{$items['image']}") }}" alt=""></a>
 							</td>
 							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
+								<h4><a href="">{{$items['name']}}</a></h4>
 								<p>Web ID: 1089772</p>
 							</td>
 							<td class="cart_price">
-								<p>$59</p>
+								<p>{{number_format($items['price'])}}</p>
 							</td>
 							<td class="cart_quantity">
 								<div class="cart_quantity_button">
 									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
+									<input class="cart_quantity_input" type="text" name="quantity" value="{{$items['qty']}}" autocomplete="off" size="2">
 									<a class="cart_quantity_down" href=""> - </a>
 								</div>
 							</td>
 							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
+								<p class="cart_total_price">{{number_format($subtotal)}}</p>
 							</td>
 							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
+								<a class="cart_quantity_delete" href="" id="{{$items['id']}}"><i class="fa fa-times"></i></a>
 							</td>
 						</tr>
-						<tr>
-							<td class="cart_product">
-								<a href=""><img src="images/cart/three.png" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">Colorblock Scuba</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>$59</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">$59</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
+						@endforeach
+							@endif
 						<tr>
 							<td colspan="4">&nbsp;</td>
 							<td colspan="2">
 								<table class="table table-condensed total-result">
 									<tr>
 										<td>Cart Sub Total</td>
-										<td>$59</td>
+										<td>{{number_format($total)}}</td>
 									</tr>
 									<tr>
 										<td>Exo Tax</td>
@@ -205,11 +172,12 @@
 									</tr>
 									<tr>
 										<td>Total</td>
-										<td><span>$61</span></td>
+										<td><span>{{number_format($total)}}</span></td>
 									</tr>
 								</table>
 							</td>
 						</tr>
+
 					</tbody>
 				</table>
 			</div>
@@ -236,3 +204,28 @@
     <!--end foor-->
 </body>
 </html>
+
+   <script type="text/javascript">
+   	 $(document).ready(function() {
+        $('.cart_quantity_delete').click(function(event) {
+            event.preventDefault();
+            var id = $(this).attr('id');
+            var row = this;
+            var _token = $("meta[name='csrf-token']").attr("content");
+            $.ajax({
+                url:"{{ route('destroy-cart') }}",
+                type:"POST",
+                data:{id:id,_token:_token},
+                success:function() {
+                  
+                    // $(row).closest("tr").hide();
+                    setTimeout(function(){
+                        location.reload();
+                    });
+                }
+
+            });
+
+        });
+    });
+   </script>

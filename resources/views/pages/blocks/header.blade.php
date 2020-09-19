@@ -61,9 +61,23 @@
                             <ul class="nav navbar-nav">
                                 <li><a href="{{ route('login') }}"><i class="fa fa-user"></i> Account</a></li>
                                 <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-                                <li><a href="{{ route('checkout') }}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                                <li><a href="{{ route('view-checkout') }}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                 <li><a href="{{ route('view_cart') }}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                <li><a href="{{ route('login') }}"><i class="fa fa-lock"></i> Login</a></li>
+                                    @php
+                                        $customer_id = Session::get('customer_id');
+                                
+                                    @endphp
+                                    @if ($customer_id)
+                                      <li>
+                                        <a href="{{ route('logout') }}"><i class="fa fa-lock"></i>Logout</a>
+                                     </li>
+                                     @else
+                                      <li>
+                                        <a href="{{ route('login') }}"><i class="fa fa-lock"></i> Login</a>
+                                     </li>
+                                    @endif
+                                    
+                              
                             </ul>
                         </div>
                     </div>

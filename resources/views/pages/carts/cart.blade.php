@@ -119,6 +119,31 @@
 </html>
 
 <script type="text/javascript">
+   	 $(document).ready(function() {
+        $('.cart_quantity_delete').click(function(event) {
+            event.preventDefault();
+            var id = $(this).attr('id');
+            var row = this;
+            var _token = $("meta[name='csrf-token']").attr("content");
+            $.ajax({
+                url:"{{ route('destroy-cart') }}",
+                type:"POST",
+                data:{id:id,_token:_token},
+                success:function() {
+                  
+                    // $(row).closest("tr").hide();
+                    setTimeout(function(){
+                        location.reload();
+                    });
+                }
+
+            });
+
+        });
+    });
+ </script>
+
+<script type="text/javascript">
 	$(document).ready(function(){
 		$('.delete').click(function(event) {
 			event.preventDefault();
@@ -135,29 +160,4 @@
 		
 
 	});
-</script>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('.cart_quantity_delete').click(function(event) {
-			event.preventDefault();
-			var id = $(this).attr('id');
-			var row = this;
-			var _token = $("meta[name='csrf-token']").attr("content");
-			$.ajax({
-				url:"{{ route('destroy-cart') }}",
-				type:"POST",
-				data:{id:id,_token:_token},
-				success:function() {
-				  
-					// $(row).closest("tr").hide();
-					setTimeout(function(){
-						location.reload();
-					});
-				}
-
-			});
-
-		});
-	});
-</script>
+</script	

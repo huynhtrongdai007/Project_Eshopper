@@ -24,8 +24,10 @@ Route::get('product_details/{id}','HomeController@productDetails')->name('produc
 //----------------Home----------------------------------------------------------------------------
 
 //----------------login----------------------------------------------------------------------------
-Route::get('login','ControllerLogin@index')->name('login');
-Route::post('create_account','ControllerLogin@store')->name('create_account');
+Route::get('login','LoginController@index')->name('login');
+Route::post('create_account','LoginController@store')->name('create_account');
+Route::post('login-customer','LoginController@login')->name('login-customer');
+Route::get('logout','LoginController@logout')->name('logout');
 //----------------------------------------------------------------------------------------------
 
 //----------------Cart----------------------------------------------------------------------------
@@ -38,9 +40,10 @@ Route::get('destroy-all-cart','CartController@deleteAllCart')->name('destroy-all
 //----------------Cart----------------------------------------------------------------------------
 
 //----------------checkout----------------------------------------------------------------------------
+  	Route::get('checkout','ControllerCheckOut@index')->name('view-checkout');
+ Route::middleware('check_login')->group(function() {
 
-Route::get('checkout','ControllerCheckOut@index')->name('checkout');
-
+  	});
 
 //----------------checkout----------------------------------------------------------------------------
 
@@ -55,6 +58,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 
 
   Route::middleware('check_login')->group(function() {
+  	Route::get('checkout','ControllerCheckOut@index')->name('checkout');
    //---------------- Admin contron-----------------------------------
 
   	Route::prefix('user')->name('user.')->group(function() {

@@ -16,15 +16,24 @@
                 <div class="col-sm-4 col-sm-offset-1">
                     <div class="login-form"><!--login form-->
                         <h2>Login to your account</h2>
-                        <form action="#">
-                            <input type="text" required placeholder="Name" />
-                            <input type="email" required placeholder="Email Address" />
+                        <form action="{{ route('login-customer') }}" method="POST">
+                            @csrf
+                            <input type="email" value="{{old('')}}" name="email" required placeholder="Enter Address" />
+                            <input type="password" name="password" required placeholder="Enter Password" />
                             <span>
                                 <input type="checkbox" class="checkbox"> 
                                 Keep me signed in
                             </span>
                             <button type="submit" class="btn btn-default">Login</button>
                         </form>
+                         <?php
+                              $message = Session::get('error_message');
+                                if($message)
+                                 {
+                                   echo"<div class='alert alert-danger text-center'>$message</div>";
+                                   Session::put('message',null);
+                                 }
+                            ?>
                     </div><!--/login form-->
                 </div>
                 <div class="col-sm-1">
@@ -49,7 +58,7 @@
                               $message = Session::get('message');
                                 if($message)
                                  {
-                                   echo"<div class='alert alert-success'>$message</div>";
+                                   echo"<div class='alert alert-success text-center'>$message</div>";
                                    Session::put('message',null);
                                  }
                             ?>
