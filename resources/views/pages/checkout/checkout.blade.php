@@ -27,68 +27,29 @@
 					<div class="col-sm-3">
 						<div class="shopper-info">
 							<p>Shopper Information</p>
-							<form>
-								<input type="text" placeholder="Display Name">
-								<input type="text" placeholder="User Name">
-								<input type="password" placeholder="Password">
-								<input type="password" placeholder="Confirm password">
+
+							<form action="" method="post">
+								@php
+								$customer_id = Session::get('customer_id');
+
+								@endphp
+								<input type="hidden" name="customer_id" id="customer_id" value="{{$customer_id}}">
+								<input type="text" name="lastname" id="lastname" value="{{old('lastname')}}" placeholder="Enter last Name*">
+								<input type="text" name="middlename" id="middlename" value="{{old('middlename')}}" placeholder="Enter middle Name">
+								<input type="text" name="firstname" id="firstname" value="{{old('firstname')}}" placeholder="Enter first Name*">
+								<input type="text" name="phone" id="phone" value="{{old('phone')}}" placeholder="Enter Phone">
+								<input type="email" name="email" id="email" value="{{old('email')}}" placeholder="Enter Email">
+								<textarea style="height: 100px;" name="address" id="address" placeholder="Enter Address*">{{old('address')}}</textarea>
 							</form>
 							<a class="btn btn-primary" href="">Get Quotes</a>
-							<a class="btn btn-primary" href="">Continue</a>
+							<a class="btn btn-primary" id="continue" href="">Continue</a>
 						</div>
 					</div>
-					<div class="col-sm-5 clearfix">
-						<div class="bill-to">
-							<p>Bill To</p>
-							<div class="form-one">
-								<form>
-									<input type="text" placeholder="Company Name">
-									<input type="text" placeholder="Email*">
-									<input type="text" placeholder="Title">
-									<input type="text" placeholder="First Name *">
-									<input type="text" placeholder="Middle Name">
-									<input type="text" placeholder="Last Name *">
-									<input type="text" placeholder="Address 1 *">
-									<input type="text" placeholder="Address 2">
-								</form>
-							</div>
-							<div class="form-two">
-								<form>
-									<input type="text" placeholder="Zip / Postal Code *">
-									<select>
-										<option>-- Country --</option>
-										<option>United States</option>
-										<option>Bangladesh</option>
-										<option>UK</option>
-										<option>India</option>
-										<option>Pakistan</option>
-										<option>Ucrane</option>
-										<option>Canada</option>
-										<option>Dubai</option>
-									</select>
-									<select>
-										<option>-- State / Province / Region --</option>
-										<option>United States</option>
-										<option>Bangladesh</option>
-										<option>UK</option>
-										<option>India</option>
-										<option>Pakistan</option>
-										<option>Ucrane</option>
-										<option>Canada</option>
-										<option>Dubai</option>
-									</select>
-									<input type="password" placeholder="Confirm password">
-									<input type="text" placeholder="Phone *">
-									<input type="text" placeholder="Mobile Phone">
-									<input type="text" placeholder="Fax">
-								</form>
-							</div>
-						</div>
-					</div>
+		
 					<div class="col-sm-4">
 						<div class="order-message">
 							<p>Shipping Order</p>
-							<textarea name="message"  placeholder="Notes about your order, Special Notes for Delivery" rows="16"></textarea>
+							<textarea name="note" id="notes" placeholder="Notes about your order, Special Notes for Delivery" rows="16"></textarea>
 							<label><input type="checkbox"> Shipping to bill address</label>
 						</div>	
 					</div>					
@@ -173,6 +134,7 @@
 									<tr>
 										<td>Total</td>
 										<td><span>{{number_format($total)}}</span></td>
+										<td><input type="hidden" id="total" value="{{$total}}"></td>
 									</tr>
 								</table>
 							</td>
@@ -181,15 +143,16 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="payment-options">
+			<h4>Hình thức thanh toán</h4><br/>
+			<div class="payment-options mt-5">
 					<span>
-						<label><input type="checkbox"> Direct Bank Transfer</label>
+						<label><input name="method" id="paymen_option" value="ATM" type="checkbox"> Direct Bank Transfer</label>
 					</span>
 					<span>
-						<label><input type="checkbox"> Check Payment</label>
+						<label><input name="method" id="paymen_option" value="Tiền Mặt" type="checkbox"> Check Payment</label>
 					</span>
 					<span>
-						<label><input type="checkbox"> Paypal</label>
+						<label><input name="method" id="paymen_option" value="Ghi Nợ" type="checkbox"> Paypal</label>
 					</span>
 				</div>
 		</div>
@@ -228,4 +191,39 @@
 
         });
     });
+   </script>
+ 
+   <script type="text/javascript">
+   	$(document).ready(function(){
+   		$('#continue').click(function(event) {
+   			 event.preventDefault();
+   			 var customer_id = $("#customer_id").val();
+   			 var lastname = $("#lastname").val();
+   			 var middlename = $("#middlename").val();
+   			 var firstname = $("#firstname").val();
+   			 var phone = $("#phone").val();
+   			 var email = $("#email").val();
+   			 var address = $("#address").val();
+			 var note = $("#notes").val();
+			 var total = $("#total").val();
+			 var paymen_option = $('#paymen_option').val();
+ 		 	 var _token = $("meta[name='csrf-token']").attr("content");
+ 		 
+ 		 	 $.ajax({
+ 		 	 	url: '{{ route('save-checkout') }}',
+ 		 	 	type: 'POST',
+ 		 	 	data: {customer_id:customer_id,lastname:lastname,middlename:middlename,firstname:firstname,phone:phone,email:email,address:address,note:note,total:total,method:paymen_option,_token:_token},
+ 		 	 	success:function() {
+ 		 	
+ 		 	 			swal( "Check Success","", "success");
+ 		 	 		setTimeout(function(){
+						location.reload();
+					},1000);
+ 		 	 		
+ 		 	 	}
+ 		 	 });
+ 		
+ 		
+   		});
+   	});
    </script>

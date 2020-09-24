@@ -153,7 +153,7 @@ class ProductController extends CategoryController
      public function updateUntive(Request $request)
     {
         $id = $request->id;
-        $this->intants_product->updateStatusUnctive($id);
+        $this->intants_product->updateStat usUnctive($id);
     }
 
     public function updateActive(Request $request)

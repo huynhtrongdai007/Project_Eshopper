@@ -59,14 +59,21 @@
                     <div class="col-sm-8">
                         <div class="shop-menu pull-right">
                             <ul class="nav navbar-nav">
+                                 @php
+                                    $customer_id = Session::get('customer_id');
+                                @endphp
                                 <li><a href="{{ route('login') }}"><i class="fa fa-user"></i> Account</a></li>
                                 <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
-                                <li><a href="{{ route('view-checkout') }}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                               
+                                <li>
+                                     @if (empty($customer_id))
+                                       <a href="{{ route('login') }}"><i class="fa fa-crosshairs"></i> Checkout</a>
+                                    @else
+                                        <a href="{{ route('view-checkout') }}"><i class="fa fa-crosshairs"></i> Checkout</a>
+                                     @endif
+                                </li>
                                 <li><a href="{{ route('view_cart') }}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                    @php
-                                        $customer_id = Session::get('customer_id');
-                                
-                                    @endphp
+                                   
                                     @if ($customer_id)
                                       <li>
                                         <a href="{{ route('logout') }}"><i class="fa fa-lock"></i>Logout</a>

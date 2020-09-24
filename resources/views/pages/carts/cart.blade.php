@@ -103,8 +103,12 @@
 						</ul>
 						
 						    <a class="btn btn-default delete"  href="">Delete All Cart</a> 
-							
-							<a class="btn btn-default check_out" href="{{ route('view-checkout') }}">Check Out</a> 
+							@if (empty(Session::get('customer_id')))
+								<a class="btn btn-default check_out" href="{{ route('login') }}">Check Out</a> 
+							@else
+								<a class="btn btn-default check_out" href="{{ route('view-checkout') }}">Check Out</a>
+							@endif
+							 
 					</div>
 				</div>
 			</div>

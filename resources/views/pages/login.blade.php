@@ -44,13 +44,15 @@
                         <h2>New User Signup!</h2>
                         <form id="form-register" action="{{ route('create_account') }}" method="POST">
                             @csrf
-                            <input type="text" id="name" name="name" value="{{old('name')}}" required placeholder="Name"/>
+                            <input type="text" id="name" name="username" value="{{old('name')}}" required placeholder="Name"/>
                             <input type="email" id="email" name="email" value="{{old('email')}}" required placeholder="Email Address"/>
                             @error('email')
                                 <span class="text-danger">{{$message}}</span>
                             @enderror
-                            <input type="password" id="password" name="password" value="{{old('password')}}" required placeholder="Password"/>
+                            
                             <input type="text" id="phone" name="phone" value="{{old('phone')}}" required placeholder="Phone"/>
+                            <input type="password" id="password" name="password" value="{{old('password')}}" required placeholder="Password"/>
+                            <input type="password"  name="password_confirm"  required placeholder="Password Confirm"/>
                             <button type="submit" required class="btn btn-default signup">Signup</button>
                         </form>
                     

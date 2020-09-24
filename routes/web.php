@@ -40,10 +40,8 @@ Route::get('destroy-all-cart','CartController@deleteAllCart')->name('destroy-all
 //----------------Cart----------------------------------------------------------------------------
 
 //----------------checkout----------------------------------------------------------------------------
-  	Route::get('checkout','ControllerCheckOut@index')->name('view-checkout');
- Route::middleware('check_login')->group(function() {
-
-  	});
+Route::get('checkout','ControllerCheckOut@index')->name('view-checkout');
+Route::post('save-checkout','ControllerCheckOut@store')->name('save-checkout');
 
 //----------------checkout----------------------------------------------------------------------------
 

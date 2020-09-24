@@ -64,11 +64,14 @@ class LoginController extends Controller
 
         $request->validate([
             
-            'email'=>'required|unique:tbl_customers'
+            'email'=>'unique:tbl_customers',
+            'password'=>'max:8',
+            'password_confirm'=>'max:8|same:password'
         ]);
 
         $data = $request->except('_token');
         $data['password'] = md5($request->password);
+            $data['password_confirm'] = md5($request->password);
         $data['created_at'] = new DateTime; 
         $this->instants->createAcount($data);
         return redirect()->back()->with('message','Registered Success');
