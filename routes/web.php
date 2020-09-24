@@ -136,6 +136,11 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 		Route::post('update_status_active','ProductController@updateActive')->name('update_status_active');
 	});
 
+	Route::prefix('orders')->name('orders.')->group(function(){
+		Route::get('index','OrderController@index')->name('index');
+		Route::get('show/{id}','OrderController@show')->name('show');
+
+	});
 
 
   });
