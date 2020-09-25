@@ -52,9 +52,11 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($order_id,$shipping_id)
     {
-        return view('admin.modules.orders.show');
+         $data['detail_customer'] = $this->instants->getByShippingID($shipping_id);
+         $data['getOrderDetail'] = $this->instants->getOrderDetail($order_id);
+         return view('admin.modules.orders.show',$data);
     }
 
     /**
