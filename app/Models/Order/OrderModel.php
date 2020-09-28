@@ -32,7 +32,7 @@ class OrderModel extends Model
     	->join('tbl_products','tbl_order_details.product_id','=','tbl_products.id')
     	->where('tbl_orders.id',$id)
     	->orderby('tbl_orders.id','DESC')
-    	->select('tbl_orders.total','tbl_products.name as product_name','tbl_products.price','tbl_order_details.sales_quantity as qty')
+    	->select('tbl_orders.total','tbl_products.name as product_name','tbl_products.price','tbl_order_details.sales_quantity as qty','tbl_products.image')
     	->get();
     	return $result;
     }

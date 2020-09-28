@@ -26,6 +26,7 @@
       <tr>
          <th>#</th>
          <th>Name</th>
+         <th>Image</th>
          <th>Total</th>
          <th>Status</th>
          <th>Created at</th>
@@ -38,6 +39,7 @@
       <tr>
           <td>{{$items->id_order}}</td>
           <td>{{$items->lastname}} {{$items->middlename}} {{$items->firstname}}</td>
+         
           <td>{{$items->total}}</td>
           <td>{{number_format($items->status_order)}}</td>
           <td>{{$items->created_at}}</td>

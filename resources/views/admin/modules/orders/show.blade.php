@@ -45,6 +45,7 @@
   <thead>
      <tr>
          <th>tên sản phẩm</th>
+         <th>Hinh Anh</th>
          <th>Số Lượng</th>
          <th>Giá</th>
          <th>Tổng Tiền</th>
@@ -53,6 +54,7 @@
         @foreach ($getOrderDetail as $items)
          <tr>
           <td>{{$items->product_name}}</td>
+          <td><img width="80" src="{{ asset("public/uploads/products/{$items->image}") }}" alt=""></td>
           <td>{{$items->qty}}</td>
           <td>{{number_format($items->price)}}</td>
           <td>{{number_format($items->qty * $items->price)}}</td>

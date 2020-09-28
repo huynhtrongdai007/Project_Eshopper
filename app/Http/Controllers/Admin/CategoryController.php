@@ -72,9 +72,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $data = $this->instant->getByid($id); 
-        $cat_parent = $this->instant->getAllData();
-        return view('admin.modules.category.edit',['data_cat'=>$data,'cat_parent'=>$cat_parent]);
+        $getByid = $this->instant->getByid($id); 
+        $getAllData = $this->instant->getAllData();
+        return view('admin.modules.category.edit',['getAllData'=>$getAllData,'getByid'=>$getByid]);
     }
 
     /**

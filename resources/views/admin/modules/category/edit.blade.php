@@ -1,8 +1,9 @@
  @extends('admin.master')
   @section('title','Sửa Thể Loại')
  @section('content')
-    <form id="form-category" action="{{ route('admin.category.update',['id'=>$data_cat->id]) }}" method="POST">
+    <form id="form-category" action="{{ route('admin.category.update',['id'=>$getByid->id]) }}" method="POST">
       @csrf
+      
  <div class="card">
         <div class="card-header">
           <h3 class="card-title">Chỉnh Sửa Thể Loại</h3>
@@ -17,25 +18,31 @@
         <div class="card-body">
           <div class="form-group">
             <label>Category Name</label>
-            <input type="text" id="category_name" name="category_name" class="form-control" value="{{$data_cat->category_name}}">
+            <input type="text" id="category_name" name="category_name" class="form-control" value="{{$getByid->category_name}}">
           </div>
            <div class="form-group">
                 <select class="form-control" id="parent" name="parent">
-                <option value="0">danh muc cha</option>
-                @foreach ($cat_parent as $items)
-                 @if($items->parent == $data_cat->id)
-                 <option selected value="{{$items->id}}">--{{$items->category_name}}</option>
-                 @else
-                 
-                  <option value="{{$items->id}}">{{$items->category_name}}</option>
+                <option value="0">-------------Danh muc cha--------------</option>
+                @foreach ($getAllData as $items)
+                 @if($items->parent == 0)
+                 <option   value="{{$items->id}}">{{$items->category_name}}</option>
+                 @endif
+     
+                @foreach ($getAllData as $items2)
+                 @if($items->id == $items2->parent)
+                 <option class="bg-secondary" {{$items2->parent == $getByid->parent ? 'selected' : ''}} value="{{$items2->id}}">{{$items2->category_name}}</option>
                  @endif
                 @endforeach
+                @endforeach
+
+
               </select>
+              
             </div>
           <div class="form-group">
            <select id="category_status" name="category_status" class="form-control">
              <option value="">Chọn trạng thái</option>
-              @if($data_cat->category_status==1)
+              @if($getByid->category_status==1)
                 <option selected="selected" value="1">On</option>
                 <option value="0">Off</option>
               @else

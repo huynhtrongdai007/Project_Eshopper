@@ -8,12 +8,17 @@ class CategoryModel extends Model
 {
    
    public function getAllData() {
-   	 $result = DB::table('tbl_category')->orderby('parent','DESC')->get();
+   	 $result = DB::table('tbl_category')
+  
+     ->orderby('parent','DESC')->get();
    	 return $result;
    }
 
    public function getByid($id) {
-   		$result = DB::table('tbl_category')->where('id',$id)->first();
+   		$result = DB::table('tbl_category')
+      ->join('tbl_products','tbl_category.id','=','tbl_products.category_id')
+      ->where('tbl_category.id',$id)
+      ->first();
    	    return $result;
    }
 
