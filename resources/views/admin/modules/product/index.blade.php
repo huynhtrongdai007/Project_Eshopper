@@ -42,7 +42,7 @@
     @foreach ($data_product as $items)
         <tr>
           <td>{{$items->id}}</td>
-          <td><img width="100" src="{{ asset("public/uploads/products/{$items->image}") }}" alt=""></td>
+          <td><img width="100" src="{{ url("public/uploads/products/{$items->image}") }}" alt=""></td>
           <td>{{$items->name}}</td>
           <td>{{$items->category_name}}</td>
           <td>{{$items->brand_name}}</td>

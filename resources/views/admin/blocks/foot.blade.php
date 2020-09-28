@@ -51,7 +51,6 @@
         url:"{{ route('admin.slider.update_status_untive') }}",
         type:"POST",
         data:{id:id,_token:token},
-
         success:function() {
             alert("Ok");
         }
@@ -118,7 +117,7 @@
 
 
 
-{{-- edit status slider --}}
+{{-- edit status category --}}
 <script type="text/javascript">
 
   $(document).ready(function(){
@@ -155,7 +154,9 @@
     });
   });
 </script>
+{{--end--}}
 
+{{-- edit prouct category --}}
 <script type="text/javascript">
 
   $(document).ready(function(){
@@ -192,3 +193,58 @@
     });
   });
 </script>
+
+{{-- create  category post --}}
+ <script type="text/javascript">
+   $(document).ready(function(){
+        $("#save").click(function(event) {
+          event.preventDefault();
+          var name = $("#name").val();
+          var slug = $("#slug").val();
+          var description = $("#description").val();
+          var _token = $("meta[name='csrf-token']").attr("content");
+
+          $.ajax({
+            url:"{{ route('admin.category_posts.store') }}",
+            type:"POST",
+            data:{name:name,slug:slug,description:description,_token:_token},
+            success:function() {
+              $("#message-success").append("<h3 class='alert alert-success'>Created Category Post SuccessFully</h3>");
+               $("#form-category-post").trigger("reset");
+            }
+
+          });
+        
+        });
+   });
+ </script>
+
+ {{-- edit  status category  post  --}}
+
+  <script type="text/javascript">
+   $(document).ready(function(){
+         $(document).on('change', '.category_post_status_off', function(event) {
+          event.preventDefault();
+
+          var id = $(this).attr("id");
+          var token = $("meta[name='csrf-token']").attr("content");
+          $.ajax({
+            url:"{{ route('admin.category_posts.update_status_untive') }}",
+            type:"POST",
+            data:{id:id,_token:token},
+         });
+      });
+
+  $(document).on('change', '.category_post_status_on', function(event) {
+          event.preventDefault();
+          var id = $(this).attr("id");
+          var token = $("meta[name='csrf-token']").attr("content");
+          $.ajax({
+            url:"{{ route('admin.category_posts.update_status_active') }}",
+            type:"POST",
+            data:{id:id,_token:token},
+         });
+      });    
+   });
+
+ </script>

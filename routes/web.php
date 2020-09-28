@@ -136,17 +136,24 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 		Route::post('update_status_active','ProductController@updateActive')->name('update_status_active');
 	});
 
-	Route::prefix('orders')->name('orders.')->group(function(){
+	 Route::prefix('orders')->name('orders.')->group(function(){
 		Route::get('index','OrderController@index')->name('index');
 		Route::get('show/{id}/{shipping_id}','OrderController@show')->name('show');
 
 	});
 
+	 Route::prefix('category_posts')->name('category_posts.')->group(function(){
+	 	Route::get('index','CategoryPostController@index')->name('index');
+	 	Route::get('create','CategoryPostController@create')->name('create');
+		Route::post('store','CategoryPostController@store')->name('store');
+		Route::get('edit/{id}','CategoryPostController@edit')->name('edit');
+		Route::post('update/{id}','CategoryPostController@update')->name('update');
+		Route::get('destroy/{id}','CategoryPostController@destroy')->name('destroy');
+		Route::post('update_status_untive','CategoryPostController@updateUntive')->name('update_status_untive');
+		Route::post('update_status_active','CategoryPostController@updateActive')->name('update_status_active');
+	 });
+
 
   });
 	
-
-	
-
-	 
 });

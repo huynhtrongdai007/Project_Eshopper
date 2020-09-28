@@ -59,5 +59,38 @@ $('#form-slider').validate({
 		}
 });
 
+$("#form-category-post").validate({
+	rules:{
+		name:{
+			required:true
+		},
+		slug:{
+			required:true
+		},
+		description:{
+			required:true
+		},
+		status:{
+			required:true
+		}
+	},
+	messages:{
+			name:{
+				required:'xin vui long nhap tên chuyên mục bài viết',
+			},
+			slug:{
+				required:'xin vui long nhap tên chuyên mục slug',
+			},
+
+			description:{
+				required:'xin vui long nhap vào mô tả bài viết',
+			},
+
+			status:{
+				required:'xin vui lòng chọn status'
+			}
+		}
+
+});
 
 });
