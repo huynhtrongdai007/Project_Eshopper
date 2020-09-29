@@ -18,15 +18,16 @@
 
             <div class="form-group">
               <label for="exampleInputEmail1">Post Name</label>
-              <input type="text" id="name" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter  Name">
+              <input type="text" id="name" value="{{old("name")}}" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter  Name">
             </div>
+            <div class="mesaage-error"></div>
              <div class="form-group">
               <label for="exampleInputEmail1">Slug Name</label>
-              <input type="text" id="slug" name="slug" class="form-control" id="exampleInputEmail1" placeholder="Enter Slug">
+              <input type="text" id="slug" value="{{old("slug")}}" name="slug" class="form-control" id="exampleInputEmail1" placeholder="Enter Slug">
             </div>
             <div class="form-group">
               <label for="">Description</label>
-              <textarea style="height: 200px" id="description" name="description" class="form-control" id="exampleInputEmail1" placeholder="Enter Mô tả bài viết"></textarea>
+              <textarea style="height: 200px" id="description" name="description" class="form-control" id="exampleInputEmail1" placeholder="Enter Mô tả bài viết">{{old("description")}}</textarea>
             </div>
           
   

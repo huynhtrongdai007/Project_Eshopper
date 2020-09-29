@@ -147,8 +147,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 	 	Route::get('create','CategoryPostController@create')->name('create');
 		Route::post('store','CategoryPostController@store')->name('store');
 		Route::get('edit/{id}','CategoryPostController@edit')->name('edit');
-		Route::post('update/{id}','CategoryPostController@update')->name('update');
-		Route::get('destroy/{id}','CategoryPostController@destroy')->name('destroy');
+		Route::post('update','CategoryPostController@update')->name('update');
+		Route::get('destroy','CategoryPostController@destroy')->name('destroy');
 		Route::post('update_status_untive','CategoryPostController@updateUntive')->name('update_status_untive');
 		Route::post('update_status_active','CategoryPostController@updateActive')->name('update_status_active');
 	 });

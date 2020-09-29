@@ -203,7 +203,6 @@
           var slug = $("#slug").val();
           var description = $("#description").val();
           var _token = $("meta[name='csrf-token']").attr("content");
-
           $.ajax({
             url:"{{ route('admin.category_posts.store') }}",
             type:"POST",
@@ -248,3 +247,53 @@
    });
 
  </script>
+
+
+  {{-- upadte category  post  --}}
+
+ <script type="text/javascript">
+   $(document).ready(function(){
+        $("#btn-update").click(function(event) {
+          event.preventDefault();
+          var id = $("#id_update").val();
+          var name = $("#name").val();
+          var slug = $("#slug").val();
+          var description = $("#description").val();
+          var _token = $("meta[name='csrf-token']").attr("content");
+
+          $.ajax({
+            url:"{{ route('admin.category_posts.update') }}",
+            type:"POST",
+            data:{id:id,name:name,slug:slug,description:description,_token:_token},
+            success:function() {
+              window.location.replace("{{ route('admin.category_posts.index') }}");
+            }
+
+          });
+        
+        });
+   });
+ </script>
+{{-- delete category post --}}
+
+<script type="text/javascript">
+  $(document).ready(function(){
+      $("#example1").on('click', '.delete-data', function(event) {
+        event.preventDefault();
+          var id = $(this).attr("id");
+          var _token = $("meta[name='csrf-token']").attr("content");
+          var row  = this;
+          $.ajax({
+            url: '{{ route('admin.category_posts.destroy') }}',
+            type: 'GET',
+            data: {id:id},
+            success:function() {
+                $(row).closest("tr").hide();
+                $("#message-success").append("<h3 class='alert alert-success'>Delete SuccessFully</h3>");
+
+            }
+          });
+      });
+  }); 
+</script>
+

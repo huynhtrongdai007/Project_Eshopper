@@ -11,10 +11,23 @@ class CategoryPostModel extends Model
 		return $result;
 	}
 
+	function getById($id) {
+		$result = DB::table('tbl_category_posts')->where('id',$id)->first();
+		return $result;
+	}
+
 
    function insertData($data) {
    		DB::table('tbl_category_posts')->insert($data);
    } 
+
+   function updateData($id,$data) {
+   		DB::table('tbl_category_posts')->where("id",$id)->update($data);
+   }
+
+   function deleteData($id) {
+   		DB::table('tbl_category_posts')->where("id",$id)->delete();
+   }
 
    function updateStatusUnctive($id) {
   	 	DB::table('tbl_category_posts')->where('id',$id)->update(['status'=>0]);

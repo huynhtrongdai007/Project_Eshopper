@@ -1,6 +1,7 @@
  @extends('admin.master')
    @section('title','Danh Sách Danh Mục Bài Viết')
  @section('content')
+  <div id="message-error"></div>
  <div class="card">
         <div class="card-header">
           <h3 class="card-title">Danh Sách Danh Mục Bài Viết</h3>
@@ -39,7 +40,7 @@
           </td>
             <td>{{$items->created_at}}</td>
             <td>{{$items->updated_at}}</td>
-         <td><a href="">Edit</a> | <a href="">Delete</a></td>
+         <td><a href="{{ route('admin.category_posts.edit',['id'=>$items->id]) }}">Edit</a> | <a id="{{$items->id}}" class="delete-data"  href="">Delete</a></td>
       </tr>
 
    @endforeach

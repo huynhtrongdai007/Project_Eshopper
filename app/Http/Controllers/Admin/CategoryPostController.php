@@ -25,6 +25,8 @@ class CategoryPostController extends Controller
         return view("admin.modules.categoryposts.index",$data);
     }
 
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -67,7 +69,8 @@ class CategoryPostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['getById'] =  $this->instants->getById($id);
+        return view("admin.modules.categoryposts.edit",$data);
     }
 
     /**
@@ -77,9 +80,12 @@ class CategoryPostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $id = $request->id;
+        $data = $request->except("_token");
+        $data["updated_at"] = new DateTime();
+        $this->instants->updateData($id,$data);
     }
 
     /**
@@ -88,9 +94,10 @@ class CategoryPostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $id =  $request->id;
+        $this->instants->deleteData($id);
     }
 
 
