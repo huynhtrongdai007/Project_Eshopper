@@ -297,3 +297,32 @@
   }); 
 </script>
 
+ {{-- edit  status  post  --}}
+
+  <script type="text/javascript">
+   $(document).ready(function(){
+         $(document).on('change', '.post_status_off', function(event) {
+          event.preventDefault();
+
+          var id = $(this).attr("id");
+          var token = $("meta[name='csrf-token']").attr("content");
+          $.ajax({
+            url:"{{ route('admin.post.update_status_untive') }}",
+            type:"POST",
+            data:{id:id,_token:token},
+         });
+      });
+
+  $(document).on('change', '.post_status_on', function(event) {
+          event.preventDefault();
+          var id = $(this).attr("id");
+          var token = $("meta[name='csrf-token']").attr("content");
+          $.ajax({
+            url:"{{ route('admin.post.update_status_active') }}",
+            type:"POST",
+            data:{id:id,_token:token},
+         });
+      });    
+   });
+
+ </script>

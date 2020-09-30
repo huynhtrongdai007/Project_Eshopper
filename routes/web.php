@@ -153,6 +153,18 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 		Route::post('update_status_active','CategoryPostController@updateActive')->name('update_status_active');
 	 });
 
+ 	Route::prefix('post')->name('post.')->group(function(){
+	 	Route::get('index','PostController@index')->name('index');
+	 	Route::get('create','PostController@create')->name('create');
+		Route::post('store','PostController@store')->name('store');
+		Route::get('edit/{id}','PostController@edit')->name('edit');
+		Route::post('update/{id}','PostController@update')->name('update');
+		Route::get('destroy/{id}','PostController@destroy')->name('destroy');
+		Route::post('update_status_untive','PostController@updateUntive')->name('update_status_untive');
+		Route::post('update_status_active','PostController@updateActive')->name('update_status_active');
+	 });
+
+
 
   });
 	
