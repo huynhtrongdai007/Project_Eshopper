@@ -27,6 +27,7 @@
          <th>#</th>
          <th>Image</th>
          <th>Name</th>
+         <th>categoty post</th>
          <th>Status</th>
          <th>Created at</th>
          <th>Updated at</th>
@@ -39,6 +40,14 @@
           <td>{{$items->id}}</td>
           <td><img width="100" src="{{ url("public/uploads/posts/{$items->image}") }}" alt=""></td>
           <td>{{$items->title}}</td>
+          <td>
+            @foreach ($getAllData_category_post as $items2)
+                @if ($items->category_post_id == $items2->id)
+                   {{$items2->name}}
+                @endif
+            @endforeach
+          
+          </td>
          <td>
           @if($items->status==1)
           <input type="checkbox" class="post_status_off" id="{{$items->id}}" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger">

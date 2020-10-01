@@ -14,9 +14,9 @@
 <!--header-->
 
 <!--slider-->
- <section id="slider">
+{{--  <section id="slider">
 @include('pages.blocks.slider')
- </section>
+ </section> --}}
 <!-- end slider-->
     
     <section>

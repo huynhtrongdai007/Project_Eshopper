@@ -42,5 +42,13 @@ class PostModel extends Model
 		DB::table('tbl_posts')->where('id',$id)->update(['status'=>0]);
 	}
    
+	//-----------code frond-end-----------
+
+	public function getIndexAllData()
+	{
+		$result = DB::table('tbl_posts')->orderby("id","DESC")->get();
+		return $result;
+		
+	}
 
 }

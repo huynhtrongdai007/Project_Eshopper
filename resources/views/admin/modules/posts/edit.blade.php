@@ -37,6 +37,13 @@
             @error('title')
             <span class="text-danger">{{$message}}</span>
             @enderror
+             <div class="form-group">
+              <label for="exampleInputEmail1">Slug</label>
+              <input type="text"  value="{{$getById->slug}}" name="slug" class="form-control" id="exampleInputEmail1" placeholder="Enter  Name">
+            </div>
+            @error('slug')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
             <div class="mesaage-error"></div>
              <div class="form-group">
               <label for="exampleInputEmail1">Description</label>
@@ -55,14 +62,24 @@
                <img width="200" src="{{ asset("public/uploads/posts/{$getById->image}") }}" alt="">
             <div class="form-group mt-3">
               <label for="">Image</label>
-           
-
               <input type="file" name="image" value="{{old("image")}}" class="form-control">
             </div>
              @error('image')
               <span class="text-danger">{{$message}}</span>
             @enderror
-  
+            <div class="form-group">
+                <select class="form-control" name="category_post_id">
+                   <option value="">----Chọn Chuyên Mục Bài Post----</option>
+                   @foreach ($getAllData_category_post as $items)
+                      @if ($items->id == $getById->category_post_id)
+                        <option selected value="{{$items->id}}">{{$items->name}}</option>
+                   @else
+                        <option value="{{$items->id}}">{{$items->name}}</option>   
+                   @endif
+                   @endforeach
+                  
+                </select>
+            </div>
         </div>
         <!-- /.card-body -->
         <div class="card-footer">

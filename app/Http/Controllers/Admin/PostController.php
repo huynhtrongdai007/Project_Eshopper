@@ -6,14 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post\PostModel as MainModel;
 use DateTime;
+use App\Models\CategoryPost\CategoryPostModel;
 class PostController extends Controller
 {
 
     private $instants;
-
+    private $instants_category_post;
+    
     public function __construct()
     {
         $this->instants = new MainModel;
+        $this->instants_category_post = new CategoryPostModel;
     }
 
     /**
@@ -24,6 +27,7 @@ class PostController extends Controller
     public function index()
     {
         $data['getAllData'] = $this->instants->getAllData();
+        $data['getAllData_category_post'] = $this->instants_category_post->getAllData();
         return view('admin.modules.posts.index',$data);
     }
 
@@ -34,14 +38,15 @@ class PostController extends Controller
      */
     public function create()
     {
-         return view('admin.modules.posts.create');
+        $data['getAllData_category_post'] = $this->instants_category_post->getAllData();
+         return view('admin.modules.posts.create',$data);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response,
      */
     public function store(Request $request)
     {
@@ -50,6 +55,7 @@ class PostController extends Controller
             'content'=>'required',
             'description'=>'required',
             'image'=>'required',
+            'category_post_id'=>'required',
         ]);
 
             $data = $request->except('_token');
@@ -84,6 +90,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $data['getById'] =  $this->instants->getById($id);
+        $data['getAllData_category_post'] = $this->instants_category_post->getAllData();
         return view('admin.modules.posts.edit',$data);
     }
 
@@ -136,4 +143,5 @@ class PostController extends Controller
         $id = $request->id;
         $this->instants->updateStatusActive($id);
     }
+
 }

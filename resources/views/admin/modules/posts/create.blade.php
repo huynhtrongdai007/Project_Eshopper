@@ -37,6 +37,13 @@
             @error('title')
             <span class="text-danger">{{$message}}</span>
             @enderror
+            <div class="form-group">
+              <label for="exampleInputEmail1">Slug</label>
+              <input type="text"  value="{{old("slug")}}" name="slug" class="form-control" id="exampleInputEmail1" placeholder="Enter Slug">
+            </div>
+            @error('slug')
+            <span class="text-danger">{{$message}}</span>
+            @enderror
             <div class="mesaage-error"></div>
              <div class="form-group">
               <label for="exampleInputEmail1">Description</label>
@@ -59,7 +66,17 @@
              @error('image')
               <span class="text-danger">{{$message}}</span>
             @enderror
-  
+            <div class="form-group">
+                <select class="form-control" name="category_post_id">
+                   <option value="">----Chọn Chuyên Mục Bài Post----</option>
+                   @foreach ($getAllData_category_post as $items)
+                     <option value="{{$items->id}}">{{$items->name}}</option>
+                   @endforeach
+                </select>
+            </div>
+            @error('category_post_id')
+              <span class="text-danger">{{$message}}</span>
+            @enderror
         </div>
         <!-- /.card-body -->
         <div class="card-footer">

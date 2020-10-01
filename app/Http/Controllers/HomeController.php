@@ -8,6 +8,7 @@ use App\Models\Slider\SliderModel;
 use App\Models\Category\CategoryModel;
 use App\Models\Brand\BrandModel;
 use App\Models\Product\ProductModel;
+use App\Models\Post\PostModel;
 class HomeController extends Controller
 {
 
@@ -15,13 +16,15 @@ class HomeController extends Controller
 	private $instants_category;
 	private $instants_brand;
 	private $instants_product;
-    
+    private $instants_post;
+
     public function __construct() {
 
     	$this->instants_slider = new SliderModel;
     	$this->instants_category = new CategoryModel;
     	$this->instants_brand = new BrandModel;
     	$this->instants_product = new ProductModel;
+    	$this->instants_post = new PostModel;
     }
 
 	public function index() {
@@ -47,5 +50,11 @@ class HomeController extends Controller
 		return view('pages.products.product_details',$data);
 	}
 
+	public function blog() {
+		$data['get_category'] = $this->instants_category->getAllDataIndex();
+		$data['get_brand'] = $this->instants_brand->getAllDataIndex();
+		$data['get_post'] = $this->instants_post->getAllData();
+		return view('pages.blogs.blog_list',$data);
+	}
 	
 }

@@ -46,6 +46,10 @@ Route::post('save-checkout','ControllerCheckOut@store')->name('save-checkout');
 //----------------checkout----------------------------------------------------------------------------
 
 
+//----------------post----------------------------------------------------------------------------
+Route::get('blog_list','HomeController@blog')->name('blog_list');
+
+//----------------checkout----------------------------------------------------------------------------
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::get('/','LoginController@index')->name('login');
     Route::post('progressLogin','LoginController@progressLogin')->name('progressLogin');
