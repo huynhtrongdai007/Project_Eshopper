@@ -56,5 +56,14 @@ class HomeController extends Controller
 		$data['get_post'] = $this->instants_post->getAllData();
 		return view('pages.blogs.blog_list',$data);
 	}
+
+	public function blogSingle($title,$id) {
+		$data['get_category'] = $this->instants_category->getAllDataIndex();
+		$data['get_brand'] = $this->instants_brand->getAllDataIndex();
+		$data['post_single'] = $this->instants_post->getById($id);
+		$category_post_id = $data['post_single']->category_post_id;
+		$data['recommen_post'] = $this->instants_post->getRecommenPost($category_post_id,$id);
+		return view('pages.blogs.blog_single',$data);
+	}
 	
 }

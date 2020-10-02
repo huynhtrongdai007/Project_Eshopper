@@ -51,7 +51,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
          $request->validate([
-            'title'=>'required',
+            'title'=>'required|unique:tbl_posts',
             'content'=>'required',
             'description'=>'required',
             'image'=>'required',

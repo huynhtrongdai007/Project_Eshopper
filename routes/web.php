@@ -48,6 +48,7 @@ Route::post('save-checkout','ControllerCheckOut@store')->name('save-checkout');
 
 //----------------post----------------------------------------------------------------------------
 Route::get('blog_list','HomeController@blog')->name('blog_list');
+Route::get('blog-single/{title}/{id}','HomeController@blogSingle')->name('blog-single');
 
 //----------------checkout----------------------------------------------------------------------------
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){

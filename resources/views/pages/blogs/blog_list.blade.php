@@ -58,11 +58,11 @@
 										<i class="fa fa-star-half-o"></i>
 								</span>
 							</div>
-							<a href="">
+							<a href="{{ route('blog-single',['title'=>$items->slug,'id'=>$items->id]) }}">
 								<img width="" src="{{ asset("public/uploads/posts/{$items->image}") }}" alt="">
 							</a>
 							<p>{{$items->description}}</p>
-							<a  class="btn btn-primary" href="">Read More</a>
+							<a  class="btn btn-primary" href="{{ route('blog-single',['title'=>$items->slug,'id'=>$items->id]) }}">Read More</a>
 						</div>
 							@endforeach
 
