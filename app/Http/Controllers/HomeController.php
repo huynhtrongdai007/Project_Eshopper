@@ -9,6 +9,9 @@ use App\Models\Category\CategoryModel;
 use App\Models\Brand\BrandModel;
 use App\Models\Product\ProductModel;
 use App\Models\Post\PostModel;
+use App\Models\Reviews\ReviewsModel;
+
+
 class HomeController extends Controller
 {
 
@@ -17,7 +20,8 @@ class HomeController extends Controller
 	private $instants_brand;
 	private $instants_product;
     private $instants_post;
-
+    private $instants_reviews;
+   
     public function __construct() {
 
     	$this->instants_slider = new SliderModel;
@@ -25,6 +29,7 @@ class HomeController extends Controller
     	$this->instants_brand = new BrandModel;
     	$this->instants_product = new ProductModel;
     	$this->instants_post = new PostModel;
+    	$this->instants_reviews = new ReviewsModel;
     }
 
 	public function index() {
@@ -47,8 +52,16 @@ class HomeController extends Controller
 		$data['getRecommenProduct'] = $this->instants_product->getRecommenProduct($category_id,$id);
 		$data['get_category'] = $this->instants_category->getAllDataIndex();
 		$data['get_brand'] = $this->instants_brand->getAllDataIndex();
+		
 		return view('pages.products.product_details',$data);
 	}
+
+	public function showComment(Request $request) {
+		$id = $request->id;
+		$result = $this->instants_reviews->showComment($id);
+		return response()->json($result);
+	}
+
 
 	public function blog() {
 		$data['get_category'] = $this->instants_category->getAllDataIndex();

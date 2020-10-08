@@ -46,7 +46,7 @@
 							<h3>{{$items->title}}</h3>
 							<div class="post-meta">
 								<ul>
-									<li><i class="fa fa-user"></i> Mac Doe</li>
+									<li><i class="fa fa-user"></i> {{$items->author}}</li>
 									<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
 									<li><i class="fa fa-calendar"></i>{{$items->created_at}}</li>
 								</ul>

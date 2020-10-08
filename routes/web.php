@@ -45,10 +45,23 @@ Route::post('save-checkout','ControllerCheckOut@store')->name('save-checkout');
 
 //----------------checkout----------------------------------------------------------------------------
 
+		Route::post('showComment','HomeController@showComment')->name('showComment');
 
 //----------------post----------------------------------------------------------------------------
 Route::get('blog_list','HomeController@blog')->name('blog_list');
 Route::get('blog-single/{title}/{id}','HomeController@blogSingle')->name('blog-single');
+// reviews
+Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
+	Route::post('add-reviews','ReviewController@store')->name('add-reviews');
+	Route::prefix('reviews')->name('reviews.')->group(function() {	
+		Route::get('index','ReviewController@index')->name('index');
+		Route::get('show','ReviewController@show')->name('show');
+		Route::get('destroy/{id}','ReviewController@destroy')->name('destroy');
+	});
+});
+
+
+
 
 //----------------checkout----------------------------------------------------------------------------
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){

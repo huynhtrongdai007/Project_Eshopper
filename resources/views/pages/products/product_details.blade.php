@@ -108,7 +108,37 @@
 							</div><!--/product-information-->
 						</div>
 					</div><!--/product-details-->
+					<div class="category-tab shop-details-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#reviews" data-toggle="tab">Reviews (5)</a></li>
+							</ul>
+						</div>
+						<div class="tab-content">
+							
+							
+						
+							<div class="tab-pane fade active in" id="reviews" >
+								<div class="col-sm-12">
+									<div id="load-Reviews"></div>
+										<p><b>Write Your Review</b></p>
+									<form id="form-reviews">
+										<span>
+											<input type="text" id="reviewsname" name="name" placeholder="Your Name"/>
+											<input type="email" id="email" name="email" placeholder="Email Address"/>
+										</span>
+										<textarea name="comment" id="comment" ></textarea>
+										<b>Rating: </b> <img src="{{ asset('public/frontend/images/product-details/rating.png') }}" alt="" />
+										<button type="button" class="btn btn-default pull-right btn-comment-reviews">
+											Submit
+										</button>
+									</form>
 
+								</div>
+							</div>
+							
+						</div>
+					</div><!--/category-tab-->
 					<div class="recommended_items"><!--recommended_items-->
 					 <h2 class="title text-center">recommended items</h2>
                         
@@ -147,7 +177,64 @@
 					swal( "Đã Thêm Vào Giỏ Hàng","", "success");
 				}
 			});
-		}); 	
+		}); 
 	});
 </script>
+<script type="text/javascript">
+	$(document).ready(function(){
+			function loadReviews() {
+			var product_id = $('#id').val();
+			var _token = $("meta[name='csrf-token']").attr("content");
+			$("#load-Reviews").html("");
+			$.ajax({
+				url:"{{ route('showComment') }}",
+				type:"POST",
+				data:{id:product_id,_token:_token},
+				success:function(data) {
+					console.log(data.name);
+					$.each(data,function(key,value){
+						$("#load-Reviews").append("<ul>"
+
+							+"<li><a href=''><i class='fa fa-user'>"+value.name+"</i></a></li>"+
+							"<li><a href=''><i class='fa fa-calendar-o'></i>"+value.created_at+"</a></li>"+
+							"<p>"+value.comment+"</p>"+
+							"</ul>");
+					});
+				}
+			});
+		}
+		loadReviews();
+
+		$("#form-reviews").on('click', '.btn-comment-reviews', function(event) {
+			event.preventDefault();
+
+			var product_id = $('#id').val();
+			var reviewsname = $("#reviewsname").val();
+			var email = $("#email").val();
+			var comment = $("#comment").val();
+			var _token = $("meta[name='csrf-token']").attr("content");
+
+			if (reviewsname=="" || email=="" || comment=="") {
+				alert("Không được để trống ô nhập thông tin");
+			}else {
+				$.ajax({
+				url:"{{ route('admin.add-reviews') }}",
+				type:"POST",
+				data:{product_id:product_id,name:reviewsname,email:email,comment:comment,_token:_token},
+				success:function(){
+					swal( "Cám ơn bạn đã đánh giá","", "success");
+					 loadReviews();
+					$("#form-reviews").trigger("reset");
+
+
+				}
+
+			});			
+			}
+			
+		});
+	});
+</script>
+
+
 

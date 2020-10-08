@@ -326,3 +326,22 @@
    });
 
  </script>
+ {{-- show reviews --}}
+<script type="text/javascript">
+  $(document).ready(function() {
+      $("#example1").on('click', '.btn-view', function(event) {
+        event.preventDefault();
+          var id = $(this).attr('id');
+            
+          $.ajax({
+            url:"{{ route('admin.reviews.show') }}",
+            type:"GET",
+            data:{id:id},
+            success:function(data) {
+              $("#show-review-modal").append(data);
+            }
+          });
+  
+      });
+  });
+</script>

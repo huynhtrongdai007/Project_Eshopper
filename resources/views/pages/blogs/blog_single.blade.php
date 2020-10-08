@@ -43,9 +43,9 @@
 							<h3>{{$post_single->title}}</h3>
 							<div class="post-meta">
 								<ul>
-									<li><i class="fa fa-user"></i> Mac Doe</li>
+									<li><i class="fa fa-user"></i> {{$post_single->author}}</li>
 									<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-									<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
+									<li><i class="fa fa-calendar"></i> {{$post_single->created_at}}</li>
 								</ul>
 								<span>
 									<i class="fa fa-star"></i>
