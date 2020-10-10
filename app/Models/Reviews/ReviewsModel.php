@@ -26,7 +26,7 @@ class ReviewsModel extends Model
    }
 
    //method lay noi dung ra trang product detail voi dieu kien id cua product
-   function showComment($id) {
+   function showReviews($id) {
    		$result = DB::table('tbl_reviews')->where('product_id',$id)->orderby('created_at','DESC')->get();
 		return $result;
    } 

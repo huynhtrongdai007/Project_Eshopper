@@ -1,3 +1,5 @@
+ @extends('pages.master')
+ @section('content')
  @foreach ($get_product as $items)
 
  <div class="col-sm-4">
@@ -39,3 +41,4 @@
     </div>
 </div>
  @endforeach
+@endsection

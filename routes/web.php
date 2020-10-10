@@ -20,15 +20,21 @@ use Illuminate\Support\Facades\Route;
 //----------------Home----------------------------------------------------------------------------
 Route::get('/','HomeController@index');
 Route::get('/home','HomeController@index')->name('home');
+Route::get('/404','HomeController@notFound404')->name('404');
 Route::get('product_details/{id}','HomeController@productDetails')->name('product_details');
 //----------------Home----------------------------------------------------------------------------
-
+Route::get('/search', 'HomeController@search')->name('search');
 //----------------login----------------------------------------------------------------------------
 Route::get('login','LoginController@index')->name('login');
 Route::post('create_account','LoginController@store')->name('create_account');
 Route::post('login-customer','LoginController@login')->name('login-customer');
 Route::get('logout','LoginController@logout')->name('logout');
 //----------------------------------------------------------------------------------------------
+//----------------Shop----------------------------------------------------------------------------
+Route::get('shop','HomeController@Viewshop')->name('shop');
+Route::get('get_ajax_data', 'HomeController	@get_ajax_data');
+
+
 
 //----------------Cart----------------------------------------------------------------------------
 
@@ -44,8 +50,12 @@ Route::get('checkout','ControllerCheckOut@index')->name('view-checkout');
 Route::post('save-checkout','ControllerCheckOut@store')->name('save-checkout');
 
 //----------------checkout----------------------------------------------------------------------------
+//----------------comment----------------------------------------------------------------------------
+Route::post('add-comment','CommentController@store')->name('add-comment');
+Route::post('showComment','HomeController@showComment')->name('showComment');
+//----------------comment----------------------------------------------------------------------------
 
-		Route::post('showComment','HomeController@showComment')->name('showComment');
+Route::post('showReviews','HomeController@showReviews')->name('showReviews');
 
 //----------------post----------------------------------------------------------------------------
 Route::get('blog_list','HomeController@blog')->name('blog_list');

@@ -10,8 +10,8 @@ use App\Models\Brand\BrandModel;
 use App\Models\Product\ProductModel;
 use App\Models\Post\PostModel;
 use App\Models\Reviews\ReviewsModel;
-
-
+use App\Models\Comment\CommentModel;
+use DB;
 class HomeController extends Controller
 {
 
@@ -21,6 +21,7 @@ class HomeController extends Controller
 	private $instants_product;
     private $instants_post;
     private $instants_reviews;
+    private $instants_comment;
    
     public function __construct() {
 
@@ -30,6 +31,7 @@ class HomeController extends Controller
     	$this->instants_product = new ProductModel;
     	$this->instants_post = new PostModel;
     	$this->instants_reviews = new ReviewsModel;
+    	$this->instants_comment = new CommentModel;
     }
 
 	public function index() {
@@ -40,7 +42,7 @@ class HomeController extends Controller
 		$get_product = $this->instants_product->getDataIndex();
 		$get_tab_category = $this->instants_category->getDataTabCategory();
 		$get_tab_product = $this->instants_category->getDataTabProduct();
-		return view('pages.master',['get_slider'=>$get_slider,'get_category'=>$get_category,'get_brand'=>$get_brand,'get_product'=>$get_product,'get_tab_category'=>$get_tab_category,'get_tab_product'=>$get_tab_product]);
+		return view('pages.home',['get_slider'=>$get_slider,'get_category'=>$get_category,'get_brand'=>$get_brand,'get_product'=>$get_product,'get_tab_category'=>$get_tab_category,'get_tab_product'=>$get_tab_product]);
 	}
 
 
@@ -56,9 +58,9 @@ class HomeController extends Controller
 		return view('pages.products.product_details',$data);
 	}
 
-	public function showComment(Request $request) {
+	public function showReviews(Request $request) {
 		$id = $request->id;
-		$result = $this->instants_reviews->showComment($id);
+		$result = $this->instants_reviews->showReviews($id);
 		return response()->json($result);
 	}
 
@@ -79,4 +81,33 @@ class HomeController extends Controller
 		return view('pages.blogs.blog_single',$data);
 	}
 	
+	public function showComment(Request $request) {
+		$post_id = $request->post_id;
+		$result = $this->instants_comment->showComment($post_id);
+		return  response()->json($result);
+	}
+
+	public function Viewshop() {
+		$get_category = $this->instants_category->getAllDataIndex();
+		$get_brand = $this->instants_brand->getAllDataIndex();
+		$getDataIndex = $this->instants_product->getDataIndex();
+		$pagination = $this->instants_product->pagination();
+		return view('pages.shops.shop',compact('get_category','get_brand','getDataIndex','pagination'));
+	}
+
+	function get_ajax_data(Request $request)
+    {
+	     if($request->ajax())
+	     {
+	      $pagination = ProductModel::paginate(6);
+	      $get_category = $this->instants_category->getAllDataIndex();
+		  $get_brand = $this->instants_brand->getAllDataIndex();
+	      return view('pages.shops.shop',compact('pagination','get_category','get_brand'))->render();
+	     }
+ 	}
+
+ 	public function notFound404() {
+ 		return view('pages.404');
+ 	}
+
 }

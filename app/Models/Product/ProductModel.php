@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use DB;
 class ProductModel extends Model
 {
+    protected $table = 'tbl_products';
+    
 	public function getAllData() {
 			$result = DB::table('tbl_products')
 		->join('tbl_category','tbl_products.category_id','=','tbl_category.id')
@@ -45,6 +47,17 @@ class ProductModel extends Model
    		return $result;
    	}
 
+    // lấy hết tắc cả show ra trang shop
+    public function getAllProduct() {
+      $result = DB::table('tbl_products')->orderby('id','DESC')->get();
+      return $result;
+    }
+
+
+
+
+
+
     public function getProductDetails($id) {
       $result = DB::table('tbl_products')
       ->join('tbl_brand','tbl_brand.id','=','tbl_products.brand_id')
@@ -76,4 +89,12 @@ class ProductModel extends Model
       ->get();
       return $result;
     }
+
+
+   public function pagination() {
+        $result = DB::table('tbl_products')->paginate(6);
+         return $result; 
+    }   
+
+
 }

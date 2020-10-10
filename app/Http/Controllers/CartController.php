@@ -46,6 +46,7 @@ class CartController extends Controller
 				'price'=>$data['price'],
 				'image'=>$data['image'],
 				'qty'=>$qty['qty'],
+		
 
 				);
 				Session::put('cart',$cart);
@@ -58,7 +59,7 @@ class CartController extends Controller
 				'price'=>$data['price'],
 				'image'=>$data['image'],
 				'qty'=>$qty['qty'],
-
+			
 			);
 		}
 		Session::put('cart',$cart);
@@ -114,5 +115,6 @@ class CartController extends Controller
 		if ($cart==true) {
 			Session::forget('cart');
 		}
+		return redirect()->back();
 	}
 }

@@ -187,11 +187,11 @@
 			var _token = $("meta[name='csrf-token']").attr("content");
 			$("#load-Reviews").html("");
 			$.ajax({
-				url:"{{ route('showComment') }}",
+				url:"{{ route('showReviews') }}",
 				type:"POST",
 				data:{id:product_id,_token:_token},
 				success:function(data) {
-					console.log(data.name);
+					
 					$.each(data,function(key,value){
 						$("#load-Reviews").append("<ul>"
 
@@ -235,6 +235,3 @@
 		});
 	});
 </script>
-
-
-

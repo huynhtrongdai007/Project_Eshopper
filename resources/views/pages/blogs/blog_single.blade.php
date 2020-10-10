@@ -8,7 +8,6 @@
 	<header id="header"><!--header-->
   		@include('pages.blocks.header')
 	</header><!--/header-->
-	
 	<section>
 		<div class="container">
 			<div class="row">
@@ -127,83 +126,42 @@
 					<div class="response-area">
 						<h2>3 RESPONSES</h2>
 						<ul class="media-list">
-							<li class="media">
-								
-								<a class="pull-left" href="#">
-									<img class="media-object" src="{{ asset('public/frontend/images/blog/man-two.jpg') }}" alt="">
-								</a>
-								<div class="media-body">
-									<ul class="sinlge-post-meta">
-										<li><i class="fa fa-user"></i>Janis Gallagher</li>
-										<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-										<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-									</ul>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-									<a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-								</div>
-							</li>
-							<li class="media second-media">
-								<a class="pull-left" href="#">
-									<img class="media-object" src="{{ asset('public/frontend/images/blog/man-three.jpg') }}" alt="">
-								</a>
-								<div class="media-body">
-									<ul class="sinlge-post-meta">
-										<li><i class="fa fa-user"></i>Janis Gallagher</li>
-										<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-										<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-									</ul>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-									<a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-								</div>
-							</li>
-							<li class="media">
-								<a class="pull-left" href="#">
-									<img class="media-object" src="{{ asset('public/frontend/images/blog/man-four.jpg') }}" alt="">
-								</a>
-								<div class="media-body">
-									<ul class="sinlge-post-meta">
-										<li><i class="fa fa-user"></i>Janis Gallagher</li>
-										<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-										<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-									</ul>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-									<a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-								</div>
-							</li>
-
+							
 						</ul>					
 					</div><!--/Response-area-->
 					<div class="replay-box">
 						<div class="row">
 							<div class="col-sm-4">
 								<h2>Leave a replay</h2>
-								<form>
+								<form id="form-comment">
 									<div class="blank-arrow">
 										<label>Your Name</label>
 									</div>
 									<span>*</span>
-									<input type="text" placeholder="write your name...">
+									<input type="text" id="name"  placeholder="write your name...">
 									<div class="blank-arrow">
 										<label>Email Address</label>
 									</div>
 									<span>*</span>
-									<input type="email" placeholder="your email address...">
+									<input type="email" id="email" placeholder="your email address...">
 									<div class="blank-arrow">
 										<label>Web Site</label>
 									</div>
 									<input type="email" placeholder="current city...">
-								</form>
+								
 							</div>
 							<div class="col-sm-8">
 								<div class="text-area">
 									<div class="blank-arrow">
-										<label>Your Name</label>
+										<label>Your Comemnt</label>
 									</div>
 									<span>*</span>
-									<textarea name="message" rows="11"></textarea>
-									<a class="btn btn-primary" href="">post comment</a>
+									<textarea name="comment" id="comment" rows="11"></textarea>
+									<input type="hidden" id="post_id" value="{{$post_single->id}}">
+									<button type="button" class="btn btn-primary btn-comment">post comment</button>
 								</div>
 							</div>
+							</form>
 						</div>
 					</div><!--/Repaly Box-->
 				</div>	
@@ -217,8 +175,120 @@
 	<footer id="footer"><!--Footer-->
 		@include('pages.blocks.footer')
 	</footer><!--/Footer-->
-	
-
   @include('pages.blocks.foot')
 </body>
 </html>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+
+		$('.btn-comment').click(function() {
+		var post_id = $("#post_id").val();
+		var name = $("#name").val();
+		var email = $("#email").val();
+		var comment = $("#comment").val();
+		var _token = $("meta[name='csrf-token']").attr("content");
+
+		if(name=="" || email == "" || comment=="") {
+			alert("không được để trống các ô nhập thông tin");
+		} else {
+			$.ajax({
+				url:"{{ route('add-comment') }}",
+				type:"POST",
+				data:{post_id:post_id,name:name,email:email,comment:comment,_token:_token},
+				success:function() {
+					setTimeout(function(){
+						location.reload();
+					});
+				 	loadCommant();
+					$("#form-comment").trigger("reset");
+				}
+			});
+		}
+
+
+		});
+
+		function loadCommant() {
+			var post_id = $("#post_id").val();
+			var _token = $("meta[name='csrf-token']").attr("content");
+			$.ajax({
+				url:"{{ route('showComment') }}",
+				type:"POST",
+				data:{post_id:post_id,_token:_token},
+				success:function(data) {
+					$.each(data,function(index, el) {
+						$('.media-list').append("<li class='media'>"+
+								
+								"<a class='pull-left' href='#'>"+
+								"<img class='media-object' src='{{ asset('public/frontend/images/blog/man-two.jpg') }}' alt=''>"+
+								"</a>"+
+								"<div class='media-body'>"+
+									 "<ul class='sinlge-post-meta'>"+
+										"<li><i class='fa fa-user'>"+"</i>"+el.name+"</li>"+
+										"<li><i class='fa fa-clock-o'>"+"</i> 1:33 pm</li>"+
+										"<li><i class='fa fa-calendar'>"+"</i>"+el.created_at+"</li>"+
+									"</ul>"+
+									"<p>"+el.comment+"</p>"+
+									"<button type='button' id="+el.id+"  class='btn btn-primary btn-reply'><i class='fa fa-reply'>"+"</i>"+"Replay"+"</button>"+
+									
+								"</div>"+
+								"<div class='form-reply'>"+
+								"</div>"+
+							"</li>");
+					});
+				}
+
+			});
+		}
+
+	loadCommant();
+
+
+	$(".media-list").on('click', '.btn-reply', function(event) {
+		event.preventDefault();
+		var id = $(this).attr("id");
+		alert(id);
+	});
+
+
+
+	$(".form-reply").append("<div class='row'>"+
+								"<div class='col-sm-4'>"+
+									"<h2>"+"Leave a replay"+"</h2>"+
+									"<form>"+
+										"<div class='blank-arrow'>"+
+											"<label>"+"Your Name"+"</label>"+
+										"</div>"+
+										"<span>*</span>"+
+										"<input type='text' placeholder='write your name...''>"+
+										"<div class='blank-arrow'>"+
+											"<label>Email Address</label>"+
+										"</div>"+
+										"<span>*</span>"+
+										"<input type='email' placeholder='your email address...'>"+
+										"<div class='blank-arrow'>"+
+											"<label>Web Site</label>"+
+										"</div>"+
+									"</form>"+
+								"</div>"+
+							"<div class='col-sm-8'>"+
+								"<div class='text-area'>"+
+									"<div class='blank-arrow'>"+
+										"<label>Your Name</label>"+
+									"</div>"+
+									"<span>*</span>"+
+									"<textarea  rows='11'></textarea>"+
+									"<a class='btn btn-primary' href=''>post comment</a>"+
+								"</div>"+
+							"</div>"+
+						"</div>");
+
+
+
+
+	});
+
+</script>
+
+ 

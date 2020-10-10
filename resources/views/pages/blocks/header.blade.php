@@ -72,7 +72,21 @@
                                         <a href="{{ route('view-checkout') }}"><i class="fa fa-crosshairs"></i> Checkout</a>
                                      @endif
                                 </li>
-                                <li><a href="{{ route('view_cart') }}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                     <li><a href="{{ route('view_cart') }}">
+                        <i class="fa fa-shopping-cart"></i>
+                         @php
+                            
+                         @endphp
+                        @if (Session::get('cart'))
+                             <span id="total-quanty-show" class="badge badge-pill badge-danger"> 
+                            1
+                            
+                            </span></a></li>
+                        @else
+                             <span class="badge badge-pill badge-danger">0</span></a></li>
+                        @endif
+                        
+                       
                                    
                                     @if ($customer_id)
                                       <li>
@@ -107,9 +121,9 @@
                         <div class="mainmenu pull-left">
                             <ul class="nav navbar-nav collapse navbar-collapse">
                                 <li><a href="{{ route('home') }}" class="active">Home</a></li>
-                                <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
+                                <li class="dropdown"><a href="">Shop<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html">Products</a></li>
+                                        <li><a href="{{ route('shop') }}">Products</a></li>
                                         <li><a href="product-details.html">Product Details</a></li> 
                                         <li><a href="checkout.html">Checkout</a></li> 
                                         <li><a href="{{ route('view_cart') }}">Cart</a></li> 
@@ -122,14 +136,14 @@
                                         <li><a href="blog-single.html">Blog Single</a></li>
                                     </ul>
                                 </li> 
-                                <li><a href="404.html">404</a></li>
+                                <li><a href="{{ route('404') }}">404</a></li>
                                 <li><a href="contact-us.html">Contact</a></li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-sm-3">
                         <div class="search_box pull-right">
-                            <input type="text" placeholder="Search"/>
+                            <input type="text" id="search"  placeholder="Search"></input>
                         </div>
                     </div>
                 </div>

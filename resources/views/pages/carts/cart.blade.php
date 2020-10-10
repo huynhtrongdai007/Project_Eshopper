@@ -16,6 +16,7 @@
 				  <li class="active">Shopping Cart</li>
 				</ol>
 			</div>
+			
 				<form action="{{ route('update-cart') }}" method="POST">
 				@csrf
 			<div class="table-responsive cart_info">
@@ -35,6 +36,8 @@
 						@php
 						$total=0;
 						$subtotal =0;
+			 
+						
 						@endphp
 
 						@if (empty(Session::get('cart')))
@@ -45,7 +48,10 @@
 						
 						
 					@foreach (Session::get('cart') as $key => $items)
+
 						@php
+							
+							
 							$subtotal = $items['qty'] * $items['price'];
 							$total += $subtotal;
 						@endphp
@@ -63,7 +69,7 @@
 							<td class="cart_quantity">
 								<div class="cart_quantity_button">
 									<a class="cart_quantity_up"   href=""> + </a>
-									<input class="cart_quantity_input" id="{{$items['qty']}}"  value="{{$items['qty']}}" type="text" name="quantity[{{$items['id']}}]" autocomplete="off" size="2">
+									<input class="cart_quantity_input" id=""  value="{{$items['qty']}}" type="text" name="quantity[{{$items['id']}}]" autocomplete="off" size="2">
 									<a class="cart_quantity_down"  href=""> - </a>
 								</div>
 							</td>
@@ -102,7 +108,7 @@
 							<li>Total <span>$61</span></li>
 						</ul>
 						
-						    <a class="btn btn-default delete"  href="">Delete All Cart</a> 
+						    <a class="btn btn-default delete"  href="{{ route('destroy-all-cart') }}">Delete All Cart</a> 
 							@if (empty(Session::get('customer_id')))
 								<a class="btn btn-default check_out" href="{{ route('login') }}">Check Out</a> 
 							@else
@@ -146,22 +152,3 @@
         });
     });
  </script>
-
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('.delete').click(function(event) {
-			event.preventDefault();
-			$.ajax({
-				url:"{{ route('destroy-all-cart') }}",
-				type:"GET",
-				success:function() {
-					setTimeout(function(){
-						location.reload();
-					});
-				}
-			});
-		});
-		
-
-	});
-</script	
