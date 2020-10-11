@@ -11,7 +11,9 @@ use App\Models\Product\ProductModel;
 use App\Models\Post\PostModel;
 use App\Models\Reviews\ReviewsModel;
 use App\Models\Comment\CommentModel;
-use DB;
+use  App\Models\Contact\ContactModel;
+use DB,DateTime;
+
 class HomeController extends Controller
 {
 
@@ -22,7 +24,7 @@ class HomeController extends Controller
     private $instants_post;
     private $instants_reviews;
     private $instants_comment;
-   
+    private $instants_contact;
     public function __construct() {
 
     	$this->instants_slider = new SliderModel;
@@ -32,6 +34,8 @@ class HomeController extends Controller
     	$this->instants_post = new PostModel;
     	$this->instants_reviews = new ReviewsModel;
     	$this->instants_comment = new CommentModel;
+    	$this->instants_contact = new ContactModel;
+
     }
 
 	public function index() {
@@ -106,8 +110,13 @@ class HomeController extends Controller
 	     }
  	}
 
+ 	public function contactUs () {
+ 		return view('pages.contact-us');
+ 	}
+
  	public function notFound404() {
  		return view('pages.404');
  	}
+
 
 }

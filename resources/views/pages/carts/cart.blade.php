@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-@include('pages.blocks.head')
-</head><!--/head-->
-
-<body>
-<header id="header">
-    @include('pages.blocks.header')
-</header>
+@extends('pages.master')
+@section('content')
 	<section id="cart_items">
 		<div class="container">
 			<div class="breadcrumbs">
@@ -120,14 +112,7 @@
 			</div>
 		</div>
 	</section><!--/#do_action-->
-
-	<footer id="footer"><!--Footer-->
-	@include('pages.blocks.footer')
-	</footer><!--/Footer-->
-    @include('pages.blocks.foot')
-</body>
-</html>
-
+@endsection
 <script type="text/javascript">
    	 $(document).ready(function() {
         $('.cart_quantity_delete').click(function(event) {

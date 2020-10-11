@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','HomeController@index');
 Route::get('/home','HomeController@index')->name('home');
 Route::get('/404','HomeController@notFound404')->name('404');
+Route::get('/contact-us','HomeController@contactUs')->name('contact-us');
 Route::get('product_details/{id}','HomeController@productDetails')->name('product_details');
 //----------------Home----------------------------------------------------------------------------
 Route::get('/search', 'HomeController@search')->name('search');
@@ -192,6 +193,13 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 		Route::post('update_status_active','PostController@updateActive')->name('update_status_active');
 	 });
 
+	Route::prefix('contact')->name('contact.')->group(function(){
+	 	Route::get('index','ContactController@index')->name('index');
+	 	Route::post('store','ContactController@store')->name('store');	
+	 	Route::get('show/{id}','ContactController@show')->name('show');
+		Route::get('destroy/{id}','ContactController@destroy')->name('destroy');
+
+	 });
 
 
   });

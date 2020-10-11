@@ -48,7 +48,7 @@
         });     
     });
 </script>
-     <script type="text/javascript">
+<script type="text/javascript">
             $('#search').on('keyup',function(){ 
                 $value = $(this).val();
                 $.ajax({
@@ -63,5 +63,4 @@
                 });
             })
             $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
-        </script>
-
+</script>

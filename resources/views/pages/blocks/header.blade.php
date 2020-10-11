@@ -85,20 +85,15 @@
                         @else
                              <span class="badge badge-pill badge-danger">0</span></a></li>
                         @endif
-                        
-                       
-                                   
-                                    @if ($customer_id)
-                                      <li>
-                                        <a href="{{ route('logout') }}"><i class="fa fa-lock"></i>Logout</a>
-                                     </li>
-                                     @else
-                                      <li>
-                                        <a href="{{ route('login') }}"><i class="fa fa-lock"></i> Login</a>
-                                     </li>
-                                    @endif
-                                    
-                              
+                            @if ($customer_id)
+                              <li>
+                                <a href="{{ route('logout') }}"><i class="fa fa-lock"></i>Logout</a>
+                             </li>
+                             @else
+                              <li>
+                                <a href="{{ route('login') }}"><i class="fa fa-lock"></i> Login</a>
+                             </li>
+                            @endif   
                             </ul>
                         </div>
                     </div>
@@ -137,7 +132,7 @@
                                     </ul>
                                 </li> 
                                 <li><a href="{{ route('404') }}">404</a></li>
-                                <li><a href="contact-us.html">Contact</a></li>
+                                <li><a href="{{ route('contact-us') }}">Contact</a></li>
                             </ul>
                         </div>
                     </div>
