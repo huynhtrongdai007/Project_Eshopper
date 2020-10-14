@@ -74,17 +74,13 @@
                                 </li>
                      <li><a href="{{ route('view_cart') }}">
                         <i class="fa fa-shopping-cart"></i>
-                         @php
-                            
-                         @endphp
-                        @if (Session::get('cart'))
-                             <span id="total-quanty-show" class="badge badge-pill badge-danger"> 
-                            1
-                            
-                            </span></a></li>
+                        @if (Session::has('Cart')!=null)
+                            <span id="total-quantity-show" class="badge badge-pill badge-danger"></span>
                         @else
-                             <span class="badge badge-pill badge-danger">0</span></a></li>
-                        @endif
+                            <span id="total-quanty-show" class="badge badge-pill badge-danger"> 
+                                0
+                            </span></a></li>                                    
+                         @endif
                             @if ($customer_id)
                               <li>
                                 <a href="{{ route('logout') }}"><i class="fa fa-lock"></i>Logout</a>
@@ -144,4 +140,3 @@
                 </div>
             </div>
         </div><!--/header-bottom-->
-  

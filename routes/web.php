@@ -33,16 +33,17 @@ Route::get('logout','LoginController@logout')->name('logout');
 //----------------------------------------------------------------------------------------------
 //----------------Shop----------------------------------------------------------------------------
 Route::get('shop','HomeController@Viewshop')->name('shop');
-Route::get('get_ajax_data', 'HomeController	@get_ajax_data');
-
-
-
+Route::get('get_ajax_data', 'HomeController@get_ajax_data');
 //----------------Cart----------------------------------------------------------------------------
+Route::get('/AddCart/{id}','CartController@AddCart');
+Route::get('/delete-item-cart/{id}','CartController@deleteCart');
 
 Route::get('cart','CartController@viewCart')->name('view_cart');
 Route::post('add-to-cart','CartController@addToCart')->name('add-to-cart');
-Route::post('update-cart','CartController@updateCart')->name('update-cart');
-Route::post('destroy-cart','CartController@deleteItemCart')->name('destroy-cart');
+Route::get('save-list-item-cart/{id}/{quantity}','CartController@SaveListItemCart')->name('save-list-item-cart');
+
+// Route::get('update-cart','CartController@updateCart')->name('update-cart');
+// Route::post('destroy-cart','CartController@deleteItemCart')->name('destroy-cart');
 Route::get('destroy-all-cart','CartController@deleteAllCart')->name('destroy-all-cart');
 //----------------Cart----------------------------------------------------------------------------
 

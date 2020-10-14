@@ -46,7 +46,7 @@ class HomeController extends Controller
 		$get_product = $this->instants_product->getDataIndex();
 		$get_tab_category = $this->instants_category->getDataTabCategory();
 		$get_tab_product = $this->instants_category->getDataTabProduct();
-		return view('pages.home',['get_slider'=>$get_slider,'get_category'=>$get_category,'get_brand'=>$get_brand,'get_product'=>$get_product,'get_tab_category'=>$get_tab_category,'get_tab_product'=>$get_tab_product]);
+		return view('pages.home',compact('get_slider','get_category','get_brand','get_product'));
 	}
 
 

@@ -26,7 +26,7 @@
 </body>
 </html>
 
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     $(document).ready(function() {
         $('.add-to-cart').click(function(event) {
             event.preventDefault();
@@ -47,7 +47,7 @@
             });
         });     
     });
-</script>
+</script> --}}
 <script type="text/javascript">
             $('#search').on('keyup',function(){ 
                 $value = $(this).val();

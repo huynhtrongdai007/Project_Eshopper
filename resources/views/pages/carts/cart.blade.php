@@ -9,7 +9,7 @@
 				</ol>
 			</div>
 			
-				<form action="{{ route('update-cart') }}" method="POST">
+				<form action="" method="POST">
 				@csrf
 			<div class="table-responsive cart_info">
 				<table class="table table-condensed">
@@ -20,67 +20,53 @@
 							<td class="price">Price</td>
 							<td class="quantity">Quantity</td>
 							<td class="total">Total</td>
-							<td></td>
+							<td>Save</td>
+							
 						</tr>
 					</thead>
 
 					<tbody>
-						@php
-						$total=0;
-						$subtotal =0;
-			 
-						
-						@endphp
-
-						@if (empty(Session::get('cart')))
+				@if(Session::has('Cart')!=null)
+						@foreach (Session::get('Cart')->products as $items)
+							<div id="change-item-cart">
+								<tr>
+								<td class="cart_product">
+									<a href=""><img width="80" src="public/uploads/products/{{$items['productInfo']->image}}" alt=""></a>
+								</td>
+								<td class="cart_description">
+									<h4><a href="">{{$items['productInfo']->name}}</a></h4>
+									<p>Web ID: 1089772</p>
+								</td>
+								<td class="cart_price">
+									<p>{{number_format($items['productInfo']->price)}}</p>
+								</td>
+								<td class="cart_quantity">
+									<div class="cart_quantity_button">
+										<a class="cart_quantity_up" href=""> + </a>
+										<input class="cart_quantity_input" id="quantity-item-{{$items['productInfo']->id}}" type="text" name="quantity" value="{{$items['quantity']}}" autocomplete="off" size="2">
+										<a class="cart_quantity_down" href=""> - </a>
+									</div>
+								</td>
+								<td class="cart_total">
+									<p class="cart_total_price">{{number_format($items['price'])}}₫</p>
+								</td>
+								<td>
+									<i style="font-size: 20px;" onclick="SaveListItemCart({{$items['productInfo']->id}});" id="save-cart-item-{{$items['productInfo']->id}}" class="fa fa-save"></i>
+								</td>
+								<td class="cart_delete">
+									
+									<a class="cart_quantity_delete" data-id="{{$items['productInfo']->id}}" href=""><i class="fa fa-times"></i></a>
+								</td>
+							</tr>
+							</div>
+						@endforeach
+						@else
 						<tr>
-							<td id="cart_empty"><h3>Cart Empty</h3></td>
+							<td><h3>Cart Empty</h3></td>
 						</tr>
-							@else
-						
-						
-					@foreach (Session::get('cart') as $key => $items)
-
-						@php
-							
-							
-							$subtotal = $items['qty'] * $items['price'];
-							$total += $subtotal;
-						@endphp
-						<tr>
-							<td class="cart_product ">
-								<a href=""><img  width="100" src="{{ asset("public/uploads/products/{$items['image']}") }}" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">{{$items['name']}}</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p class="price_jq">{{number_format($items['price'])}}</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up"   href=""> + </a>
-									<input class="cart_quantity_input" id=""  value="{{$items['qty']}}" type="text" name="quantity[{{$items['id']}}]" autocomplete="off" size="2">
-									<a class="cart_quantity_down"  href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">{{number_format($subtotal)}}</p>
-							</td>
-							<td class="cart_delete">
-									<a class="cart_quantity_delete" id="{{$items['id']}}" href=""><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
-							
-					@endforeach
- 						<tr>
-							<td><input class="btn btn-default btn-sm update" value="Update" type="submit"></td>
-					  </tr>
-						@endif
-						  
+					@endif
 					</tbody>
-				 
+						 
 				</table>
 			</div>
 		</form>
@@ -94,15 +80,21 @@
 				<div class="col-sm-6">
 					<div class="total_area">
 						<ul>
-							<li>Cart Sub Total <span id="total">{{number_format($total)}}</span></li>
+							@if(Session::has('Cart')!=null)
+							<li>Cart Sub Total <span id="total">{{number_format(Session::get('Cart')->totalPrice)}}₫</span></li>
+							@else
+							<li>Cart Sub Total <span id="total">0 ₫</span></li>
+
+							@endif
 							<li>Eco Tax <span>$2</span></li>
 							<li>Shipping Cost <span>Free</span></li>
 							<li>Total <span>$61</span></li>
 						</ul>
-						
-						    <a class="btn btn-default delete"  href="{{ route('destroy-all-cart') }}">Delete All Cart</a> 
+							@if (Session::has('Cart')!=null)
+							<a class="btn btn-default delete" id="delete-all-items-cart" href="{{ route('destroy-all-cart') }}">Delete All Cart</a> 
+							@endif
 							@if (empty(Session::get('customer_id')))
-								<a class="btn btn-default check_out" href="{{ route('login') }}">Check Out</a> 
+								<a   class="btn btn-default check_out" href="{{ route('login') }}">Check Out</a> 
 							@else
 								<a class="btn btn-default check_out" href="{{ route('view-checkout') }}">Check Out</a>
 							@endif
@@ -113,27 +105,3 @@
 		</div>
 	</section><!--/#do_action-->
 @endsection
-<script type="text/javascript">
-   	 $(document).ready(function() {
-        $('.cart_quantity_delete').click(function(event) {
-            event.preventDefault();
-            var id = $(this).attr('id');
-            var row = this;
-            var _token = $("meta[name='csrf-token']").attr("content");
-            $.ajax({
-                url:"{{ route('destroy-cart') }}",
-                type:"POST",
-                data:{id:id,_token:_token},
-                success:function() {
-                  
-                    // $(row).closest("tr").hide();
-                    setTimeout(function(){
-                        location.reload();
-                    });
-                }
-
-            });
-
-        });
-    });
- </script>

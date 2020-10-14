@@ -157,7 +157,7 @@
             var row = this;
             var _token = $("meta[name='csrf-token']").attr("content");
             $.ajax({
-                url:"{{ route('destroy-cart') }}",
+                url:"",
                 type:"POST",
                 data:{id:id,_token:_token},
                 success:function() {
