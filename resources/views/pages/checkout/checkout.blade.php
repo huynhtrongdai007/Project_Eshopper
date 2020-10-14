@@ -55,85 +55,69 @@
 					<thead>
 						<tr class="cart_menu">
 							<td class="image">Item</td>
-							<td class="description"></td>
+							<td class="description">Description</td>
 							<td class="price">Price</td>
 							<td class="quantity">Quantity</td>
 							<td class="total">Total</td>
-							<td></td>
+							<td>Save</td>
+							
 						</tr>
 					</thead>
+
 					<tbody>
-						@php
-							$total=0;
-							$subtotal =0;
-						@endphp
-						@if (empty(Session::get('cart')))
-							<tr><td><h3>Cart Empty</h3></td></tr>
-						@else
-					
-						    
+				@if(Session::has('Cart')!=null)
+						@foreach (Session::get('Cart')->products as $items)
+							<div id="change-item-cart">
+								<tr>
+								<td class="cart_product">
+									<a href=""><img width="80" src="public/uploads/products/{{$items['productInfo']->image}}" alt=""></a>
+								</td>
+								<td class="cart_description">
+									<h4><a href="">{{$items['productInfo']->name}}</a></h4>
+									<p>Web ID: 1089772</p>
+								</td>
+								<td class="cart_price">
+									<p>{{number_format($items['productInfo']->price)}}</p>
+								</td>
+								<td class="cart_quantity">
+									<div class="cart_quantity_button">
+										<a class="cart_quantity_up" href=""> + </a>
+										<input class="cart_quantity_input" id="quantity-item-{{$items['productInfo']->id}}" type="text" name="quantity" value="{{$items['quantity']}}" autocomplete="off" size="2">
+										<a class="cart_quantity_down" href=""> - </a>
+									</div>
+								</td>
+								<td class="cart_total">
+									<p class="cart_total_price">{{number_format($items['price'])}}₫</p>
+								</td>
+								<td>
+									<i style="font-size: 20px;" onclick="SaveListItemCart({{$items['productInfo']->id}});" id="save-cart-item-{{$items['productInfo']->id}}" class="fa fa-save"></i>
+								</td>
+								<td class="cart_delete">
+									
+									<a class="cart_quantity_delete" data-id="{{$items['productInfo']->id}}" href=""><i class="fa fa-times"></i></a>
+								</td>
 
-
-						@foreach (Session::get('cart') as $items)
-						@php
-							$subtotal = $items['qty'] * $items['price'];
-							$total += $subtotal;
-						@endphp
-						<tr>
-							<td class="cart_product">
-								<a href=""><img width="80" src="{{ asset("public/uploads/products/{$items['image']}") }}" alt=""></a>
-							</td>
-							<td class="cart_description">
-								<h4><a href="">{{$items['name']}}</a></h4>
-								<p>Web ID: 1089772</p>
-							</td>
-							<td class="cart_price">
-								<p>{{number_format($items['price'])}}</p>
-							</td>
-							<td class="cart_quantity">
-								<div class="cart_quantity_button">
-									<a class="cart_quantity_up" href=""> + </a>
-									<input class="cart_quantity_input" type="text" name="quantity" value="{{$items['qty']}}" autocomplete="off" size="2">
-									<a class="cart_quantity_down" href=""> - </a>
-								</div>
-							</td>
-							<td class="cart_total">
-								<p class="cart_total_price">{{number_format($subtotal)}}</p>
-							</td>
-							<td class="cart_delete">
-								<a class="cart_quantity_delete" href="" id="{{$items['id']}}"><i class="fa fa-times"></i></a>
-							</td>
-						</tr>
+							</tr>
+						
+							</div>
 						@endforeach
-							@endif
+						@else
 						<tr>
-							<td colspan="4">&nbsp;</td>
-							<td colspan="2">
-								<table class="table table-condensed total-result">
-									<tr>
-										<td>Cart Sub Total</td>
-										<td>{{number_format($total)}}</td>
-									</tr>
-									<tr>
-										<td>Exo Tax</td>
-										<td>$2</td>
-									</tr>
-									<tr class="shipping-cost">
-										<td>Shipping Cost</td>
-										<td>Free</td>										
-									</tr>
-									<tr>
-										<td>Total</td>
-										<td><span>{{number_format($total)}}</span></td>
-										<td><input type="hidden" id="total" value="{{$total}}"></td>
-									</tr>
-								</table>
-							</td>
+							<td><h3>Cart Empty</h3></td>
 						</tr>
-
+					@endif
 					</tbody>
+						 
 				</table>
 			</div>
+			<span>Cart Sub Total:</span>
+			@if (Session::has('Cart')!=null)
+			<input type="text" disabled="" id="total" value="{{number_format(Session::get('Cart')->totalPrice)}}">
+			@else
+				<input type="text" id="total" value="0">
+			@endif
+			
+
 			<h4>Hình thức thanh toán</h4><br/>
 			<div class="payment-options mt-5">
 					<span>
@@ -149,7 +133,7 @@
 		</div>
 	</section> <!--/#cart_items-->
 	@endsection
-   <script type="text/javascript">
+{{--    <script type="text/javascript">
    	 $(document).ready(function() {
         $('.cart_quantity_delete').click(function(event) {
             event.preventDefault();
@@ -172,39 +156,5 @@
 
         });
     });
-   </script>
+   </script> --}}
  
-   <script type="text/javascript">
-   	$(document).ready(function(){
-   		$('#continue').click(function(event) {
-   			 event.preventDefault();
-   			 var customer_id = $("#customer_id").val();
-   			 var lastname = $("#lastname").val();
-   			 var middlename = $("#middlename").val();
-   			 var firstname = $("#firstname").val();
-   			 var phone = $("#phone").val();
-   			 var email = $("#email").val();
-   			 var address = $("#address").val();
-			 var note = $("#notes").val();
-			 var total = $("#total").val();
-			 var paymen_option = $('#paymen_option').val();
- 		 	 var _token = $("meta[name='csrf-token']").attr("content");
- 		 
- 		 	 $.ajax({
- 		 	 	url: '{{ route('save-checkout') }}',
- 		 	 	type: 'POST',
- 		 	 	data: {customer_id:customer_id,lastname:lastname,middlename:middlename,firstname:firstname,phone:phone,email:email,address:address,note:note,total:total,method:paymen_option,_token:_token},
- 		 	 	success:function() {
- 		 	
- 		 	 			swal( "Check Success","", "success");
- 		 	 		setTimeout(function(){
-						location.reload();
-					},1000);
- 		 	 		
- 		 	 	}
- 		 	 });
- 		
- 		
-   		});
-   	});
-   </script>

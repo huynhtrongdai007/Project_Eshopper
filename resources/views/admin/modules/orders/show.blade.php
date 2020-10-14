@@ -58,9 +58,13 @@
           <td>{{$items->qty}}</td>
           <td>{{number_format($items->price)}}</td>
           <td>{{number_format($items->qty * $items->price)}}</td>
+
         </tr>
         @endforeach
-        
+        <tr>
+          <td colspan="5">Tong Thanh Tien {{$items->total}}</td>
+        </tr>
+          
       </tbody>
   </thead>
   <tbody>

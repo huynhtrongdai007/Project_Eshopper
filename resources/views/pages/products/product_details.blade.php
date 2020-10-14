@@ -75,7 +75,7 @@
 							<div class="product-information"><!--/product-information-->
 
 								{{-- <img src="{{ asset("public/uploads/images/product-details/news.jpg") }}" class="newarrival" alt="" /> --}}
-								<form id="form-add-cart" method="" action="" enctype="mutipart/form-data">
+							
 								
 								
 								<h2>{{$product->name}}</h2>
@@ -91,20 +91,16 @@
 											<input name="qty"  class="cart_quantity_input" value="1" type="text"  size="2">
 										<a class="cart_quantity_down"  href=""> - </a>
 									</div>
-									<input type="hidden" name="id" id="id" value="{{$product->id}}">
-									<input type="hidden" name="name" id="name" value="{{$product->name}}">
-									<input type="hidden" name="price" id="price" value="{{$product->price}}">
-									<input type="hidden" name="image" id="image" value="{{$product->image}}">
-									<button  type="submit" class="btn btn-fefault cart add-to-cart">
+									<a  onclick="AddCartDetail({{$product->id}})" href="javascript:" class="btn btn-fefault cart add-to-cart">
 										<i class="fa fa-shopping-cart"></i>
 										Add to cart
-									</button>
+									</a>	
 								</span>
 								<p><b>Category:</b>{{$product->category_name}}</p>
 							{{-- 	<p><b>Condition:</b> New</p> --}}
 								<p><b>Brand:</b>{{$product->brand_name}}</p>
 								<a href=""><img src="{{ asset('public/frontend/images/product-details/share.png') }}" class="share img-responsive"  alt="" /></a>
-								</form>
+								
 							</div><!--/product-information-->
 						</div>
 					</div><!--/product-details-->
@@ -126,6 +122,7 @@
 										<span>
 											<input type="text" id="reviewsname" name="name" placeholder="Your Name"/>
 											<input type="email" id="email" name="email" placeholder="Email Address"/>
+											<input type="hidden" id="id" value="{{$product->id}}">
 										</span>
 										<textarea name="comment" id="comment" ></textarea>
 										<b>Rating: </b> <img src="{{ asset('public/frontend/images/product-details/rating.png') }}" alt="" />
@@ -157,81 +154,3 @@
 @include('pages.blocks.foot')
 </body>
 </html>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#form-add-cart').on('click', '.add-to-cart', function(event) {
-			event.preventDefault();
-			var id  =  $('#id').val();
-			var qty =  $('.cart_quantity_input').val();
-			var name = $('#name').val();
-			var price = $('#price').val();
-			var image = $('#image').val();
-			var _token = $("meta[name='csrf-token']").attr("content");
-		
-			$.ajax({
-				url:"{{ route('add-to-cart') }}",
-				type:"POST",
-				data:{id:id,qty:qty,name:name,price:price,image:image,_token:_token},
-				success:function() {
-					swal( "Đã Thêm Vào Giỏ Hàng","", "success");
-				}
-			});
-		}); 
-	});
-</script>
-<script type="text/javascript">
-	$(document).ready(function(){
-			function loadReviews() {
-			var product_id = $('#id').val();
-			var _token = $("meta[name='csrf-token']").attr("content");
-			$("#load-Reviews").html("");
-			$.ajax({
-				url:"{{ route('showReviews') }}",
-				type:"POST",
-				data:{id:product_id,_token:_token},
-				success:function(data) {
-					
-					$.each(data,function(key,value){
-						$("#load-Reviews").append("<ul>"
-
-							+"<li><a href=''><i class='fa fa-user'>"+value.name+"</i></a></li>"+
-							"<li><a href=''><i class='fa fa-calendar-o'></i>"+value.created_at+"</a></li>"+
-							"<p>"+value.comment+"</p>"+
-							"</ul>");
-					});
-				}
-			});
-		}
-		loadReviews();
-
-		$("#form-reviews").on('click', '.btn-comment-reviews', function(event) {
-			event.preventDefault();
-
-			var product_id = $('#id').val();
-			var reviewsname = $("#reviewsname").val();
-			var email = $("#email").val();
-			var comment = $("#comment").val();
-			var _token = $("meta[name='csrf-token']").attr("content");
-
-			if (reviewsname=="" || email=="" || comment=="") {
-				alert("Không được để trống ô nhập thông tin");
-			}else {
-				$.ajax({
-				url:"{{ route('admin.add-reviews') }}",
-				type:"POST",
-				data:{product_id:product_id,name:reviewsname,email:email,comment:comment,_token:_token},
-				success:function(){
-					swal( "Cám ơn bạn đã đánh giá","", "success");
-					 loadReviews();
-					$("#form-reviews").trigger("reset");
-
-
-				}
-
-			});			
-			}
-			
-		});
-	});
-</script>

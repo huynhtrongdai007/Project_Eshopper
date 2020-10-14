@@ -25,12 +25,9 @@
    <thead>
       <tr>
          <th>#</th>
-         <th>Name</th>
-         <th>Image</th>
+         <th>Customer Name</th>
          <th>Total</th>
-         <th>Status</th>
          <th>Created at</th>
-         <th>Updated at</th>
          <th>Actions</th>
       </tr>
    </thead>
@@ -41,9 +38,7 @@
           <td>{{$items->lastname}} {{$items->middlename}} {{$items->firstname}}</td>
          
           <td>{{$items->total}}</td>
-          <td>{{number_format($items->status_order)}}</td>
           <td>{{$items->created_at}}</td>
-          <td>{{$items->updated_at}}</td>
           <td><a href="{{ route('admin.orders.show',['id'=>$items->id_order,'shipping_id'=>$items->shipping_id] )}}">Xem</a> | <a href="">Xóa</a></td>
        </tr>
     @endforeach

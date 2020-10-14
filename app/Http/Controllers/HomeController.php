@@ -52,14 +52,14 @@ class HomeController extends Controller
 
 	public function productDetails($id) {
 
-		$data['product'] = $this->instants_product->getProductDetails($id);
-		$category_id = $data['product']->category_id;
-		$data['getGallery'] = $this->instants_product->getGallery($category_id);
-		$data['getRecommenProduct'] = $this->instants_product->getRecommenProduct($category_id,$id);
-		$data['get_category'] = $this->instants_category->getAllDataIndex();
-		$data['get_brand'] = $this->instants_brand->getAllDataIndex();
+		$product = $this->instants_product->getProductDetails($id);
+		$category_id = $product->category_id;
+		$getGallery = $this->instants_product->getGallery($category_id);
+		$getRecommenProduct = $this->instants_product->getRecommenProduct($category_id,$id);
+		$get_category = $this->instants_category->getAllDataIndex();
+		$get_brand = $this->instants_brand->getAllDataIndex();
 		
-		return view('pages.products.product_details',$data);
+		return view('pages.products.product_details',compact('product','getRecommenProduct','get_category','get_brand','getGallery'));
 	}
 
 	public function showReviews(Request $request) {

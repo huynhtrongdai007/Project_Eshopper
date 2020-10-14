@@ -43,7 +43,7 @@
 										<img src="{{ asset("public/uploads/products/{$items->image}") }}" alt="" />
 										<h2>{{number_format($items->price)}}.Đ</h2>
 										<p>{{$items->name}}</p>
-										<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+										<a onclick="AddCart({{$items->id}})" href="javascript:" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 									</div>
 									
 								</div>
@@ -65,26 +65,27 @@
 			</div>
 		</div>
 	</section>
+ @endsection
+
 <script type="text/javascript">
 $(document).ready(function(){
 
-	$(document).on('click', '.pagination a', function(event){
-	event.preventDefault(); 
-	var page = $(this).attr('href').split('page=')[1];
-		fetch_data(page);
-	});
+    $(document).on('click', '.pagination a', function(event){
+        event.preventDefault(); 
+        var page = $(this).attr('href').split('page=')[1];
+            fetch_data(page);
+        });
 
-	function fetch_data(page)
-	{
-	$.ajax({
-	url:"get_ajax_data?page="+page,
-	success:function(data)
-		{
-		$('.single-productinfo').html(data);
-		}
-	});
-	}
+        function fetch_data(page)
+        {
+        $.ajax({
+        url:"get_ajax_data?page="+page,
+        success:function(data)
+            {
+            $('.single-productinfo').html(data);
+            }
+        });
+    }
 
 });
 </script>
- @endsection

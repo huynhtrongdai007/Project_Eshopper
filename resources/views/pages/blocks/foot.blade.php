@@ -21,7 +21,8 @@
 
 
 <script type="text/javascript">
-	function AddCart(id) {
+  	function AddCart(id) {
+
 		$.ajax({
 			url:'AddCart/'+id,
 			type:'GET',
@@ -31,6 +32,20 @@
 		});
 	}
   
+    function AddCartDetail(id) {
+
+        $.ajax({
+            url:"{{ route('AddCartDetail',['id']) }}",
+            type:'GET'
+        }).done(function(response){
+            
+            alertify.success('Đã thêm sản phẩm');
+        });
+    }
+
+
+
+
     $(".cart_delete").on('click', '.cart_quantity_delete', function(event) {
         event.preventDefault();
        
@@ -66,5 +81,91 @@
     }
 
 
+    $(document).ready(function(){
+            function loadReviews() {
+            var product_id = $('#id').val();
+            var _token = $("meta[name='csrf-token']").attr("content");
+            $("#load-Reviews").html("");
+            $.ajax({
+                url:"{{ route('showReviews') }}",
+                type:"POST",
+                data:{id:product_id,_token:_token},
+                success:function(data) {
+                    
+                    $.each(data,function(key,value){
+                        $("#load-Reviews").append("<ul>"
 
- </script>
+                            +"<li><a href=''><i class='fa fa-user'>"+value.name+"</i></a></li>"+
+                            "<li><a href=''><i class='fa fa-calendar-o'></i>"+value.created_at+"</a></li>"+
+                            "<p>"+value.comment+"</p>"+
+                            "</ul>");
+                    });
+                }
+            });
+        }
+        loadReviews();
+
+        $("#form-reviews").on('click', '.btn-comment-reviews', function(event) {
+            event.preventDefault();
+
+            var product_id = $('#id').val();
+            var reviewsname = $("#reviewsname").val();
+            var email = $("#email").val();
+            var comment = $("#comment").val();
+            var _token = $("meta[name='csrf-token']").attr("content");
+
+            if (reviewsname=="" || email=="" || comment=="") {
+                alert("Không được để trống ô nhập thông tin");
+            }else {
+                $.ajax({
+                url:"{{ route('admin.add-reviews') }}",
+                type:"POST",
+                data:{product_id:product_id,name:reviewsname,email:email,comment:comment,_token:_token},
+                success:function(){
+                    swal( "Cám ơn bạn đã đánh giá","", "success");
+                     loadReviews();
+                    $("#form-reviews").trigger("reset");
+
+
+                }
+
+            });         
+            }
+            
+        });
+    });
+</script>
+   <script type="text/javascript">
+    $(document).ready(function(){
+        $('#continue').click(function(event) {
+             event.preventDefault();
+             var customer_id = $("#customer_id").val();
+             var lastname = $("#lastname").val();
+             var middlename = $("#middlename").val();
+             var firstname = $("#firstname").val();
+             var phone = $("#phone").val();
+             var email = $("#email").val();
+             var address = $("#address").val();
+             var note = $("#notes").val();
+             var total = $("#total").val();
+             var paymen_option = $('#paymen_option').val();
+             var _token = $("meta[name='csrf-token']").attr("content");
+         
+             $.ajax({
+                url: '{{ route('save-checkout') }}',
+                type: 'POST',
+                data: {customer_id:customer_id,lastname:lastname,middlename:middlename,firstname:firstname,phone:phone,email:email,address:address,note:note,total:total,method:paymen_option,_token:_token},
+                success:function() {
+            
+                        swal( "Check Success","", "success");
+                    setTimeout(function(){
+                        location.reload();
+                    },1000);
+                    
+                }
+             });
+        
+        
+        });
+    });
+   </script>

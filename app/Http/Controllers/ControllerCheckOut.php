@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Checkout\CheckoutModel as MainModel;
 use Session;
 use DateTime;
+use App\Cart;
 session_start();
 class ControllerCheckOut extends Controller
 {
@@ -87,18 +88,18 @@ class ControllerCheckOut extends Controller
         Session::put('order_id',$order_id);
         // insert order details
 
-        $carts = Session::get('cart');
-        foreach ($carts as  $items) {
+        $Cart = Session::get('Cart')->products;
+        foreach ($Cart as  $items) {
             $order_detail['order_id'] = Session::get('order_id');
-            $order_detail['product_id'] = $items['id'];
-            $order_detail['name'] = $items['name'];
-            $order_detail['price'] = $items['price'];
-            $order_detail['sales_quantity'] = $items['qty'];
+            $order_detail['product_id'] = $items['productInfo']->id;
+            $order_detail['name'] = $items['productInfo']->name;
+            $order_detail['price'] = $items['productInfo']->price;
+            $order_detail['sales_quantity'] = $items['quantity'];
             $order_detail['created_at'] = new DateTime();
             $this->instants->insertOrderDetail($order_detail);
             
         }
-        Session::forget('cart');
+        Session::forget('Cart');
     }
 
     /**

@@ -9,9 +9,9 @@
 				</ol>
 			</div>
 			
-				<form action="" method="POST">
-				@csrf
-			<div class="table-responsive cart_info">
+
+				
+		<div class="table-responsive cart_info">
 				<table class="table table-condensed">
 					<thead>
 						<tr class="cart_menu">
@@ -69,7 +69,7 @@
 						 
 				</table>
 			</div>
-		</form>
+		
 		</div>
 	</section> <!--/#cart_items-->
 
