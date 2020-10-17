@@ -169,3 +169,24 @@
         });
     });
    </script>
+
+
+   <script type="text/javascript">
+       function add_wishlist(id) {
+         var product_id = id;
+         var customer_id = $('#customer_id').val();
+         var _token = $("meta[name='csrf-token']").attr("content");
+        if(customer_id=="") {
+            alert("xin vui lồng đăng nhâp");
+        }else {
+            $.ajax({
+                url: '{{ route('add-wishlist') }}',
+                type: 'POST',
+                data: {product_id:product_id,customer_id:customer_id,_token},
+                success:function(data) {
+                      alertify.success('Đã thêm sản phẩm');
+                }
+            });
+        }
+    }
+   </script>

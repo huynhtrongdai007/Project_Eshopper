@@ -13,7 +13,7 @@ use App\Models\Reviews\ReviewsModel;
 use App\Models\Comment\CommentModel;
 use  App\Models\Contact\ContactModel;
 use DB,DateTime;
-
+use Session;
 class HomeController extends Controller
 {
 
@@ -108,6 +108,34 @@ class HomeController extends Controller
 		  $get_brand = $this->instants_brand->getAllDataIndex();
 	      return view('pages.shops.shop',compact('pagination','get_category','get_brand'))->render();
 	     }
+ 	}
+
+
+ 	function wishlist() {
+ 		$id = Session::get('customer_id');
+ 		$get_wishlists = $this->instants_product->getWishLists($id);
+ 		return view('pages.wishlist',compact('get_wishlists'));
+ 	}
+
+ 	function addWishlist(Request $request) {
+ 		$data = $request->except("_token");
+ 		$product_id = $request->product_id;
+ 		$checkWishList = $this->instants_product->checkWitshList($product_id);
+ 		if ($checkWishList==true) {
+ 			return redirect()->route('home')->with('message','sản phẩm này đã được thêm rồi');
+ 		}
+ 		
+ 		$data['created_at'] = new DateTime();
+ 		$success = $this->instants_product->addWishlist($data);
+ 		if ($success) {
+ 			 return back()->with('message','đã thêm sản phẩm yêu thích');
+
+ 		}
+ 	}
+
+ 	function checkWishList(Request $request) {
+ 		$product_id = $request->product_id;
+ 		$this->instants_product->checkWitshList($product_id);
  	}
 
  	public function contactUs () {

@@ -1,12 +1,8 @@
-  <?php
-          $message = Session::get('message');
-            if($message)
-             {
-               echo"<div class='alert alert-success'>$message</div>";
-               Session::put('message',null);
-             }
-          ?>
-@foreach ($get_product as $items)
+@extends('pages.master')
+@section('content')
+	
+	 <h2 class="title text-center">Sản Phẩm Yêu Thích</h2>
+@foreach ($get_wishlists as $items)
     <div class="col-sm-4">
                 <div class="product-image-wrapper">
                     <a href="{{ route('product_details',['id'=>$items->id]) }}">
@@ -19,15 +15,9 @@
                             </div>
                         </div>
                     </a>
-                  
-                    <div class="choose">
-                        <ul class="nav nav-pills nav-justified">
-                            <li><a onclick="add_wishlist({{$items->id}});" href="javascript:"><i class="fa fa-plus-square"></i>Add to wishlist</a>
-                                <input type="hidden" id="customer_id" value="{{Session::get('customer_id')}}">
-                            </li>
-                            <li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
     @endforeach
+
+
+@endsection

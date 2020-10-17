@@ -57,6 +57,11 @@ Route::post('save-checkout','ControllerCheckOut@store')->name('save-checkout');
 Route::post('add-comment','CommentController@store')->name('add-comment');
 Route::post('showComment','HomeController@showComment')->name('showComment');
 //----------------comment----------------------------------------------------------------------------
+//----------------wishlist----------------------------------------------------------------------------
+Route::get('wishlist','HomeController@wishlist')->name('wishlist');
+Route::post('add-wishlist','HomeController@addWishlist')->name('add-wishlist');
+Route::post('check-wishlist','HomeController@checkWishList')->name('check-wishlist');
+//----------------wishlist----------------------------------------------------------------------------
 
 Route::post('showReviews','HomeController@showReviews')->name('showReviews');
 

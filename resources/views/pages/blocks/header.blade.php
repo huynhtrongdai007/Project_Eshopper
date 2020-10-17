@@ -63,7 +63,7 @@
                                     $customer_id = Session::get('customer_id');
                                 @endphp
                                 <li><a href="{{ route('login') }}"><i class="fa fa-user"></i> Account</a></li>
-                                <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
+                                <li><a  href="{{ route('wishlist') }}"><i class="fa fa-star"></i> Wishlist</a></li>
                                
                                 <li>
                                      @if (empty($customer_id))
@@ -116,9 +116,17 @@
                                     <ul role="menu" class="sub-menu">
                                         <li><a href="{{ route('shop') }}">Products</a></li>
                                         <li><a href="product-details.html">Product Details</a></li> 
-                                        <li><a href="checkout.html">Checkout</a></li> 
+
+                                        <li>
+                                            @if (!empty(Session::get('customer_id')))
+                                                <a href="{{ route('view-checkout') }}">Checkout</a>
+                                            @else
+                                                <a href="{{ route('login') }}">Checkout</a>
+                                            @endif
+                                                
+                                        </li> 
                                         <li><a href="{{ route('view_cart') }}">Cart</a></li> 
-                                        <li><a href="login.html">Login</a></li> 
+                                        <li><a href="{{ route('login') }}">Login</a></li> 
                                     </ul>
                                 </li> 
                                 <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>

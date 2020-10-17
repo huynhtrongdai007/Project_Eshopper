@@ -96,5 +96,25 @@ class ProductModel extends Model
          return $result; 
     }   
 
+    public function addWishlist($data) {
+       DB::table('tbl_wishlists')->insert($data);
+    }
+
+    public function getWishLists($id) {
+      $result = DB::table('tbl_wishlists')
+      ->join('tbl_products','tbl_wishlists.product_id','=','tbl_products.id')
+      ->where('tbl_wishlists.customer_id',$id)->orderby('tbl_wishlists.id','DESC')->get();
+      return $result;
+    }
+
+    // method kiem tra xem da them san pham yeu thich chua
+
+    public function checkWitshList($product_id) {
+        $result = DB::table('tbl_wishlists')
+        ->where('product_id',$product_id)
+        ->first();
+        return $result;
+    }
+
 
 }
