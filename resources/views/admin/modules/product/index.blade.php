@@ -24,7 +24,9 @@
 <table id="example1" class="table table-bordered table-hover">
    <thead>
       <tr>
+        <th>Nhập Hàng</th>
          <th>#</th>
+         <th>Code</th>
          <th>Image</th>
          <th>Name</th>
          <th>Category</th>
@@ -32,6 +34,7 @@
          <th>Price</th>
          <th>Quantity</th>
          <th>Selling Quantitu</th>
+         <th>Remain</th>
          <th>Status</th>
          <th>Created at</th>
          <th>Updated at</th>
@@ -41,7 +44,9 @@
    <tbody>
     @foreach ($data_product as $items)
         <tr>
+          <td><a href="{{ route('admin.warehouse.importgoods',['id'=>$items->id]) }}">Nhập Hàng</a></td>
           <td>{{$items->id}}</td>
+          <td>{{$items->code}}</td>
           <td><img width="100" src="{{ url("public/uploads/products/{$items->image}") }}" alt=""></td>
           <td>{{$items->name}}</td>
           <td>{{$items->category_name}}</td>
@@ -49,6 +54,7 @@
           <td>{{$items->price}}</td>
           <td>{{$items->quantity}}</td>
           <td>{{$items->selling_quantity}}</td>
+          <td>{{$items->remain}}</td>
          <td>
           @if($items->status==1)
           <input type="checkbox" class="product_status_off" id="{{$items->id}}" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger">

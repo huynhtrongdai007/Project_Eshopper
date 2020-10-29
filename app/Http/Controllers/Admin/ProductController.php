@@ -55,8 +55,12 @@ class ProductController extends CategoryController
      */
     public function store(Request $request)
     {
-        $request->validate([
+        
+
+
+    $request->validate([
             'name'=>'required',
+            'code'=>'required',
             'category_id'=>'required',
             'brand_id'=>'required',
             'description'=>'required',
@@ -64,17 +68,18 @@ class ProductController extends CategoryController
             'price'=>'required',
             'quantity'=>'required',
             'image'=>'required',
-            'status'=>'required'
+            
         ]);
 
         $data = $request->except('_token');
         $get_image = $request->file('image');
+        $data['remain'] = $request->quantity;
         $data['created_at'] = new DateTime;
-        
         if ($get_image) {
             $new_image = $get_image->getClientOriginalName();
             $get_image->move('public/uploads/products',$get_image->getClientOriginalName());
             $data['image'] = $new_image;
+
             $data['created_at'] = new DateTime;
             $this->intants_product->insertData($data);
             return redirect()->route('admin.product.create')->with('message','Insertd Product SuccessFully');
@@ -82,6 +87,9 @@ class ProductController extends CategoryController
 
         $this->intants_product->insertData($data);
         return redirect()->route('admin.product.create')->with('message','Insertd Product SuccessFully');
+
+
+      
     }
 
     /**
@@ -150,6 +158,8 @@ class ProductController extends CategoryController
         
     }
 
+
+  
      public function updateUntive(Request $request)
     {
         $id = $request->id;

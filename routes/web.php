@@ -167,6 +167,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 
 		Route::get('destroy/{id}','ProductController@destroy')->name('destroy');
 
+	
 		Route::post('update_status_untive','ProductController@updateUntive')->name('update_status_untive');
 
 		Route::post('update_status_active','ProductController@updateActive')->name('update_status_active');
@@ -208,6 +209,13 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 
 	 });
 
+	Route::prefix('warehouse')->name('warehouse.')->group(function(){
+
+		Route::get('index','WareHouseController@index')->name('index');
+		Route::get('importgoods/{id}','WareHouseController@importgoods')->name('importgoods');
+		Route::post('storeimportgoods/{id}','WareHouseController@storeimportgoods')->name('storeimportgoods');
+
+	});
 
   });
 	

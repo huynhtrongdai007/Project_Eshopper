@@ -150,7 +150,7 @@
              var total = $("#total").val();
              var paymen_option = $('#paymen_option').val();
              var _token = $("meta[name='csrf-token']").attr("content");
-         
+            console.log(note);
              $.ajax({
                 url: '{{ route('save-checkout') }}',
                 type: 'POST',

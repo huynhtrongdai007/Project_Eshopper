@@ -27,16 +27,6 @@ class ControllerCheckOut extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -45,7 +35,7 @@ class ControllerCheckOut extends Controller
     public function store(Request $request)
     {
             // insert shipping
-        $data_shipping = $request->except('_token');
+        $data_shipping = $request->except('_token','shipping_name');
         $data_shipping = array(
             'customer_id' => $request->customer_id,
             'lastname' => $request->lastname,
@@ -54,7 +44,7 @@ class ControllerCheckOut extends Controller
             'phone' => $request->phone,
             'email' => $request->email,
             'address' => $request->address,
-            'note' => $request->notes,
+            'note' => $request->note,
             'created_at' => new DateTime(),
         );
         
@@ -102,48 +92,4 @@ class ControllerCheckOut extends Controller
         Session::forget('Cart');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

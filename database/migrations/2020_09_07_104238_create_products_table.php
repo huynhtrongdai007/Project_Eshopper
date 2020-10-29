@@ -23,6 +23,8 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->text('content');
             $table->integer('selling_quantity');
+            $table->integer('quantity');
+            $table->integer('remain');
             $table->string('price');
             $table->string('image');
             $table->timestamps();

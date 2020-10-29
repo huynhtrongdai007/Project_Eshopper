@@ -25,10 +25,17 @@
             <div class="form-group">
               <label for="exampleInputEmail1">Product Name</label>
               <input type="text" value="{{old('name')}}" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter Product Name"> 
+                @error('name')
+                 <span class="text-danger">{{$message}}</span> 
+               @enderror
             </div>
-            @error('name')
-             <span class="text-danger">{{$message}}</span> 
-            @enderror
+           <div class="form-group">
+              <label for="exampleInputEmail1">Product Code</label>
+              <input type="text" value="{{old('code')}}" name="code" class="form-control" id="exampleInputEmail1" placeholder="Enter Product Code"> 
+                @error('code')
+                 <span class="text-danger">{{$message}}</span> 
+               @enderror
+            </div>
 
             <div class="form-group">
                 <label for="exampleInputEmail1">Category</label>
@@ -90,18 +97,6 @@
              @error('image')
              <span class="text-danger">{{$message}}</span> 
             @enderror
-            <div class="form-group">
-              <label>Status</label>
-              <select class="form-control" name="status">
-                <option value="">Chọn trạng thái</option>
-                <option value="1">On</option>
-                <option value="0">Off</option>
-              </select>
-            </div>
-             @error('status')
-             <span class="text-danger">{{$message}}</span> 
-            @enderror
-          
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
