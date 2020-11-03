@@ -55,7 +55,7 @@ class ControllerCheckOut extends Controller
         // insert payment 
         $data_payment = $request->except('_token');
         $data_payment = array(
-            'method' =>$request->method,
+            'method' => $request->method,
             'created_at' => new DateTime(),
         );
         
@@ -65,11 +65,13 @@ class ControllerCheckOut extends Controller
 
         // insert order
         $data_order = $request->except('_token');
+        $order_code = substr(md5(microtime()),rand(0,26),5);
         $data_order = array(
             'customer_id'=> Session::get('customer_id'),
             'shipping_id'=> Session::get('shipping_id'),
             'payment_id'=> Session::get('payment_id'),
             'total'=> $request->total,
+            'order_code' => $order_code,
             'created_at' => new DateTime(),
         );
 
@@ -81,6 +83,7 @@ class ControllerCheckOut extends Controller
         $Cart = Session::get('Cart')->products;
         foreach ($Cart as  $items) {
             $order_detail['order_id'] = Session::get('order_id');
+            $order_detail['order_code'] =   $order_code;
             $order_detail['product_id'] = $items['productInfo']->id;
             $order_detail['name'] = $items['productInfo']->name;
             $order_detail['price'] = $items['productInfo']->price;

@@ -3,7 +3,7 @@
  @section('content')
  <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Chi tiết đơn hàng</h3>
+          <h3 class="card-title">Chi tiết đơn hàng:</h3>
          <?php
           $message = Session::get('message');
             if($message)
@@ -11,6 +11,7 @@
                echo"<div class='alert alert-success'>'$message'</div>";
                Session::put('message',null);
              }
+            
           ?>
           
           <div class="card-tools">
@@ -63,8 +64,11 @@
         @endforeach
         <tr>
           <td colspan="5">Tong Thanh Tien {{$items->total}}</td>
+
         </tr>
-          
+        <tr>
+           <td>Ma don hang: {{$items->order_code}}</td>
+        </tr>
       </tbody>
   </thead>
   <tbody>
@@ -75,7 +79,7 @@
  </div>
         <!-- /.card-body -->
         <div class="card-footer">
-          Footer
+          <a target="_blank" href="{{ route('admin.orders.print_order',['order_code'=>$items->order_code]) }}" class="btn btn-success">Print Bill</a>
         </div>
         <!-- /.card-footer-->
  </div>

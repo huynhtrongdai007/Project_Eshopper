@@ -34,7 +34,7 @@
    <tbody>
     @foreach ($data_orders as $items)
       <tr>
-          <td>{{$items->id_order}}</td>
+          <td>{{$items->order_code}}</td>
           <td>{{$items->lastname}} {{$items->middlename}} {{$items->firstname}}</td>
          
           <td>{{$items->total}}</td>
