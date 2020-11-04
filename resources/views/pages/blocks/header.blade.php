@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="logo pull-left">
-                            <a href="{{ route('home') }}"><img src="{{ asset('frontend/images/home/logo.png') }}" alt="" /></a>
+                            <a href="{{ route('home') }}"><img src="{{ asset('public/frontend/images/home/logo.png') }}" alt="" /></a>
                         </div>
                         <div class="btn-group pull-right">
                             <div class="btn-group">
@@ -142,7 +142,8 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="search_box pull-right">
-                            <input type="text" id="search"  placeholder="Search"></input>
+                            <input type="text" id="keywords"  placeholder="Search"></input>
+                            <div id="result-search"></div>
                         </div>
                     </div>
                 </div>

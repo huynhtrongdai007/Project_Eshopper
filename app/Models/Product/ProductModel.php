@@ -120,5 +120,14 @@ class ProductModel extends Model
         return $result;
     }
 
+    // tìm kiếm sản phẩm
+
+    public function searchProduct($keywords) {
+      $result = DB::table('tbl_products')
+      ->where('status',1)
+      ->where('name','LIKE','%'.$keywords.'%')
+      ->get();
+      return $result;
+    }
 
 }

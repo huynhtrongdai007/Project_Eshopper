@@ -133,6 +133,30 @@ class HomeController extends Controller
  		}
  	}
 
+ 	public function search(Request $request) {
+ 		$data = $request->except('_token');
+ 		if ($data['query']) {
+ 			$product = $this->instants_product->searchProduct($data['query']);
+ 			$output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+ 			$src = "public/uploads/products/";
+ 			foreach ($product as $items) {
+
+ 				$output.='
+
+ 					<li>
+ 					<img src='.asset('public/uploads/products/'.$items->image.'').'>
+ 					<a href='.route('product_details',['id'=>$items->id]).'>'.$items->name.'</a>
+ 					</li>
+
+ 				';
+ 			}
+
+ 			$output.='</ul>';
+ 			echo $output;
+ 		}
+
+ 	}
+
  	function checkWishList(Request $request) {
  		$product_id = $request->product_id;
  		$this->instants_product->checkWitshList($product_id);

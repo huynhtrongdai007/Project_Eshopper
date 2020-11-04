@@ -24,7 +24,7 @@ Route::get('/404','HomeController@notFound404')->name('404');
 Route::get('/contact-us','HomeController@contactUs')->name('contact-us');
 Route::get('product_details/{id}','HomeController@productDetails')->name('product_details');
 //----------------Home----------------------------------------------------------------------------
-Route::get('/search', 'HomeController@search')->name('search');
+Route::post('/autocomplete', 'HomeController@search')->name('search');
 //----------------login----------------------------------------------------------------------------
 Route::get('login','LoginController@index')->name('login');
 Route::post('create_account','LoginController@store')->name('create_account');

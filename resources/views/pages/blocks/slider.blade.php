@@ -24,7 +24,7 @@
                                     <button type="button" class="btn btn-default get">Get it now</button>
                                 </div>
                                 <div class="col-sm-6">
-                                    <img src="{{ asset('uploads/sliders/'.$items->image) }}" class="girl img-responsive" alt="" />
+                                    <img src="{{ asset('public/uploads/sliders/'.$items->image) }}" class="girl img-responsive" alt="" />
                                     <img src="{{ asset('frontend/images/home/pricing.png') }}"  class="pricing" alt="" />
                                 </div>
                             </div>
