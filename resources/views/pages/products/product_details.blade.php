@@ -32,7 +32,7 @@
 						</div><!--/price-range-->
 						
 						<div class="shipping text-center"><!--shipping-->
-							<img src="{{ asset('public/frontend/images/home/shipping.jpg') }}" alt="" />
+							<img src="{{ asset('frontend/images/home/shipping.jpg') }}" alt="" />
 						</div><!--/shipping-->
 						
 					</div>
@@ -42,7 +42,7 @@
 					<div class="product-details"><!--product-details-->
 						<div class="col-sm-5">
 							<div class="view-product">
-								<img src="{{ asset("public/uploads/products/{$product->image}") }}" alt="" />
+								<img src="{{ asset("uploads/products/{$product->image}") }}" alt="" />
 								<h3>ZOOM</h3>
 							</div>
 							<div id="similar-product" class="carousel slide" data-ride="carousel">
@@ -55,7 +55,7 @@
 								    	@foreach ($getGallery as $key => $gallery)
 										@if ($i % 2 != 0)
 										<div class="item {{($key == 0) ? "active" : "" }}">
-										  <a  href=""><img width="100" src="{{ asset("public/uploads/products/{$gallery->image}") }}"></a> 
+										  <a  href=""><img width="100" src="{{ asset("uploads/products/{$gallery->image}") }}"></a> 
 										</div>
 										@endif
 										@endforeach
@@ -80,7 +80,7 @@
 								
 								<h2>{{$product->name}}</h2>
 								
-								<img name="image" src="{{ asset('public/frontend/images/product-details/rating.png') }}" alt="" />
+								<img name="image" src="{{ asset('frontend/images/product-details/rating.png') }}" alt="" />
 								<span>
 									<span>{{number_format($product->price)}}.Đ</span>
 									<div class="clearfix"></div>
@@ -99,7 +99,7 @@
 								<p><b>Category:</b>{{$product->category_name}}</p>
 							{{-- 	<p><b>Condition:</b> New</p> --}}
 								<p><b>Brand:</b>{{$product->brand_name}}</p>
-								<a href=""><img src="{{ asset('public/frontend/images/product-details/share.png') }}" class="share img-responsive"  alt="" /></a>
+								<a href=""><img src="{{ asset('frontend/images/product-details/share.png') }}" class="share img-responsive"  alt="" /></a>
 								
 							</div><!--/product-information-->
 						</div>

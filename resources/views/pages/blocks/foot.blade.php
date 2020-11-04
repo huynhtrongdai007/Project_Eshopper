@@ -1,12 +1,12 @@
    
-    <script src="{{ asset('public/frontend/js/jquery.js') }}"></script>
-    <script src="{{ asset('public/frontend/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('public/frontend/js/jquery.scrollUp.min.js') }}"></script>
-    <script src="{{ asset('public/frontend/js/price-range.js') }}"></script>
-    <script src="{{ asset('public/frontend/js/jquery.prettyPhoto.js') }}"></script>
-    <script src="{{ asset('public/frontend/js/sweetalert.js') }}"></script>
-    <script src="{{ asset('public/frontend/js/main.js') }}"></script>
-    <script src="{{ asset('public/frontend/js/myscript.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery.js') }}"></script>
+    <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery.scrollUp.min.js') }}"></script>
+    <script src="{{ asset('frontend/js/price-range.js') }}"></script>
+    <script src="{{ asset('frontend/js/jquery.prettyPhoto.js') }}"></script>
+    <script src="{{ asset('frontend/js/sweetalert.js') }}"></script>
+    <script src="{{ asset('frontend/js/main.js') }}"></script>
+    <script src="{{ asset('frontend/js/myscript.js') }}"></script>
     <!-- JavaScript -->
 	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 

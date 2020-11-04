@@ -47,7 +47,7 @@
           <td><a href="{{ route('admin.warehouse.importgoods',['id'=>$items->id]) }}">Nhập Hàng</a></td>
           <td>{{$items->id}}</td>
           <td>{{$items->code}}</td>
-          <td><img width="100" src="{{ url("public/uploads/products/{$items->image}") }}" alt=""></td>
+          <td><img width="100" src="{{ asset("./uploads/products/{$items->image}") }}" alt=""></td>
           <td>{{$items->name}}</td>
           <td>{{$items->category_name}}</td>
           <td>{{$items->brand_name}}</td>

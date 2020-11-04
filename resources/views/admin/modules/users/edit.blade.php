@@ -31,7 +31,7 @@
             </div>
             <div class="form-group">
               <label>Image</label>
-              <img width="300" src="{{ asset("./public/uploads/sliders/{$data_user->image}")}}"><br/>
+              <img width="300" src="{{ asset("uploads/sliders/{$data_user->image}")}}"><br/>
               <label class="mt-3">Update new image</label>
               <input type="file" name="image" class="form-control">
             </div>

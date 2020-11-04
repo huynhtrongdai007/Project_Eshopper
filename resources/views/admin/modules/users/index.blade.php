@@ -47,7 +47,7 @@
          </td>
       
          <td>
-           <img width="80" src="{{ asset("./public/uploads/users/{$items->image}")}}" alt="">
+           <img width="80" src="{{ asset("uploads/users/{$items->image}")}}" alt="">
          </td>
          <td>{{$items->created_at}}</td>
          <td>{{$items->updated_at}}</td>

@@ -177,6 +177,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 		Route::get('index','OrderController@index')->name('index');
 		Route::get('show/{id}/{shipping_id}','OrderController@show')->name('show');
 		Route::get('print_order/{order_code}','OrderController@printOrder')->name('print_order');
+		Route::get('destroy/{id}','OrderController@destroy')->name('destroy');
 
 	});
 

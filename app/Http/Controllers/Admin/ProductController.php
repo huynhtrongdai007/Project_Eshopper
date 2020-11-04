@@ -56,8 +56,6 @@ class ProductController extends CategoryController
     public function store(Request $request)
     {
         
-
-
     $request->validate([
             'name'=>'required',
             'code'=>'required',
@@ -163,7 +161,7 @@ class ProductController extends CategoryController
      public function updateUntive(Request $request)
     {
         $id = $request->id;
-        $this->intants_product->usUnctive($id);
+        $this->intants_product->updateStatusUnctive($id);
     }
 
     public function updateActive(Request $request)

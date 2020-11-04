@@ -45,7 +45,6 @@ class CartController extends Controller
  		
  		}
 
- 		return back();
     }
 
  public function AddCartDetail(Request $request,$id) {

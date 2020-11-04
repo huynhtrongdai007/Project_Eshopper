@@ -38,16 +38,14 @@ class OrderController extends Controller
         $output = '';
 
         $output.= '
-        <style>body{font-family:Dejavu Sans;}
-            #bill-order {margin-top:20%;}
-        #bill-customer{margin-top:10%;}
-        </style>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+        <style>body{font-family:Dejavu Sans;}</style>
         <h1 align="center">CÔNG TY CNHH MỘT THÀNH VIÊN ABC</h1>   
-        <table id="bill-customer" border="1" align="center">    
+        <table class="table mt-5" border="1px">    
           <thead>
               <tr>  
 
-                 <th with="40%">tên khách hàng</th>
+                 <th >tên khách hàng</th>
                  <th>địa chỉ</th>
                  <th>số điên thoại</th>
               </tr>
@@ -62,7 +60,7 @@ class OrderController extends Controller
             
           </tbody>
          </table>
-        <table id="bill-order" border="1" align="center" class="table-light">
+        <table  border="1px" class="table">
          <thead  with="100%">
              <tr>
                  <th>tên sản phẩm</th>
@@ -84,11 +82,11 @@ class OrderController extends Controller
 
       }
       $output.='<tr>
-          <td colspan="5">Tong Thanh Tien:'.$items->total.'</td>
+          <td colspan="4">Tong Thanh Tien:'.$items->total.'</td>
 
         </tr>
         <tr>
-           <td colspan="5">Ma don hang:'.$items->order_code.'</td>
+           <td colspan="4">Ma don hang:'.$items->order_code.'</td>
         </tr>';
       $output.='
   </tbody>
@@ -116,29 +114,6 @@ $output.='
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -146,6 +121,7 @@ $output.='
      */
     public function destroy($id)
     {
-        //
+        $this->instants->DeleteData($id);
+        return back()->with('message','Xóa đơn hàng thành công');
     }
 }

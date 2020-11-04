@@ -8,7 +8,7 @@
           $message = Session::get('message');
             if($message)
              {
-               echo"<div class='alert alert-success'>'$message'</div>";
+               echo"<div class='alert alert-success'>$message</div>";
                Session::put('message',null);
              }
             
@@ -55,7 +55,7 @@
         @foreach ($getOrderDetail as $items)
          <tr>
           <td>{{$items->product_name}}</td>
-          <td><img width="80" src="{{ asset("public/uploads/products/{$items->image}") }}" alt=""></td>
+          <td><img width="80" src="{{ asset("uploads/products/{$items->image}") }}" alt=""></td>
           <td>{{$items->qty}}</td>
           <td>{{number_format($items->price)}}</td>
           <td>{{number_format($items->qty * $items->price)}}</td>

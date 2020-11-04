@@ -57,5 +57,8 @@ class OrderModel extends Model
         return $result;
     }
 
+    public function DeleteData($id) {
+        DB::table('tbl_order_details')->where('id',$id)->delete();
+    } 
 
 }

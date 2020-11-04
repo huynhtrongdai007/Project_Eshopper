@@ -21,6 +21,7 @@
 							<td class="quantity">Quantity</td>
 							<td class="total">Total</td>
 							<td>Save</td>
+							<td></td>
 							
 						</tr>
 					</thead>
@@ -31,7 +32,7 @@
 							<div id="change-item-cart">
 								<tr>
 								<td class="cart_product">
-									<a href=""><img width="80" src="public/uploads/products/{{$items['productInfo']->image}}" alt=""></a>
+									<a href=""><img width="80" src="{{ asset('uploads/products/'.$items['productInfo']->image) }}" alt=""></a>
 								</td>
 								<td class="cart_description">
 									<h4><a href="">{{$items['productInfo']->name}}</a></h4>

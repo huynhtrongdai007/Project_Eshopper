@@ -2,22 +2,37 @@
 @section('content')
 	
 	 <h2 class="title text-center">Sản Phẩm Yêu Thích</h2>
-@foreach ($get_wishlists as $items)
-    <div class="col-sm-4">
-                <div class="product-image-wrapper">
-                    <a href="{{ route('product_details',['id'=>$items->id]) }}">
-                        <div class="single-products">
-                            <div class="productinfo text-center">
-                                <img id="img" src="{{ asset("public/uploads/products/{$items->image}") }}" alt="" />
-                                <h2 id="price">{{number_format($items->price)}}.Đ</h2>
-                                <p id="name">{{$items->name}}</p>
-                                <a onclick="AddCart({{$items->id}})" href="javascript:" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                            </div>
+
+    <section id="cart_items">
+<div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="image">Item</td>
+                            <td class="description">Name</td>
+                            <td class="price">Price</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <div id="change-item-cart">
+                            @foreach ($get_wishlists as $items)
+                            <tr>
+                                <td><img id="img" width="80" src="{{ asset("uploads/products/{$items->image}") }}" alt="" /></td>
+                                <td><p id="name">{{$items->name}}</p></td>
+                                <td><h2 id="price" class="text-primary">{{number_format($items->price)}}.Đ</h2></td>
+                                <td><a href="{{ route('product_details',['id'=>$items->id]) }}">Xem</a></td>
+                            </tr>
+                           @endforeach
                         </div>
-                    </a>
-                </div>
+                    </tbody>
+                         
+                </table>
             </div>
-    @endforeach
+        </section>
+
 
 
 @endsection
+
