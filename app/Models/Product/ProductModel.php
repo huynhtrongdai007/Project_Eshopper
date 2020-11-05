@@ -107,7 +107,10 @@ class ProductModel extends Model
     public function getWishLists($id) {
       $result = DB::table('tbl_wishlists')
       ->join('tbl_products','tbl_wishlists.product_id','=','tbl_products.id')
-      ->where('tbl_wishlists.customer_id',$id)->orderby('tbl_wishlists.id','DESC')->get();
+      ->where('tbl_wishlists.customer_id',$id)
+      ->select('tbl_products.image','tbl_products.name','tbl_products.price','tbl_wishlists.id')
+      ->orderby('tbl_wishlists.id','DESC')
+      ->get();
       return $result;
     }
 
@@ -118,6 +121,12 @@ class ProductModel extends Model
         ->where('product_id',$product_id)
         ->first();
         return $result;
+    }
+
+    // xóa san pham yeu thich
+
+    public function deleteWishList($id) {
+      DB::table('tbl_wishlists')->where('id',$id)->delete();
     }
 
     // tìm kiếm sản phẩm

@@ -1,27 +1,27 @@
 
 <!-- jQuery -->
-<script src="{{asset('backend/plugins/jquery/jquery.min.js')}}"></script>
-<script src="{{ asset('backend/js/jquery.js') }}"></script>
+<script src="{{asset('public/backend//plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{ asset('public/backend//js/jquery.js') }}"></script>
 <!-- Bootstrap 4 -->
-<script src="{{asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('public/backend//plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="{{asset('backend/dist/js/adminlte.min.js')}}"></script>
+<script src="{{asset('public/backend//dist/js/adminlte.min.js')}}"></script>
 
 <!-- DataTables -->
-<script src="{{asset('backend/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('backend/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{asset('backend/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{asset('backend/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
-<script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
+<script src="{{asset('public/backend//plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('public/backend//plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('public/backend//plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('public/backend//plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{ asset('public/backend//dist/js/adminlte.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 
-<script src="{{asset('backend/dist/js/demo.js')}}"></script>
+<script src="{{asset('public/backend//dist/js/demo.js')}}"></script>
 
 <!-- page script -->
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
-<script src="{{ asset('backend/js/script.js') }}"></script>
+<script src="{{ asset('public/backend//js/script.js') }}"></script>
 <script>
   $(function () {
     $("#example1").DataTable({

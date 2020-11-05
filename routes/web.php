@@ -59,6 +59,7 @@ Route::post('showComment','HomeController@showComment')->name('showComment');
 //----------------comment----------------------------------------------------------------------------
 //----------------wishlist----------------------------------------------------------------------------
 Route::get('wishlist','HomeController@wishlist')->name('wishlist');
+Route::post('destroy-wishlist','HomeController@destroyWishlist')->name('destroy-wishlist');
 Route::post('add-wishlist','HomeController@addWishlist')->name('add-wishlist');
 Route::post('check-wishlist','HomeController@checkWishList')->name('check-wishlist');
 //----------------wishlist----------------------------------------------------------------------------

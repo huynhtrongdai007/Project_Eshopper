@@ -1,7 +1,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="../../index3.html" class="brand-link">
-      <img src="{{asset('backend/dist/img/AdminLTELogo.png')}}"
+      <img src="{{asset('public/backend//dist/img/AdminLTELogo.png')}}"
            alt="AdminLTE Logo"
            class="brand-image img-circle elevation-3"
            style="opacity: .8">
@@ -16,7 +16,7 @@
           @php
               $img = auth()->user()->image;
           @endphp
-          <img src="{{asset('uploads/users/'.$img.'')}}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{asset('public/uploads//users/'.$img.'')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{auth()->user()->username}}</a>

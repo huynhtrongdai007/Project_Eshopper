@@ -133,6 +133,11 @@ class HomeController extends Controller
  		}
  	}
 
+ 	function destroyWishlist(Request $request) {
+ 		$id = $request->id;
+ 		$this->instants_product->deleteWishList($id);
+ 	}
+
  	public function search(Request $request) {
  		$data = $request->except('_token');
  		if ($data['query']) {
@@ -144,7 +149,7 @@ class HomeController extends Controller
  				$output.='
 
  					<li>
- 					<img src='.asset('public/uploads/products/'.$items->image.'').'>
+ 					<img  width="80" src='.asset('public/uploads/products/'.$items->image.'').'>
  					<a href='.route('product_details',['id'=>$items->id]).'>'.$items->name.'</a>
  					</li>
 

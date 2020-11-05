@@ -32,7 +32,7 @@
 						</div><!--/price-range-->
 						
 						<div class="shipping text-center"><!--shipping-->
-							<img src="{{ asset('frontend/images/home/shipping.jpg') }}" alt="" />
+							<img src="{{ asset('public/frontend/images/home/shipping.jpg') }}" alt="" />
 						</div><!--/shipping-->
 						
 					</div>
@@ -42,7 +42,7 @@
 					<div class="product-details"><!--product-details-->
 						<div class="col-sm-5">
 							<div class="view-product">
-								<img src="{{ asset("uploads/products/{$product->image}") }}" alt="" />
+								<img src="{{ asset("public/uploads/products/{$product->image}") }}" alt="" />
 								<h3>ZOOM</h3>
 							</div>
 							<div id="similar-product" class="carousel slide" data-ride="carousel">

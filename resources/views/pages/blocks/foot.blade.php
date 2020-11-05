@@ -48,7 +48,7 @@
 
     $(".cart_delete").on('click', '.cart_quantity_delete', function(event) {
         event.preventDefault();
-       
+        
         $.ajax({
             url:'delete-item-cart/'+$(this).data("id"),
             type:'GET',
@@ -190,6 +190,27 @@
         }
     }
    </script>
+   {{-- xóa wishlist --}}
+   <script type="text/javascript">
+                $(document).ready(function(){
+                  $(".delete-wishlist").on('click', function() {
+                  
+                     var element =(this);
+                     var id = $(this).attr('id');
+                     console.log(id);
+                     var _token = $("meta[name='csrf-token']").attr("content");
+
+                    $.ajax({
+                        url:"{{ route('destroy-wishlist') }}",
+                        type:"POST",
+                        data:{id:id,_token:_token},
+                        success:function() {
+                            $(element).closest('tr').hide();
+                        }
+                    });
+                  });
+                });
+   </script>
 
    <script type="text/javascript">
        $("#keywords").keyup(function() {
@@ -201,7 +222,7 @@
                 method:"POST",
                 data:{query:query,_token:_token},
                 success:function(data) {
-                   
+
                     $("#result-search").fadeIn();
                     $("#result-search").html(data);
                 }

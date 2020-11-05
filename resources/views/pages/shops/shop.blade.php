@@ -2,7 +2,7 @@
  @section('content')
 	<section id="advertisement">
 		<div class="container">
-			<img src="{{ asset("frontend/images/shop/advertisement.jpg") }} " alt="" />
+			<img src="{{ asset("public/frontend//images/shop/advertisement.jpg") }} " alt="" />
 		</div>
 	</section>
 	<section>
@@ -28,7 +28,7 @@
 						</div><!--/price-range-->
 						
 						<div class="shipping text-center"><!--shipping-->
-							<img src=" {{ asset('frontend/images/home/shipping.jpg') }}" alt="" />
+							<img src=" {{ asset('public/frontend//images/home/shipping.jpg') }}" alt="" />
 						</div><!--/shipping-->
 					</div>
 				</div>
@@ -40,7 +40,7 @@
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">
-										<img src="{{ asset("uploads/products/{$items->image}") }}" alt="" />
+										<img src="{{ asset("public/uploads//products/{$items->image}") }}" alt="" />
 										<h2>{{number_format($items->price)}}.Đ</h2>
 										<p>{{$items->name}}</p>
 										<a onclick="AddCart({{$items->id}})" href="javascript:" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>

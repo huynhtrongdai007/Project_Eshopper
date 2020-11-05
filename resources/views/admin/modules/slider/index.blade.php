@@ -38,7 +38,7 @@
         <tr>
    
          <td>{{$items->id}}</td>
-         <td> <img width="80" src="{{ asset("uploads/sliders/{$items->image}")}}" alt=""></td>
+         <td> <img width="80" src="{{ asset("public/uploads//sliders/{$items->image}")}}" alt=""></td>
          <td>{{$items->name}}</td>
          <td>
           @if($items->status==1)
