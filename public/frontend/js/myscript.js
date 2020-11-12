@@ -36,23 +36,7 @@ $(document).ready(function(){
         //Trigger change event
         qty.trigger('change');
     });    
-
-    //  $(".cart_quantity_input").change(function() {
-    //     var sum = 0;
-    //     var total = 0;
-    //     $('.price').each(function () {
-    //         var price = $(this);
-    //         var count = price.closest('tr').find('.cart_quantity_input');
-    //          console.log(price);
-    //         sum = (price.html() * count.val());
-    //         total = total + sum;
-           
-    //         price.closest('tr').find('.cart_total_price').html(sum + "Đ"); //Also use html() instead of append()
-    //     });
-    //     $('#total').html(total); 
-    //     //Also use html() instead of append()
-
-    // }).change(); //trigger change event on page load 
+    
  });
 
 

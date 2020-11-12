@@ -48,6 +48,7 @@ class CartController extends Controller
     }
 
  public function AddCartDetail(Request $request,$id) {
+       
         $product = DB::table('tbl_products')->where('id',$id)->first();
         if ($product != null) {
             $oldCart = Session('Cart') ? Session('Cart') : null; 

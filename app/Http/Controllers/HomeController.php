@@ -25,6 +25,7 @@ class HomeController extends Controller
     private $instants_reviews;
     private $instants_comment;
     private $instants_contact;
+    
     public function __construct() {
 
     	$this->instants_slider = new SliderModel;
@@ -44,9 +45,11 @@ class HomeController extends Controller
 		$get_category = $this->instants_category->getAllDataIndex();
 		$get_brand = $this->instants_brand->getAllDataIndex();
 		$get_product = $this->instants_product->getDataIndex();
-		$get_tab_category = $this->instants_category->getDataTabCategory();
-		$get_tab_product = $this->instants_category->getDataTabProduct();
-		return view('pages.home',compact('get_slider','get_category','get_brand','get_product'));
+		$get_tabs_category = $this->instants_category->getDataTabCategory();
+		$get_tabs_product = $this->instants_category->getDataTabProduct();
+		$get_recommended_product = $this->instants_product->getRecommendedProduct();
+
+		return view('pages.home',compact('get_slider','get_category','get_brand','get_product','get_tabs_category','get_tabs_product','get_recommended_product'));
 	}
 
 

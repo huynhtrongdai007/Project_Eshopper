@@ -49,7 +49,7 @@ class CategoryController extends Controller
         $data = $request->except('_token');
         $data['created_at'] = new DateTime();
         $this->instant->insertData($data);
-        return redirect()->route('admin.category.index')->with('message','Inserted SuccessFully');
+        return back()->with('message','Inserted SuccessFully');
 
     }
 

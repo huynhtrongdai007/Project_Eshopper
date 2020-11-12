@@ -150,10 +150,12 @@ class ProductController extends CategoryController
      */
     public function destroy($id)
     {  
-       $success =   $this->intants_product->deleteData($id);
-           return redirect()->route('admin.product.index')->with('message','Deleted Product SuccessFully');
-       
-        
+         $result = $this->intants_product->deleteData($id);
+         if ($result) {
+            return redirect()->route('admin.product.index')->with('message','Deleted Product SuccessFully');
+         } else {
+             return redirect()->route('admin.product.index')->with('message','Deleted Product Not Success');
+         }
     }
 
 

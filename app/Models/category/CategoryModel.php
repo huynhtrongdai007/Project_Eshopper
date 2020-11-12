@@ -52,21 +52,21 @@ class CategoryModel extends Model
    }
 
    // phuong thuc lay du lieu ra tab category voi dieu kien parent = 0
-   public function getDataTabCategory() {
-       $result = DB::table('tbl_category')
-       ->where('parent',0)
-       ->get();
-       return $result;
-   }
 
-
- public function getDataTabProduct() {
+  public function getDataTabProduct() {
        $result = DB::table('tbl_category')
        ->join('tbl_products','tbl_category.id','=','tbl_products.category_id')
-       ->where('tbl_products.status',1)
-       ->limit(4)
        ->get();
        return $result;
    }
+
+   // phuong thuc lay category dieu kien parent_id khác 0
+
+   public function getDataTabCategory() {
+     return  DB::table('tbl_category')->where('parent','<>',0)
+      ->get();
+   }
+
+
 
 }

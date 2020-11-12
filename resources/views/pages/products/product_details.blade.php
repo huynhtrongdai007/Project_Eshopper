@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-@include('pages.blocks.head')
-</head><!--/head-->
-
-<body>
-	<header id="header"><!--header-->
-		@include('pages.blocks.header')
-	</header><!--/header-->
+@extends('pages.master')
+@section('content')
 	
 	<section>
 		<div class="container">
@@ -49,17 +41,27 @@
 									
 								  <!-- Wrapper for slides -->
 								    <div class="carousel-inner">
-								    	  @php
-		                                  $i =1;
-		                                @endphp
-								    	@foreach ($getGallery as $key => $gallery)
-										@if ($i % 2 != 0)
-										<div class="item {{($key == 0) ? "active" : "" }}">
-										  <a  href=""><img width="100" src="{{ asset("uploads/products/{$gallery->image}") }}"></a> 
+								    	
+{{-- 								    	@foreach ($getGallery as $key => $gallery)
+ --}}										
+									<div class="item active">
+										  <a href=""><img src="{{ asset('public/frontend/images/product-details/similar1.jpg') }}" alt=""></a>
+										  <a href=""><img src="{{ asset('public/frontend/images/product-details/similar2.jpg') }}" alt=""></a>
+										  <a href=""><img src="{{ asset('public/frontend/images/product-details/similar3.jpg') }}" alt=""></a>
 										</div>
-										@endif
-										@endforeach
-									</div>
+										<div class="item">
+										   <a href=""><img src="{{ asset('public/frontend/images/product-details/similar1.jpg') }}" alt=""></a>
+										  <a href=""><img src="{{ asset('public/frontend/images/product-details/similar2.jpg') }}" alt=""></a>
+										  <a href=""><img src="{{ asset('public/frontend/images/product-details/similar3.jpg') }}" alt=""></a>
+										</div>
+										<div class="item">
+										 <a href=""><img src="{{ asset('public/frontend/images/product-details/similar1.jpg') }}" alt=""></a>
+										  <a href=""><img src="{{ asset('public/frontend/images/product-details/similar2.jpg') }}" alt=""></a>
+										  <a href=""><img src="{{ asset('public/frontend/images/product-details/similar3.jpg') }}" alt=""></a>
+										</div>
+									
+{{-- 										@endforeach
+ --}}									</div>
 
 								  <!-- Controls -->
 								  <a class="left item-control" href="#similar-product" data-slide="prev">
@@ -74,13 +76,13 @@
 						<div class="col-sm-7">
 							<div class="product-information"><!--/product-information-->
 
-								{{-- <img src="{{ asset("public/uploads/images/product-details/news.jpg") }}" class="newarrival" alt="" /> --}}
+								 <img src="{{ asset("public/frontend/images/product-details/new.jpg") }}" class="newarrival" alt="" /> 
 							
 								
 								
 								<h2>{{$product->name}}</h2>
 								
-								<img name="image" src="{{ asset('frontend/images/product-details/rating.png') }}" alt="" />
+								<img name="image" src="{{ asset('public/frontend/images/product-details/rating.png') }}" alt="" />
 								<span>
 									<span>{{number_format($product->price)}}.Đ</span>
 									<div class="clearfix"></div>
@@ -99,7 +101,7 @@
 								<p><b>Category:</b>{{$product->category_name}}</p>
 							{{-- 	<p><b>Condition:</b> New</p> --}}
 								<p><b>Brand:</b>{{$product->brand_name}}</p>
-								<a href=""><img src="{{ asset('frontend/images/product-details/share.png') }}" class="share img-responsive"  alt="" /></a>
+								<a href=""><img src="{{ asset('public/frontend/images/product-details/share.png') }}" class="share img-responsive"  alt="" /></a>
 								
 							</div><!--/product-information-->
 						</div>
@@ -146,11 +148,4 @@
 			</div>
 		</div>
 	</section>
-	
-	<footer id="footer"><!--Footer-->
-	   @include('pages.blocks.footer')
-	</footer><!--/Footer-->
-	
-@include('pages.blocks.foot')
-</body>
-</html>
+@endsection

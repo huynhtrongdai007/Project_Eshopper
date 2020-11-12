@@ -125,8 +125,6 @@
                     swal( "Cám ơn bạn đã đánh giá","", "success");
                      loadReviews();
                     $("#form-reviews").trigger("reset");
-
-
                 }
 
             });         

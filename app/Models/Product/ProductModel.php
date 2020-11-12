@@ -139,4 +139,17 @@ class ProductModel extends Model
       return $result;
     }
 
+    // lay san pham ban chay nhat
+
+    public function getRecommendedProduct() {
+      $result = DB::table('tbl_products')
+      ->where('status','<>',0)
+      ->latest('view_count','desc')
+      ->take(6)
+      ->get();
+      return $result;
+    }
+
+
+
 }

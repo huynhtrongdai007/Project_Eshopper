@@ -32,7 +32,7 @@
 							<div id="change-item-cart">
 								<tr>
 								<td class="cart_product">
-									<a href=""><img width="80" src="{{ asset('uploads/products/'.$items['productInfo']->image) }}" alt=""></a>
+									<a href=""><img width="80" src="{{ asset('public/uploads/products/'.$items['productInfo']->image) }}" alt=""></a>
 								</td>
 								<td class="cart_description">
 									<h4><a href="">{{$items['productInfo']->name}}</a></h4>
@@ -89,7 +89,11 @@
 							@endif
 							<li>Eco Tax <span>$2</span></li>
 							<li>Shipping Cost <span>Free</span></li>
-							<li>Total <span>$61</span></li>
+							@if(Session::has('Cart')!=null)
+							<li>Total <span>{{number_format(Session::get('Cart')->totalPrice)}}₫</span></li>
+							@else
+							<li>Total <span id="total">0 ₫</span></li>
+							@endif
 						</ul>
 							@if (Session::has('Cart')!=null)
 							<a class="btn btn-default delete" id="delete-all-items-cart" href="{{ route('destroy-all-cart') }}">Delete All Cart</a> 

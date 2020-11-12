@@ -58,7 +58,7 @@ class OrderModel extends Model
     }
 
     public function DeleteData($id) {
-        DB::table('tbl_order_details')->where('id',$id)->delete();
+        DB::table('tbl_orders')->where('id',$id)->delete();
     } 
 
 }
