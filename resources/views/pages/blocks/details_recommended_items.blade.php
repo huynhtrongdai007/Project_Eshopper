@@ -1,7 +1,7 @@
 <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
        
-          @foreach ($get_recommended_product as $keyRecommend => $recommendedProduct)
+          @foreach ($getRecommenProduct as $keyRecommend => $recommendedProduct)
            @if ($keyRecommend % 3 == 0)
                  <div class="item  {{$keyRecommend == 0 ? 'active' : ''}}"> 
            @endif

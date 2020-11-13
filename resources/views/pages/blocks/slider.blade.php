@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <img src="{{ asset('public/uploads/sliders/'.$items->image) }}" class="girl img-responsive" alt="" />
-                                    <img src="{{ asset('frontend/images/home/pricing.png') }}"  class="pricing" alt="" />
+                                    <img src="{{ asset('public/frontend/images/home/pricing.png') }}"  class="pricing" alt="" />
                                 </div>
                             </div>
 

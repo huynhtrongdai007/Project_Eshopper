@@ -9,9 +9,11 @@ use App\Models\category\CategoryModel as MainModel;
 class CategoryController extends Controller
 {
     private $instant;
+    private $htmlselect;
 
     public function __construct() {
         $this->instant = new MainModel;
+        $this->htmlselect = '';
     }
 
 
@@ -33,9 +35,24 @@ class CategoryController extends Controller
      */
     public function create()
     {
-         $data = $this->instant->getAllData();
-        return view('admin.modules.category.create',['cat_parent'=>$data]);
+        
+    $htmlOption =  $this->categoryRecusive(0);
+         return view('admin.modules.category.create',compact('htmlOption'));
     }
+
+    function categoryRecusive($id,$text='') {
+
+         $data = $this->instant->getAllData();
+         foreach ($data as $value) {
+             if ($value->parent==$id) {
+                  $this->htmlselect .="<option value='$value->id'>".$text.$value->category_name."</option>";
+                 $this->categoryRecusive($value->id,$text.'-');
+             }
+         }
+
+         return  $this->htmlselect;
+    }
+
 
     /**
      * Store a newly created resource in storage.

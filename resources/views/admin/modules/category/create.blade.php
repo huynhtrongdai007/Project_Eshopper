@@ -28,12 +28,8 @@
             </div>
             <div class="form-group">
                 <select class="form-control" id="parent" name="parent">
-                <option value="">Chọn danh muc con</option>
-                <option value="0">không</option>
-                @foreach ($cat_parent as $items)
-                 <option value="{{$items->id}}">{{$items->category_name}}</option>
-                @endforeach
-               
+                <option value="0">Chọn danh muc cha</option>
+                  {!!$htmlOption!!}
               </select>
             </div>
             <div class="form-group">
