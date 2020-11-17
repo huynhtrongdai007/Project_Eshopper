@@ -138,7 +138,7 @@
                                 <li><a href="{{ route('404') }}">404</a></li>
                                 <li><a href="{{ route('contact-us') }}">Contact</a></li>
                             </ul>
-                        </div>
+                         </div> 
                     </div>
                     <div class="col-sm-3">
                         <div class="search_box pull-right">
@@ -149,3 +149,15 @@
                 </div>
             </div>
         </div><!--/header-bottom-->
+
+
+
+
+  {{--   <li><a href="{{ route('home') }}" class="active">Home</a></li>
+                                @foreach ($get_menu as $menuParent)
+
+                                <li class="dropdown"><a href="#">{{$menuParent->name}}<i class="fa fa-angle-down"></i></a>
+
+                                   @include('pages.blocks.sub_menu',['menuParent'=>$menuParent])
+                                </li> 
+                                @endforeach --}}

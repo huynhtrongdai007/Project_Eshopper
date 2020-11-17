@@ -1,11 +1,19 @@
  @extends('admin.master')
- @section('title','Thêm Thể Loại')
+ @section('title','Thêm Menu')
  @section('content')
-   <form id="form-category" action="{{ route('admin.category.store') }}" method="POST">
+  <?php
+    $message = Session::get('message');
+      if($message)
+       {
+         echo"<div class='alert alert-success'>".$message."</div>";
+         Session::put('message',null);
+       }
+    ?>
+   <form id="form-category" action="{{ route('admin.menu.store') }}" method="POST">
       @csrf
  <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Thêm Thể Loại</h3>
+          <h3 class="card-title">Thêm Menu</h3>
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
               <i class="fas fa-minus"></i></button>
@@ -16,21 +24,15 @@
         <div class="card-body">
 
             <div class="form-group">
-              <label for="exampleInputEmail1">Category Name</label>
-              <input type="text" id="category_name" name="category_name" class="form-control" id="exampleInputEmail1" placeholder="Enter Category Name">
-              @foreach($errors->all() as $e)
-              <span class="text-danger">{{$e}}</span>
-              @endforeach
+              <label for="exampleInputEmail1">Menu Name</label>
+              <input type="text" name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter Category Name">
             </div>
             <div class="form-group">
-                <select class="form-control" id="parent" name="parent">
-                 <option value="0">chon danh muc cha</option>
-                  {!!$htmlOption!!}
-    
+                <select class="form-control" name="parent_id">
+                 <option value="0">Chọn danh muc cha</option>
+                 {!! $optionSelect!!}
               </select>
-            </div>
-          
-          
+            </div> 
         </div>
         <!-- /.card-body -->
         <div class="card-footer">

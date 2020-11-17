@@ -4,22 +4,24 @@ namespace App\Models\category;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+
 class CategoryModel extends Model
 {
+
+  protected $table = 'tbl_category';
+
    
    public function getAllData() {
    	 $result = DB::table('tbl_category')
-  
      ->orderby('parent','DESC')->get();
    	 return $result;
    }
-
-   public function getByid($id) {
-   		$result = DB::table('tbl_category')
-      ->join('tbl_products','tbl_category.id','=','tbl_products.category_id')
-      ->where('tbl_category.id',$id)
+   
+ public function getByid($id) {
+      $result = DB::table('tbl_category')
+      ->where('id',$id)
       ->first();
-   	    return $result;
+      return $result;
    }
 
 	public function insertData($data)
@@ -67,6 +69,10 @@ class CategoryModel extends Model
       ->get();
    }
 
+
+   public function categoryChidrent() {
+      return $this->hasMany(CategoryModel::class,'parent');
+   }
 
 
 }

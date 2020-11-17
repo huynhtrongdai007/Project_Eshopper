@@ -11,7 +11,9 @@ use App\Models\Product\ProductModel;
 use App\Models\Post\PostModel;
 use App\Models\Reviews\ReviewsModel;
 use App\Models\Comment\CommentModel;
-use  App\Models\Contact\ContactModel;
+use App\Models\Contact\ContactModel;
+use App\Models\MenuModel;
+
 use DB,DateTime;
 use Session;
 class HomeController extends Controller
@@ -25,6 +27,7 @@ class HomeController extends Controller
     private $instants_reviews;
     private $instants_comment;
     private $instants_contact;
+    private $instants_menu;
     
     public function __construct() {
 
@@ -36,20 +39,22 @@ class HomeController extends Controller
     	$this->instants_reviews = new ReviewsModel;
     	$this->instants_comment = new CommentModel;
     	$this->instants_contact = new ContactModel;
-
+    	$this->instants_menu = new MenuModel;
     }
 
 	public function index() {
 
 		$get_slider = $this->instants_slider->getDataIndex();
-		$get_category = $this->instants_category->getAllDataIndex();
+		// $get_category = $this->instants_category->getAllDataIndex();
+		$get_category = CategoryModel::where('parent',0)->get(); 	
+		
 		$get_brand = $this->instants_brand->getAllDataIndex();
 		$get_product = $this->instants_product->getDataIndex();
 		$get_tabs_category = $this->instants_category->getDataTabCategory();
 		$get_tabs_product = $this->instants_category->getDataTabProduct();
 		$get_recommended_product = $this->instants_product->getRecommendedProduct();
-
-		return view('pages.home',compact('get_slider','get_category','get_brand','get_product','get_tabs_category','get_tabs_product','get_recommended_product'));
+		$get_menu = MenuModel::where('parent_id',0)->get();
+		return view('pages.home',compact('get_slider','get_category','get_brand','get_product','get_tabs_category','get_tabs_product','get_recommended_product','get_menu'));
 	}
 
 

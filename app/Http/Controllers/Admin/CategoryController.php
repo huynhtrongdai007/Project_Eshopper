@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DateTime;
+use Illuminate\Support\Str;
 use App\Models\category\CategoryModel as MainModel;
+use App\Components\Recusive;
 class CategoryController extends Controller
 {
     private $instant;
@@ -36,24 +38,16 @@ class CategoryController extends Controller
     public function create()
     {
         
-    $htmlOption =  $this->categoryRecusive(0);
+         $htmlOption =  $this->getCategory($parent_id = '');
          return view('admin.modules.category.create',compact('htmlOption'));
     }
 
-    function categoryRecusive($id,$text='') {
-
-         $data = $this->instant->getAllData();
-         foreach ($data as $value) {
-             if ($value->parent==$id) {
-                  $this->htmlselect .="<option value='$value->id'>".$text.$value->category_name."</option>";
-                 $this->categoryRecusive($value->id,$text.'-');
-             }
-         }
-
-         return  $this->htmlselect;
+    public function getCategory($parent_id) {
+        $data = $this->instant->getAllData();
+        $recusive = new Recusive($data);
+        $htmlOption = $recusive->categoryRecusive($parent_id);
+        return $htmlOption;
     }
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -64,6 +58,7 @@ class CategoryController extends Controller
     {
         $request->validate(['category_name'=>'unique:tbl_category']);
         $data = $request->except('_token');
+        $data['slug'] = Str::slug($request->category_name);
         $data['created_at'] = new DateTime();
         $this->instant->insertData($data);
         return back()->with('message','Inserted SuccessFully');
@@ -90,8 +85,8 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $getByid = $this->instant->getByid($id); 
-        $getAllData = $this->instant->getAllData();
-        return view('admin.modules.category.edit',['getAllData'=>$getAllData,'getByid'=>$getByid]);
+        $htmlOption =  $this->getCategory($getByid->parent);
+        return view('admin.modules.category.edit',compact('getByid','htmlOption'));
     }
 
     /**

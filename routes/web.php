@@ -220,6 +220,17 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 
 	});
 
+	Route::prefix('menu')->name('menu.')->group(function(){
+		Route::get('index','MenuController@index')->name('index');
+		Route::get('create','MenuController@create')->name('create');
+		Route::post('store','MenuController@store')->name('store');
+		Route::get('edit/{id}','MenuController@edit')->name('edit');
+		Route::post('update/{id}','MenuController@update')->name('update');
+		Route::get('destroy/{id}','MenuController@destroy')->name('destroy');
+	});
+
+
+
   });
 	
 });
