@@ -45,16 +45,12 @@ class HomeController extends Controller
 	public function index() {
 
 		$get_slider = $this->instants_slider->getDataIndex();
-		// $get_category = $this->instants_category->getAllDataIndex();
 		$get_category = CategoryModel::where('parent',0)->get(); 	
-		
 		$get_brand = $this->instants_brand->getAllDataIndex();
 		$get_product = $this->instants_product->getDataIndex();
-		$get_tabs_category = $this->instants_category->getDataTabCategory();
-		$get_tabs_product = $this->instants_category->getDataTabProduct();
 		$get_recommended_product = $this->instants_product->getRecommendedProduct();
 		$get_menu = MenuModel::where('parent_id',0)->get();
-		return view('pages.home',compact('get_slider','get_category','get_brand','get_product','get_tabs_category','get_tabs_product','get_recommended_product','get_menu'));
+		return view('pages.home',compact('get_slider','get_category','get_brand','get_product','get_recommended_product','get_menu'));
 	}
 
 

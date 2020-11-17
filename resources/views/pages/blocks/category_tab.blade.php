@@ -1,6 +1,6 @@
 <div class="col-sm-12">
   <ul class="nav nav-tabs">
-    @foreach ($get_tabs_category as $indexCategory => $categoryItem)
+    @foreach ($get_category as $indexCategory => $categoryItem)
       <li class="{{ $indexCategory == 0 ? 'active' : '' }}">
           <a href="#category_tab_{{$categoryItem->id}}" data-toggle="tab">
               {{$categoryItem->category_name}}
@@ -11,9 +11,9 @@
   </ul>
 </div>
  <div class="tab-content">
-  @foreach ($get_tabs_category as $indexCategoryProduct => $categoryItemProduct)
+  @foreach ($get_category as $indexCategoryProduct => $categoryItemProduct)
   <div class="tab-pane fade {{$indexCategoryProduct == 0 ? 'active in' : ''}}" id="category_tab_{{$categoryItemProduct->id}}">
-      @foreach ($get_tabs_product as $tabsProduct)
+      @foreach ($categoryItemProduct->products as $tabsProduct)
         <div class="col-sm-3">
           <a href="">
              <div class="product-image-wrapper">

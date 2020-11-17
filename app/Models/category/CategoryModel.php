@@ -3,6 +3,7 @@
 namespace App\Models\category;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Product\ProductModel;
 use DB;
 
 class CategoryModel extends Model
@@ -62,17 +63,12 @@ class CategoryModel extends Model
        return $result;
    }
 
-   // phuong thuc lay category dieu kien parent_id khác 0
-
-   public function getDataTabCategory() {
-     return  DB::table('tbl_category')->where('parent','<>',0)
-      ->get();
-   }
-
-
    public function categoryChidrent() {
       return $this->hasMany(CategoryModel::class,'parent');
    }
 
+   public function products() {
+    return $this->hasMany(ProductModel::class,'category_id');
+   }
 
 }
