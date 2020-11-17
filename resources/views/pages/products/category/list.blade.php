@@ -35,7 +35,7 @@
 				<div class="col-sm-9 padding-right">
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Features Items</h2>
-						@foreach ($pagination as $items)			
+						@foreach ($products as $items)			
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">
@@ -58,7 +58,7 @@
 						@endforeach
 						<div class="clearfix"></div>
 						<ul class="pagination">
-							{!! $pagination->links() !!}
+							{!! $products->links() !!}
 						</ul>
 					</div><!--features_items-->
 				</div>
@@ -66,3 +66,26 @@
 		</div>
 	</section>
  @endsection
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+    $(document).on('click', '.pagination a', function(event){
+        event.preventDefault(); 
+        var page = $(this).attr('href').split('page=')[1];
+            fetch_data(page);
+        });
+
+        function fetch_data(page)
+        {
+        $.ajax({
+        url:"get_ajax_data?page="+page,
+        success:function(data)
+            {
+            $('.single-productinfo').html(data);
+            }
+        });
+    }
+
+});
+</script>

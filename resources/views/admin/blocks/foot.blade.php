@@ -88,9 +88,6 @@
           url:"{{ route('admin.brand.update_status_untive') }}",
           type:"POST",
           data:{id:id,_token:token},
-          success:function() {
-            alert("Ok");
-          }
        });
     });
 
@@ -103,9 +100,6 @@
           url:"{{ route('admin.brand.update_status_active') }}",
           type:"POST",
           data:{id:id,_token:token},
-          success:function() {
-            alert("Ok");
-          }
        });
     });
 

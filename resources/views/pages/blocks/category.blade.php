@@ -19,7 +19,11 @@
                 <div class="panel-body">
                     @foreach ($category->categoryChidrent as $categoryChidrent)
                         <ul>
-                            <li><a href="#">{{$categoryChidrent->category_name}}</a></li>
+                    <li><a href="{{ route('category.product',
+                    ['slug'=>$categoryChidrent->slug,'id'=>$categoryChidrent->id]) }}">
+                            {{$categoryChidrent->category_name}}
+                        </a>
+                    </li>
                         </ul>
                     
                     @endforeach

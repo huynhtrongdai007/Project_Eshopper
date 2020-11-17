@@ -38,7 +38,7 @@ class BrandModel extends Model
     }
 
     public function getAllDataIndex() {
-        $result = DB::table('tbl_brand')->where('status',1)->orderby('id','DESC')->get();
+        $result = DB::table('tbl_brand')->where('status',1)->get();
         return $result;
     }
 

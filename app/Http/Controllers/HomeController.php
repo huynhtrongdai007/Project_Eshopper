@@ -54,6 +54,14 @@ class HomeController extends Controller
 	}
 
 
+	public function categoryDetails($slug,$categoryId) {
+		$get_category = CategoryModel::where('parent',0)->get();
+		$get_brand = $this->instants_brand->getAllDataIndex();
+		$products = ProductModel::where('category_id',$categoryId)->paginate(12);
+		return view('pages.products.category.list',compact('get_category','get_brand','products'));
+	}
+
+
 	public function productDetails($id) {
 
 		$product = $this->instants_product->getProductDetails($id);
@@ -62,7 +70,7 @@ class HomeController extends Controller
 		$getRecommenProduct = $this->instants_product->getRecommenProduct($category_id,$id);
 		$get_category = $this->instants_category->getAllDataIndex();
 		$get_brand = $this->instants_brand->getAllDataIndex();
-		
+		$get_product = $this->instants_product->getDataIndex();
 		return view('pages.products.product_details',compact('product','getRecommenProduct','get_category','get_brand','getGallery'));
 	}
 
@@ -96,10 +104,11 @@ class HomeController extends Controller
 	}
 
 	public function Viewshop() {
-		$get_category = $this->instants_category->getAllDataIndex();
+		$get_category = CategoryModel::where('parent',0)->get(); 	
 		$get_brand = $this->instants_brand->getAllDataIndex();
 		$getDataIndex = $this->instants_product->getDataIndex();
 		$pagination = $this->instants_product->pagination();
+
 		return view('pages.shops.shop',compact('get_category','get_brand','getDataIndex','pagination'));
 	}
 
@@ -108,8 +117,7 @@ class HomeController extends Controller
 	     if($request->ajax())
 	     {
 	      $pagination = ProductModel::paginate(6);
-	      $get_category = $this->instants_category->getAllDataIndex();
-		  $get_brand = $this->instants_brand->getAllDataIndex();
+	     
 	      return view('pages.shops.shop',compact('pagination','get_category','get_brand'))->render();
 	     }
  	}

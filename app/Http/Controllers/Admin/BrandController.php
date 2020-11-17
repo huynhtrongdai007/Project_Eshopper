@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Brand\BrandModel as MainModel;
+use Illuminate\Support\Str;
 use DateTime;
 class BrandController extends Controller
 {
@@ -47,10 +48,10 @@ class BrandController extends Controller
     {
 
     	$request->validate([
-    		'brand_name'=>'required|unique:tbl_brand',
-    		'status' =>'required'
+    		'brand_name'=>'required|unique:tbl_brand'
     	]);
     	$data = $request->except('_token');
+        $data['slug'] = Str::slug($request->brand_name);
     	$data['created_at'] = new DateTime();
     	$this->instants->insertData($data);
     	return redirect()->route('admin.brand.create')->with('message','inserted Brand SuccessFully');
@@ -90,6 +91,7 @@ class BrandController extends Controller
     public function update(Request $request, $id)
     {
     	$data = $request->except('_token');
+        $data['slug'] = Str::slug($request->brand_name);
     	$data['updated_at'] = new DateTime();
         $this->instants->updateData($id,$data);
         return redirect()->route('admin.brand.index')->with('message','Updated Brand SuccessFully');

@@ -31,19 +31,6 @@
             @error('brand_name')
               <span class="text-danger">{{$message}}</span>
             @enderror
-            <div class="form-group">  
-              <label>Status</label>
-              <select class="form-control" id="brand_status" name="status">
-                <option value="">Chọn trạng thái</option>
-                <option value="1">On</option>
-                <option value="0">Off</option>
-              </select>
-           
-            </div>
-               @error('status')
-              <span class="text-danger">{{$message}}</span>
-            @enderror
-
           </div>
         <!-- /.card-body -->
         <div class="card-footer">

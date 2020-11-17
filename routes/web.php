@@ -30,6 +30,9 @@ Route::get('login','LoginController@index')->name('login');
 Route::post('create_account','LoginController@store')->name('create_account');
 Route::post('login-customer','LoginController@login')->name('login-customer');
 Route::get('logout','LoginController@logout')->name('logout');
+
+//----------------category----------------------------------------------------------------------------
+Route::get('/category/{slug}/{id}','HomeController@categoryDetails')->name('category.product');
 //----------------------------------------------------------------------------------------------
 //----------------Shop----------------------------------------------------------------------------
 Route::get('shop','HomeController@Viewshop')->name('shop');
